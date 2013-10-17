@@ -27,8 +27,7 @@
     // Only if you want use push
     sdk.clientKey = R1_CLIENT_KEY;
 
-    // Optional parameters
-    sdk.applicationUserId = [[NSUserDefaults standardUserDefaults] objectForKey:@"r1EmitterDemoApplicationId"];
+    // Optional emitter parameters
     sdk.emitter.appVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"r1EmitterLastApplicationVersion"];
     sdk.emitter.appId = [[NSUserDefaults standardUserDefaults] objectForKey:@"r1EmitterDemoAppId"];
     

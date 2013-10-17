@@ -38,7 +38,7 @@
     self.appUserIdCell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.appUserIdCell.textField.delegate = (id)self;
     self.appUserIdCell.textField.enablesReturnKeyAutomatically = YES;
-    self.appUserIdCell.textField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"r1EmitterDemoAppUserId"];
+    self.appUserIdCell.textField.text = [R1SDK sharedInstance].applicationUserId;
 }
 
 - (void) viewDidUnload
@@ -101,8 +101,7 @@
     
     if (textField == self.appUserIdCell.textField)
     {
-        [[NSUserDefaults standardUserDefaults] setObject:newText forKey:@"r1EmitterDemoAppUserId"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [R1SDK sharedInstance].applicationUserId = newText;
     }
     
     return YES;
