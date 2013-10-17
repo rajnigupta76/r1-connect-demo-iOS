@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC918FFB180FE147009EB1D7 /* LibR1Connect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC918FFA180FE147009EB1D7 /* LibR1Connect.a */; };
 		ECD535B118055780000A2909 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD535B018055780000A2909 /* Foundation.framework */; };
 		ECD535B318055780000A2909 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD535B218055780000A2909 /* CoreGraphics.framework */; };
 		ECD535B518055780000A2909 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD535B418055780000A2909 /* UIKit.framework */; };
@@ -34,10 +35,10 @@
 		ECD5361B18055A04000A2909 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD5361A18055A04000A2909 /* libsqlite3.dylib */; };
 		ECD5361D18055A10000A2909 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD5361C18055A10000A2909 /* SystemConfiguration.framework */; };
 		ECD5362118055CFA000A2909 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD5362018055CFA000A2909 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		ECD5362218056C41000A2909 /* libR1SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD5361E18055A68000A2909 /* libR1SDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EC918FFA180FE147009EB1D7 /* LibR1Connect.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = LibR1Connect.a; sourceTree = "<group>"; };
 		ECD535AD18055780000A2909 /* DemoApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD535B018055780000A2909 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ECD535B218055780000A2909 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -90,7 +91,6 @@
 		ECD53618180559FD000A2909 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		ECD5361A18055A04000A2909 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		ECD5361C18055A10000A2909 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		ECD5361E18055A68000A2909 /* libR1SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libR1SDK.a; sourceTree = "<group>"; };
 		ECD5362018055CFA000A2909 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -101,9 +101,9 @@
 			files = (
 				ECD5362118055CFA000A2909 /* AdSupport.framework in Frameworks */,
 				ECD5361D18055A10000A2909 /* SystemConfiguration.framework in Frameworks */,
+				EC918FFB180FE147009EB1D7 /* LibR1Connect.a in Frameworks */,
 				ECD5361B18055A04000A2909 /* libsqlite3.dylib in Frameworks */,
 				ECD53619180559FD000A2909 /* CoreTelephony.framework in Frameworks */,
-				ECD5362218056C41000A2909 /* libR1SDK.a in Frameworks */,
 				ECD53617180559F6000A2909 /* CoreLocation.framework in Frameworks */,
 				ECD535B318055780000A2909 /* CoreGraphics.framework in Frameworks */,
 				ECD535B518055780000A2909 /* UIKit.framework in Frameworks */,
@@ -202,7 +202,7 @@
 		ECD5360C180557E1000A2909 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				ECD5361E18055A68000A2909 /* libR1SDK.a */,
+				EC918FFA180FE147009EB1D7 /* LibR1Connect.a */,
 				ECD5360E180557E1000A2909 /* R1Emitter.h */,
 				ECD5360F180557E1000A2909 /* R1EmitterLineItem.h */,
 				ECD53610180557E1000A2909 /* R1EmitterSocialPermission.h */,
@@ -356,6 +356,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../Lib";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -391,6 +392,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../Lib";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -407,10 +409,7 @@
 				GCC_PREFIX_HEADER = "DemoApplication/DemoApplication-Prefix.pch";
 				INFOPLIST_FILE = "DemoApplication/DemoApplication-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					../Lib,
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -426,10 +425,7 @@
 				GCC_PREFIX_HEADER = "DemoApplication/DemoApplication-Prefix.pch";
 				INFOPLIST_FILE = "DemoApplication/DemoApplication-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					../Lib,
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
