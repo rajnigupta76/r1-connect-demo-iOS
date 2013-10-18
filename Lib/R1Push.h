@@ -2,6 +2,8 @@
 #import "R1PushTags.h"
 #import "R1LocationService.h"
 
+@protocol R1PushDelegate;
+
 @interface R1Push : NSObject
 
 // Singleton
@@ -19,6 +21,8 @@
 
 @property (nonatomic, readonly) BOOL isStarted;
 
+@property (nonatomic, assign) id<R1PushDelegate> delegate;
+
 - (void) registerDeviceToken:(NSData *)token;
 - (void) failToRegisterDeviceTokenWithError:(NSError *)error;
 
@@ -29,3 +33,15 @@
 - (void) start;
 
 @end
+
+@protocol R1PushDelegate <NSObject>
+
+@optional
+
+- (void) handleForegroundNotification:(NSDictionary *)notification;
+
+- (void) handleBackgroundNotification:(NSDictionary *)notification;
+
+
+@end
+
