@@ -25,6 +25,11 @@ Your application must link against the following frameworks:
 
 ![Linked binaries](https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/link_with_binary.png)
 
+###Check Background modesCheck Background modes switch is turned on in Capabilities tab for your target. If it’s turned off, please turn on.
+
+![Background modes](https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/enable_background_mode.png)
+
+
 ###Setting up your App Delegate
 
 You will need to initialize the R1 Connect Library in your App Delegate.####Import the required header filesAt the top of your application delegate include any required headers:
