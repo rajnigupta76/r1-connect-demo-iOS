@@ -33,15 +33,15 @@ Your application must link against the following frameworks:
 ###Setting up your App Delegate
 
 You will need to initialize the R1 Connect Library in your App Delegate.####Import the required header filesAt the top of your application delegate include any required headers:
-•	If you want use only emitter (without push)
+•	If you want to use only emitter (without push)
 ![import](https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/import1.png)
 
-•	If you want use emitter and push ![import](https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/import2.png)
+•	If you want to use emitter and push ![import](https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/import2.png)
 ####Initialize R1Connect Instance![Your Application Delegate](https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/app_delegate1.png)
  ####Register for Remote Notifications![Your Application Delegate](https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/app_delegate2.png)
- Push is disabled by default. You can enable it in *application:didFinishLaunchingWithOptions:* method or later.![Enable Push](https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/push_enable.png)
- If you enabled it in *application:didFinishLaunchingWithOptions:* method Push Notification AlertView will be showed at first application start.
+ Push is disabled by default. You can enable it in *application:didFinishLaunchingWithOptions:* method later.![Enable Push](https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/push_enable.png)
 
+If you enabled it in *application:didFinishLaunchingWithOptions:* method, Push Notification AlertView will be showed at first application start.
 #Emitter & Push Parameters
 The following is a list of configuration parameters for the R1 Connect SDK, most of these contain values that are sent to the tracking server to help identify your app on our platform and to provide analytics on sessions and location.
 
@@ -64,7 +64,8 @@ The application name associated with emitter. By default, this property is popul
 
 ***appId***
 
-Default: nilThe application identifier associated with this emitter.  If you wish to set this property, you must do so before making any tracking calls. Note: that this is not your app's bundle id, like e.g. com.example.appname.
+Default: nil
+The application identifier associated with this emitter.  If you wish to set this property, you must do so before making any tracking calls. Note: that this is not your app's bundle id, like e.g. com.example.appname.
 
 	[R1Emitter sharedInstance].appId = @"12345678";
 ***appVersion***
