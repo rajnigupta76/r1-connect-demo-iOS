@@ -56,7 +56,7 @@ Optional current user identifier.
 The current user location coordinates. Use it only if your application already uses location services.
 	[R1SDK sharedInstance].location = …;***locationService***
 If your application did not use location information before this SDK installation, you can use locationService in this SDK to enable or disable it:
-	[R1SDK sharedInstance].locationService.enabled = YES;When enabled, such as in the example above, location information will be sent automatically. However, locationService doesn’t fetch the location constantly. For instance, when the location is received the SDK will turn off the location in CLLocationManager and wait 60 minutes before attempting to retrieve it again. ***appName***
+	[R1SDK sharedInstance].locationService.enabled = YES;When enabled, such as in the example above, location information will be sent automatically. However, locationService doesn’t fetch the location constantly. For instance, when the location is received the SDK will turn off the location in CLLocationManager and wait 10 minutes (by default) before attempting to retrieve it again. You can change this value:	[R1SDK sharedInstance].locationService.autoupdateTimeout = 1200; // 20 minutes***appName***
 
 The application name associated with emitter. By default, this property is populated with the `CFBundleName` string from the application bundle. If you wish to override this property, you must do so before making any tracking calls.
 		

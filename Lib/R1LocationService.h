@@ -14,6 +14,12 @@ typedef enum
 
 @property (nonatomic, assign) BOOL enabled;
 
+/*!
+ By default, this is 600 seconds.
+ This value can not be small then 60 seconds.
+ */
+@property (nonatomic, assign) NSTimeInterval autoupdateTimeout;
+
 @property (nonatomic, readonly) CLLocation *lastLocation;
 @property (nonatomic, readonly) R1LocationServiceState state;
 
