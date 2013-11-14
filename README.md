@@ -47,11 +47,11 @@ The following is a list of configuration parameters for the R1 Connect SDK, most
 
 ##Configuration Parameters
 
-***applicationUserID***
+***applicationUserId***
 
 Optional current user identifier.
 
-	[R1Emitter sharedInstance].applicationUserID = @"12345";
+	[R1SDK sharedInstance].applicationUserId = @"12345";
 ***location***
 The current user location coordinates. Use it only if your application already uses location services.
 	[R1SDK sharedInstance].location = …;***locationService***
@@ -94,6 +94,41 @@ To disable automatic session tracking, set this to a negative value. To indicate
 By default, this is 30 seconds.
 
 	[R1Emitter sharedInstance].sessionTimeout = 15;
+	
+#Push Tags
+You can specify Tags for *R1 Connect SDK* to send *Push Notifications* for certain groups of users.
+
+The maximum length of the Tag is 128 characters.
+
+*R1 Connect SDK* saves Tags. You do not have to add Tags every time the application is launch.
+
+***Add a new Tag***
+
+	[[R1Push sharedInstance].tags addTag:@"NEW TAG"];
+	
+***Add multiple Tags***
+	
+	[[R1Push sharedInstance].tags addTags:@[ @"NEW TAG 1", @"NEW TAG 2" ]];
+	
+***Remove exist Tag***
+	
+	[[R1Push sharedInstance].tags removeTag:@"EXIST TAG"];
+	
+***Remove multiple Tags***
+
+	[[R1Push sharedInstance].tags removeTags:@[ @"EXIST TAG 1", @"EXIST TAG 2" ]];
+	
+***Replace all exist Tags***
+
+	[R1Push sharedInstance].tags.tags = @[ @"NEW TAG 1", @"NEW TAG 2" ];
+or
+
+	[[R1Push sharedInstance].tags setTags:@[ @"NEW TAG 1", @"NEW TAG 2" ]];
+	
+***Get all Tags***
+	
+	NSArray *currentTags = [R1Push sharedInstance].tags.tags;
+
 
 #Emitter EventsThe R1 Connect SDK will automatically capture some generic events, but in order to get the most meaningful data on how users interact with your app the SDK also offers pre-built user-defined events for popular user actions as well as the ability to create your own custom events.
 
