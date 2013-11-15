@@ -98,9 +98,9 @@ By default, this is 30 seconds.
 #Push Tags
 You can specify Tags for *R1 Connect SDK* to send *Push Notifications* for certain groups of users.
 
-The maximum length of the Tag is 128 characters.
+The maximum length of a Tag is 128 characters.
 
-*R1 Connect SDK* saves Tags. You do not have to add Tags every time the application is launch.
+*R1 Connect SDK* saves Tags. You do not have to add Tags every time the application is launched.
 
 ***Add a new Tag***
 
@@ -110,7 +110,7 @@ The maximum length of the Tag is 128 characters.
 	
 	[[R1Push sharedInstance].tags addTags:@[ @"NEW TAG 1", @"NEW TAG 2" ]];
 	
-***Remove exist Tag***
+***Remove existing Tag***
 	
 	[[R1Push sharedInstance].tags removeTag:@"EXIST TAG"];
 	
@@ -118,7 +118,7 @@ The maximum length of the Tag is 128 characters.
 
 	[[R1Push sharedInstance].tags removeTags:@[ @"EXIST TAG 1", @"EXIST TAG 2" ]];
 	
-***Replace all exist Tags***
+***Replace all existing Tags***
 
 	[R1Push sharedInstance].tags.tags = @[ @"NEW TAG 1", @"NEW TAG 2" ];
 or
