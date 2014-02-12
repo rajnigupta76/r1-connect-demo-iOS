@@ -15,7 +15,7 @@ The following steps will explain how to integrate with R1 Connect to enable both
 ###Required Libraries 
 Your application must link against the following frameworks:
 
-![Required Libraries](https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/required_libraries.png
+![Required Libraries](https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/required_libraries.png)
 
 ###How to Add the R1 Connect files to Your Project
 
@@ -63,6 +63,8 @@ At the top of your application delegate include any required headers:
 ####Initialize R1Connect Instance
 
 ```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     R1SDK *sdk = [R1SDK sharedInstance];
     
     // Initialize Anlaytics
@@ -80,6 +82,9 @@ At the top of your application delegate include any required headers:
     
     // Start SDK
     [sdk start];
+    
+    return YES
+}
 ```
 
 ####Register for Remote Notifications
