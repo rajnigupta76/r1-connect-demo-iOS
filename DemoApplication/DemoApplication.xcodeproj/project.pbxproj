@@ -39,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		EC918FFA180FE147009EB1D7 /* LibR1Connect.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = LibR1Connect.a; sourceTree = "<group>"; };
+		EC97170A18E58BC500E3B236 /* R1EmitterUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = R1EmitterUserInfo.h; sourceTree = "<group>"; };
 		ECD535AD18055780000A2909 /* DemoApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD535B018055780000A2909 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ECD535B218055780000A2909 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -207,6 +208,7 @@
 				ECD5360F180557E1000A2909 /* R1EmitterLineItem.h */,
 				ECD53610180557E1000A2909 /* R1EmitterSocialPermission.h */,
 				ECD53611180557E1000A2909 /* R1LocationService.h */,
+				EC97170A18E58BC500E3B236 /* R1EmitterUserInfo.h */,
 				ECD53612180557E1000A2909 /* R1Push.h */,
 				ECD53613180557E1000A2909 /* R1PushTags.h */,
 				ECD53614180557E1000A2909 /* R1SDK.h */,
@@ -242,7 +244,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = RE;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = RadiumOne;
 				TargetAttributes = {
 					ECD535AC18055780000A2909 = {
@@ -326,7 +328,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -368,7 +369,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;

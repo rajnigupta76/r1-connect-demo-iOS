@@ -40,13 +40,13 @@
 {
     NSMutableString *str = [NSMutableString string];
     
-    [str appendFormat:@"ProductID: %@", (lineItem.productID != nil) ? lineItem.productID : @"Empty"];
+    [str appendFormat:@"ProductID: %@", (lineItem.itemID != nil) ? lineItem.itemID : @"Empty"];
     
-    if (lineItem.productName != nil)
+    if (lineItem.itemName != nil)
     {
         if ([str length] > 0)
             [str appendString:@"\n"];
-        [str appendFormat:@"ProductName: %@", lineItem.productName];
+        [str appendFormat:@"ProductName: %@", lineItem.itemName];
     }
     
     if (lineItem.quantity != 0)

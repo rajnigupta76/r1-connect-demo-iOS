@@ -104,10 +104,10 @@
     }
     
     if (self.isNewItem)
-        self.lineItem = [[[R1EmitterLineItem alloc] initWithProductID:self.productIDCell.textField.text] autorelease];
+        self.lineItem = [[[R1EmitterLineItem alloc] initWithItemID:self.productIDCell.textField.text] autorelease];
     
-    self.lineItem.productID = self.productIDCell.textField.text;
-    self.lineItem.productName = self.productNameCell.textField.text;
+    self.lineItem.itemID = self.productIDCell.textField.text;
+    self.lineItem.itemName = self.productNameCell.textField.text;
     self.lineItem.unitOfMeasure = self.unitOfMeasureCell.textField.text;
     self.lineItem.currency = self.currencyCell.textField.text;
     self.lineItem.itemCategory = self.itemCategoryCell.textField.text;
@@ -199,7 +199,7 @@
     self.productIDCell.textField.delegate = (id)self;
     self.productIDCell.textField.enablesReturnKeyAutomatically = YES;
     self.productIDCell.textField.keyboardType = UIKeyboardTypeDefault;
-    self.productIDCell.textField.text = (self.lineItem == nil) ? [REEventParameter randomString] : self.lineItem.productID;
+    self.productIDCell.textField.text = (self.lineItem == nil) ? [REEventParameter randomString] : self.lineItem.itemID;
 //    if (!self.isNewItem)
 //        self.productIDCell.textField.userInteractionEnabled = NO;
 
@@ -211,7 +211,7 @@
     self.productNameCell.textField.delegate = (id)self;
     self.productNameCell.textField.enablesReturnKeyAutomatically = YES;
     self.productNameCell.textField.keyboardType = UIKeyboardTypeDefault;
-    self.productNameCell.textField.text = (self.lineItem == nil) ? [REEventParameter randomString] : self.lineItem.productName;
+    self.productNameCell.textField.text = (self.lineItem == nil) ? [REEventParameter randomString] : self.lineItem.itemName;
     
     self.quantityCell = [[[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"quantityCell"] autorelease];
     self.quantityCell.textLabel.text = self.quantityCell.textField.placeholder = @"Quantity";

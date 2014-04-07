@@ -92,7 +92,7 @@
     
     if (_hasLineItem)
     {
-        self.lineItem = [[[R1EmitterLineItem alloc] initWithProductID:[REEventParameter randomString]] autorelease];
+        self.lineItem = [[[R1EmitterLineItem alloc] initWithItemID:[REEventParameter randomString]] autorelease];
     }else
     {
         self.lineItem = nil;
@@ -112,7 +112,7 @@
         return;
     }
     
-    if (self.hasLineItem && self.lineItem.productID == nil)
+    if (self.hasLineItem && self.lineItem.itemID == nil)
     {
         [self showErrorAlertView:@"Line item product ID is empty!"];
         return;
