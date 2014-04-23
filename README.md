@@ -84,7 +84,7 @@ At the top of your application delegate include any required headers:
 (NSDictionary *)launchOptions {     
     R1SDK *sdk = [R1SDK sharedInstance];  
     
-    // Initialize Anlaytics      
+    // Initialize Analytics      
     sdk.applicationId = @"[YOUR APPLICATION ID]";  //Ask your RadiumOne contact for an app id
     
     [R1Emitter sharedInstance].appVersion = @"1.0.2";
@@ -207,7 +207,7 @@ The R1 Connect SDK will automatically capture some generic events, but in order 
 
 ### ii. Standard Events
 
-Standard Events give you an easy way to cover all the main user flows (login, register, share, purchase...) in a standardized format for optimized reporting on the portal. They provide some great foundation for your analytics strategy. Once you set them up in your code, they unlock great insights, especially on user lifetime value.
+Standard Events provide an easy way to cover all the main user flows (login, register, share, purchase...) in a standardized format for optimized reporting on the portal. They provide a great foundation to your analytics strategy. Once you set them up in your code, they unlock great insights, particularly on user lifetime value.
 
 *Note: The last argument in all of the following emitter callbacks, otherInfo, is a dictionary of “key”,”value” pairs or nil, which enables you to customize these events as much as you want.*
 
@@ -427,7 +427,7 @@ Another common mistake is to add parameters to the event that have too many poss
 			  			   
 Again, the problem here is that each profile may have any number of followers. This will result in having your data much too fragmented to extract any valuable information.
 
-Instead, a good strategy would be to define relevant buckets to replace high variance parameters. For example, in this case, it might be more relevant to separate traffic on the profiles with a lot of followers from traffic on frofiles with very few followers. You could define 3 categories: 
+Instead, a good strategy would be to define relevant buckets to replace high variance parameters. For example, in this case, it might be more relevant to separate traffic on the profiles with a lot of followers from traffic on profiles with very few followers. You could define 3 categories: 
 
 - "VERY_INFLUENTIAL" for profiles > 100,000 
 - "INFLUENTIAL" for profile > 10,000 and <= 100,000
