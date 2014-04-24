@@ -87,9 +87,6 @@ At the top of your application delegate include any required headers:
     // Initialize Analytics      
     sdk.applicationId = @"[YOUR APPLICATION ID]";  //Ask your RadiumOne contact for an app id
     
-    [R1Emitter sharedInstance].appVersion = @"1.0.2";
-    [R1Emitter sharedInstance].appId = @"12345678";
-    
     // Start SDK     
    [sdk start];      
     return YES; 
