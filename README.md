@@ -21,7 +21,7 @@
 		
 
 #1. System Requirements
-The R1 Connect SDK supports all mobile and tablet devices running iOS 5.0 with Xcode 4.5 and above. The downloadable directory (see below "[a. Import Files](#a-import-files)") contains the library and headers of the R1 Connect SDK for iOS. 
+The R1 Connect SDK supports all mobile and tablet devices running iOS 5.0 with Xcode 4.5 and above. The downloadable directory (see below "[a. Import Files](#a-import-files)") contains the library and headers for the R1 Connect SDK. 
 
 The library supports the following architectures:
 
@@ -31,16 +31,16 @@ The library supports the following architectures:
 *	i386
 *	x86_64
 
-It supports iOS 5 and up.
+The library supports iOS version 5 and higher.
 
 #2. SDK Initialization
 
 ## a. Import Files
 1.	Download the r1connect lib files:
            git clone git@github.com:radiumone/r1-connect-demo-iOS.git
-2.	Open up your iOS project in xCode.
+2.	Open your iOS project in xCode.
 3.	Select File -> Add Files to “[YOUR XCODE PROJECT]” project
-4.	Select all files in "Lib" Folder from the repo you just cloned
+4.	Select all files in the "Lib" Folder from the repo you just cloned
 5.	When the dialog box appears, check the Copy Items into destination group’s folder checkbox.
  
 
@@ -48,36 +48,33 @@ It supports iOS 5 and up.
 <img src="https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/library_files.png"  width="440" />
 
 ## b. Link the Static Library
-Go to "Build Phases" and make sure LibR1Connect.a file is set in the “Link Binary With Libraries” section. If it’s absent, please add it.
+Go to "Build Phases" and make sure LibR1Connect.a file is set in the “Link Binary With Libraries” section. If absent, please add it.
 
-Make sure you also add:
+Make sure you add:
 
-+	AdSupport.framework
-+	CoreTelephony.framework
-+	SystemConfiguration.framework
-+	libsqlite3.dylib
-+	CoreLocation.framework
+- AdSupport.framework
+- CoreTelephony.framework
+- SystemConfiguration.framework
+- libsqlite3.dylib
+- CoreLocation.framework
 
 
  <img src="https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/link_with_binary.png"  width="440" />
 
  
-Check Background modes switch is turned on in Capabilities tab for your target. If it’s turned off, please turn on.
+Verify that the Background Modes switch is turned on in the Capabilities tab for your target.
  
 ## c. Initialize the SDK
 You will need to initialize the R1 Connect Library in your App Delegate.
 ####Import the required header files
 At the top of your application delegate include any required headers:
 
-
 ```objc
 #import "R1SDK.h"
 #import "R1Emitter.h"
 ```
 
-
-####Initialize R1Connect Instance
-
+####Initialize the R1Connect Instance
 
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:
@@ -94,7 +91,7 @@ At the top of your application delegate include any required headers:
 ```
 
 ## d. Advanced Settings
-The following is a list of configuration parameters for the R1 Connect SDK, most of these contain values that are sent to the tracking server to help identify your app on our platform and to provide analytics on sessions and location.
+The following is a list of configuration parameters for the R1 Connect SDK.  Most of these contain values that are sent to the tracking server to help identify your app on our platform and to provide analytics on sessions and location.
 
 ####Configuration Parameters
 
@@ -107,7 +104,7 @@ Optional current user identifier.
 
 ***location***
 
-The current user location coordinates. Use it only if your application already uses location services.
+The current user location coordinates. Use only if your application already uses location services.
 
 ```objc
 [R1SDK sharedInstance].location = [locations lastObject];
@@ -128,7 +125,7 @@ When enabled, such as in the example above, location information will be sent au
 
 ***appName***
 
-The application name associated with emitter. By default, this property is populated with the `CFBundleName` string from the application bundle. If you wish to override this property, you must do so before making any tracking calls.
+The application name associated with the emitter. By default, this property is populated with the `CFBundleName` string from the application bundle. If you wish to override this property, you must do so before making any tracking calls.
 		
 ```objc
 [R1Emitter sharedInstance].appName = @"Custom application name";
@@ -154,11 +151,9 @@ The application version associated with this emitter. By default, this property 
 
 ***sessionStart***
 
-If true, indicates the start of a new session. Note that when a emitter is first instantiated, this is initialized to true. To prevent this default
- behavior, set this to `NO` when the tracker is first obtained.
+If true, indicates the start of a new session. Note that when a emitter is first instantiated, this is initialized to true. To prevent this default behavior, set this to `NO` when the tracker is first obtained.
  
- By itself, setting this does not send any data. If this is true, when the next emitter call is made, a parameter will be added to the resulting emitter
- information indicating that it is the start of a session, and this flag will be cleared.
+Setting this does not send any data. If this is true, when the next emitter call is made, a parameter will be added to the resulting emitter information indicating the start of a session.  This flag will be cleared.
 
 ```objc
 [R1Emitter sharedInstance].sessionStart = YES;
@@ -168,7 +163,7 @@ If true, indicates the start of a new session. Note that when a emitter is first
 
 ***sessionTimeout***
 
-If non-negative, indicates how long, in seconds, the application must transition to the inactive or background state for before the tracker will automatically indicate the start of a new session when the app becomes active again by setting sessionStart to true. For example, if this is set to 30 seconds, and the user receives a phone call that lasts for 45 seconds while using the app, upon returning to the app, the sessionStart parameter will be set to true. If the phone call instead lasted 10 seconds, sessionStart will not be modified.
+If positive, indicates how long, in seconds, the application must transition to the inactive or background state for before the tracker will automatically indicate the start of a new session when the app becomes active again by setting sessionStart to true. For example, if this is set to 30 seconds, and the user receives a phone call that lasts for 45 seconds while using the app, upon returning to the app, the sessionStart parameter will be set to true. If the phone call lasted 10 seconds, sessionStart will not be modified.
  
 To disable automatic session tracking, set this to a negative value. To indicate the start of a session anytime the app becomes inactive or backgrounded, set this to zero.
  
@@ -183,7 +178,7 @@ By default, this is 30 seconds.
 ### i. Automatic Events
 
 
-The R1 Connect SDK will automatically capture some generic events, but in order to get the most meaningful data on how users interact with your app the SDK. These events are triggered when the state of the application is changed and, therefore, they do not require any additional code to be written in the app in order to work out of the box:
+The R1 Connect SDK will automatically capture some generic events in order to get the most meaningful data on how users interact with your app. These events are triggered when the state of the application is changed, and therefore do not require any additional code to work out of the box:
 
 **Launch** - emitted when the app starts
 
@@ -195,16 +190,16 @@ The R1 Connect SDK will automatically capture some generic events, but in order 
 
 **Resume** - emitted when the app returns from the background state
 
-**Application Opened** - This event is very useful for push notifications and can measure when your app is opened after a message is sent.
+**Application Opened** - emitted when the app is opened and can measure when your app is opened after a message is sent
 
-**Session Start** - As the name implies the Session Start event is used to start a new session.
+**Session Start** - emitted when a new session begins
 
-**Session End** - The Session End event is used to end a session and passes with it a Session Length attribute that calculates the session length in seconds.
+**Session End** - emitted when a session ends; includes a Session Length attribute with the session length in seconds.
 
 
 ### ii. Standard Events
 
-Standard Events provide an easy way to cover all the main user flows (login, register, share, purchase...) in a standardized format for optimized reporting on the portal. They provide a great foundation to your analytics strategy. Once you set them up in your code, they unlock great insights, particularly on user lifetime value.
+Standard events cover all the main user flows (login, register, share, purchase...) in a standardized format for optimized reporting on the portal, providing a great foundation to your analytics strategy. Once you set them up in your code, they unlock great insights, particularly on user lifetime value.
 
 *Note: The last argument in all of the following emitter callbacks, otherInfo, is a dictionary of “key”,”value” pairs or nil, which enables you to customize these events as much as you want.*
 
@@ -257,7 +252,7 @@ NSArray *permissions = @[[R1EmitterSocialPermission socialPermissionWithName:@"p
 
 **User Info**
 
-This event enables you to send user profiles to the backend.
+Enables you to send user profiles to the backend.
 
 ```objc
 R1EmitterUserInfo *userInfo = [R1EmitterUserInfo userInfoWithUserID:@"userId"
@@ -293,7 +288,7 @@ Tracks an application upgrade from a trial version to a full version
 
 **Screen View**
 
-Basically, a page view, it provides info about that screen
+A page view that provides info about that screen
 
 ```objc
 [[R1Emitter sharedInstance] emitScreenViewWithDocumentTitle:@"title"
@@ -387,9 +382,7 @@ R1EmitterLineItem *lineItem = [R1EmitterLineItem itemWithID:@"product_id"
 
 ###iii. Custom Events
 
-
-
-With custom events you have the ability to create and track specific events that are more closely aligned with your app. If planned and structured correctly, custom events can be strong indicators of user intent and behavior. Some examples include pressing the “like” button, playing a song, changing the screen mode from portrait to landscape, and zooming in or out of an image. These are all actions by the user that could be tracked with events.
+Custom events allow you to create and track specific events that are more closely aligned with your app. If planned and structured correctly, custom events can be strong indicators of user intent and behavior. Some examples include pressing the “like” button, playing a song, changing the screen mode from portrait to landscape, and zooming in or out of an image. These are all actions by the user that could be tracked with events.
 
 To include tracking of custom events for the mobile app, the following callbacks need to be included in the application code:
 
@@ -411,7 +404,7 @@ Example: "ProfileViewing"
 
 Avoid: "Profile Viewing - Lady Gaga's profile"
 
-As you may have thousands of user profiles in your database, it is preferable to keep the event name high level ("ProfileViewing") so you can run interesting anaytics on it. For example, it will be much easier to answer this question: "how many profiles does a user visit every day on average?". 
+As you may have thousands of user profiles in your database, it is preferable to keep the event name high level ("ProfileViewing") so you can run interesting anaytics on it. High level events help answer questions like "how many profiles does a user visit every day on average?" 
 
 ####Parameter Variance
 
@@ -422,15 +415,15 @@ Another common mistake is to add parameters to the event that have too many poss
 			withParameters:@{"profileFollowers":profileFollowers}];
 ```
 			  			   
-Again, the problem here is that each profile may have any number of followers. This will result in having your data much too fragmented to extract any valuable information.
+Again, the problem here is that each profile may have any number of followers. This will fragment your data too much to extract any valuable information.
 
-Instead, a good strategy would be to define relevant buckets to replace high variance parameters. For example, in this case, it might be more relevant to separate traffic on the profiles with a lot of followers from traffic on profiles with very few followers. You could define 3 categories: 
+A good strategy would be to define relevant buckets for high variance parameters. In this case, it might be more relevant to separate traffic on the profiles with a lot of followers from traffic on profiles with very few followers. You could define 3 categories: 
 
 - "VERY_INFLUENTIAL" for profiles > 100,000 
 - "INFLUENTIAL" for profile > 10,000 and <= 100,000
 - "NON_INFLUENTIAL" for profile <= 10,000
 
-Then a proper event would be 
+A proper event could be 
 
 ```objc
 [[R1Emitter sharedInstance] emitEvent:@"ProfileViewing"
@@ -438,12 +431,11 @@ Then a proper event would be
 ```
 
 			  			   
-This will enable you to create much more insightful reports.
+This will enable you to create more insightful reports.
 
 ##b. Push Notification Activation
 
 ###i. Initialization
-
 
 ####Setup your App Delegate
 
@@ -554,12 +546,12 @@ If not already in the “Keychain Access” app that contains your certificate, 
 ![Files in xCode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image007.jpg)
     
 ######Emailing your SSL certificate
-After downloading your 2 certificates (one for production, one for development), please send them to your RadiumOne account manager (with certificate passwords if you chose to add any).
+After downloading your 2 certificates (one for production, one for development), please send them to your RadiumOne account manager (with certificate passwords if you choose to add any).
 
 
 ###iii. Segment your Audience    
 
-You can specify Tags for *R1 Connect SDK* to send *Push Notifications* for certain groups of users.
+You can specify Tags for *R1 Connect SDK* to send *Push Notifications* to certain groups of users.
 
 The maximum length of a Tag is 128 characters.
 
@@ -607,7 +599,7 @@ NSArray *currentTags = [R1Push sharedInstance].tags.tags;
 
 ##c. Attribution Tracking Activation
 ###i. Track RadiumOne Campaigns
-Please contact your Account Manager to setup R1 ad campaign as well as tracking campaigns.  If you don't have one, please contact us  [here](http://radiumone.com/contact-mobile-team.html) and one of our Account Managers will assist you.
+Please contact your Account Manager to setup R1 ad campaign as well as tracking campaigns.  If you don't have one, please contact us [here](http://radiumone.com/contact-mobile-team.html) and one of our Account Managers will assist you.
 
 Once your Account Manager has set up tracking, you will start receiving attribution tracking report automatically!
 
