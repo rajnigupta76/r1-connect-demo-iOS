@@ -266,7 +266,7 @@ R1EmitterUserInfo *userInfo = [R1EmitterUserInfo userInfoWithUserID:@"userId"
                               state:@"state"
                                 zip:@"zip"];
 
-[[R1Emitter sharedInstance] emitUserInfo:@"userId"
+[[R1Emitter sharedInstance] emitUserInfo:userInfo
                                otherInfo:@{@"custom_key":@"value"}];
 ```
 
