@@ -392,7 +392,7 @@ To include tracking of custom events for the mobile app, the following callbacks
 
 // Emits a custom event with parameters
 [[R1Emitter sharedInstance] emitEvent:@"Your custom event name"
-			  			   withParameters:@{"key":"value"}];
+			  			   withParameters:@{@"key":@"value"}];
 ```
 
 
