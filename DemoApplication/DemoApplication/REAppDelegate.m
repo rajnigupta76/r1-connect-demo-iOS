@@ -26,6 +26,9 @@
     sdk.applicationId = R1_APPLICATION_ID;
     // Only if you want use push
     sdk.clientKey = R1_CLIENT_KEY;
+    
+    // Advertising indicator - Defaults to false
+    sdk.advertisingEnabled=FALSE;
 
     // Optional emitter parameters
     sdk.emitter.appVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"r1EmitterLastApplicationVersion"];
