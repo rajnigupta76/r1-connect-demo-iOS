@@ -99,7 +99,7 @@ The following is a list of configuration parameters for the R1 Connect SDK.  Mos
 
 Indicates (to the SDK) whether or not the application is displaying advertisiments; A value of TRUE prevents the SDK from accessing IDFA to comply with Apple's advertising policy when advertisements are served within the application (outside of the SDK).
 ```objc
-[R1SDK sharedInstance].advertisingEnabled = TRUE;
+[R1SDK sharedInstance].advertisingEnabled = FALSE;
 ```
 
 ***applicationUserId***
