@@ -2,7 +2,7 @@
 
 ###1. Updated
 
-1. #####Emit Registration
+#####1. Emit Registration
 
 Before:
 ```objc
@@ -27,7 +27,7 @@ Current:
                                              otherInfo:@{@"custom_key":@"value"}];
 ```
 
-2. #####Emit Facebook connect
+#####2. Emit Facebook connect
 
 Before:
 ```objc
@@ -47,7 +47,7 @@ NSArray *permissions = @[[R1EmitterSocialPermission socialPermissionWithName:@"p
                                   				     otherInfo:@{@"custom_key":@"value"}];
 ```
 
-3. #####LineItem object
+#####3. LineItem object
 
 Renamed *productID* property to *itemID*
 
@@ -68,7 +68,7 @@ lineItem.itemID = @"Line Item ID";
 
 ###2. Added
 
-1. #####Emit User Info
+#####1. Emit User Info
 
 ```objc
 R1EmitterUserInfo *userInfo = [R1EmitterUserInfo userInfoWithUserID:@"userID"
@@ -85,7 +85,7 @@ R1EmitterUserInfo *userInfo = [R1EmitterUserInfo userInfoWithUserID:@"userID"
 [[R1Emitter sharedInstance] emitUserInfo:@"userId"
                                otherInfo:@{@"custom_key":@"value"}];
 ```
-2. ##### Advertising Enabled
+#####2. Advertising Enabled
 
 ```objc
 [R1SDK sharedInstance].advertisingEnabled=NO
@@ -95,7 +95,7 @@ R1EmitterUserInfo *userInfo = [R1EmitterUserInfo userInfoWithUserID:@"userID"
 
 ###3. Deprecated
 
-1. #####Emit Action
+#####1. Emit Action
 
 Method *emitActive* deprecated.
 Use *emitEvent* instead.
@@ -114,4 +114,4 @@ Current:
 			  			withParameters:@{@"label":@"About", @"value":@10, @"custom_key":@"value"}];
 ```
 
-2. #####sessionStart property
+#####2. sessionStart property
