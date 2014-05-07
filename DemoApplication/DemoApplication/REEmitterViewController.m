@@ -38,7 +38,6 @@
 - (void) initTestCases
 {
     self.testCases = @[[RETestCase testCaseWithType:RETestCaseTypeEvent],
-                       [RETestCase testCaseWithType:RETestCaseTypeAction],
                        [RETestCase testCaseWithType:RETestCaseTypeLogin],
                        [RETestCase testCaseWithType:RETestCaseTypeUserInfo],
                        [RETestCase testCaseWithType:RETestCaseTypeRegistration],

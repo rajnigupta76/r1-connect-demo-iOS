@@ -46,8 +46,6 @@
 {
     switch (self.type)
     {
-        case RETestCaseTypeAction:
-            return @"Action Event";
         case RETestCaseTypeLogin:
             return @"Login Event";
         case RETestCaseTypeUserInfo:
@@ -90,11 +88,6 @@
     
     switch (self.type)
     {
-        case RETestCaseTypeAction:
-            [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"action" visibleKey:@"Action" type:REEventParameterTypeString]];
-            [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"label" visibleKey:@"Label" type:REEventParameterTypeString]];
-            [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"value" visibleKey:@"Value" type:REEventParameterTypeLong]];
-            break;
         case RETestCaseTypeLogin:
             [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"userID" visibleKey:@"UserID" type:REEventParameterTypeString]];
             [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"userName" visibleKey:@"UserName" type:REEventParameterTypeString]];
@@ -205,12 +198,6 @@
         case RETestCaseTypeEvent:
             [emitter emitEvent:eventName
                 withParameters:parameters];
-            break;
-        case RETestCaseTypeAction:
-            [emitter emitAction:[parameters objectForKey:@"action"]
-                          label:[parameters objectForKey:@"label"]
-                          value:[[parameters objectForKey:@"value"] longLongValue]
-                      otherInfo:[parameters objectForKey:@"other_info"]];
             break;
         case RETestCaseTypeLogin:
             [emitter emitLoginWithUserID:[parameters objectForKey:@"userID"]

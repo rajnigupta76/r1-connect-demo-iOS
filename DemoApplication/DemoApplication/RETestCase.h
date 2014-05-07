@@ -3,7 +3,6 @@
 typedef enum
 {
     RETestCaseTypeEvent,
-    RETestCaseTypeAction,
     RETestCaseTypeUserInfo,
     RETestCaseTypeLogin,
     RETestCaseTypeRegistration,
