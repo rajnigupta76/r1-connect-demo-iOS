@@ -82,7 +82,7 @@ At the top of your application delegate include any required headers:
     R1SDK *sdk = [R1SDK sharedInstance];  
     
     // Initialize Analytics      
-    sdk.applicationId = @"[YOUR APPLICATION ID]";  //Ask your RadiumOne contact for an app id
+    sdk.applicationId = @"YOUR APPLICATION ID";  //Ask your RadiumOne contact for an app id
     
     // Start SDK     
    [sdk start];      
@@ -460,10 +460,10 @@ This will enable you to create more insightful reports.
     R1SDK *sdk = [R1SDK sharedInstance];
     
     // Initialize SDK
-    sdk.applicationId = @"[Application ID]";  //Ask your RadiumOne contact for an app id
+    sdk.applicationId = @"Application ID";  //Ask your RadiumOne contact for an app id
     
     // Initialize Push Notification
-    sdk.clientKey = @"[Your Client Key]";  //Ask your RadiumOne contact for a client key
+    sdk.clientKey = @"Your Client Key";  //Ask your RadiumOne contact for a client key
     [[R1Push sharedInstance] handleNotification:[launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey]
                                  applicationState: application.applicationState];
     [[R1Push sharedInstance] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
