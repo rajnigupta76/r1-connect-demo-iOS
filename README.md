@@ -25,12 +25,11 @@ The R1 Connect SDK supports all mobile and tablet devices running iOS 5.0 with X
 
 The library supports the following architectures:
 
-*       arm7
+* arm7
 *	arm7s
 *	arm64
-*	i386
-*	x86_64
-
+* i386
+* x86_64
 The library supports iOS version 5 and higher.
 
 #2. SDK Initialization
@@ -52,6 +51,8 @@ Go to "Build Phases" and make sure LibR1Connect.a file is set in the “Link Bin
 
 Make sure you add:
 
+- CoreLocation.framework
+- CoreBluetooth.framework
 - AdSupport.framework
 - CoreTelephony.framework
 - SystemConfiguration.framework
@@ -616,4 +617,52 @@ Once your Account Manager has set up tracking, you will start receiving attribut
 3. For each media supplier, your account manager will send you 2 tracking URLs (one impression tracking URL, 1 click tracking URL).
 4. Send each pair of URLs to the relevant Media Supplier so they can set these tracking URLs on the creatives
 5. You're all set and will start having access to Attribution Tracking Reports
+
+##d. Geofencing Activation
+
+Geofencing is disabled by default.  You can enable it in the `application:didFinishLaunchingWithOptions:` method or later.
+
+    sdk.geofencingEnabled = YES;
+    
+To disable geofencing, either remove the above call or set its value to NO
+
+The R1GeofencingSDK also allows you to notify your users and drive engagements
+via local notification. When a user `entered` or `exited` a region (both
+`CLGeographicalRegion` and `CLBeaconRegion`) you can obtain relevant information
+using the `NSNotification` object, and the notification object has the following
+keys to access the `CLRegion` object and its name string respectively:
+````
+kR1LocationRegionObjectKey
+kR1LocationRegionNameKey
+````
+You can register region enter/exit notifications as needed as shown below:
+````
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendLocalEnterNotification:) name:kR1GeofenceDidEnterNotification object:nil];
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendLocalExitNotification:) name:kR1GeofenceDidExitNotification object:nil];
+````
+In your `sendLocalEnterNotification:` and `sendLocalExitNotification:` methods,
+you can relay your event messages to `application:didReceiveLocalNotification:`
+by overriding it on your application delegate to display these local notifications using your own keys. For example:
+
+````
+#import "R1GeofencingSDK.h"
+````
+
+```objc
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+  if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+    // you may want to show an alert
+    
+    NSString *alertString = [notification.userInfo objectForKey:<Your_Own_NotificationAlertBodyKey>];
+    application.applicationIconBadgeNumber = 0; // reset the badge to zero
+    
+    NSString *alertTitle = [notification.userInfo objectForKey:<Your__Own_NotificationAlertTypeKey>];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alert show];
+  }
+}
+
+```
 

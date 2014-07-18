@@ -31,6 +31,8 @@
     sdk.emitter.appVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"r1EmitterLastApplicationVersion"];
     sdk.emitter.appId = [[NSUserDefaults standardUserDefaults] objectForKey:@"r1EmitterDemoAppId"];
     
+    sdk.geofencingEnabled = YES;
+    
     [sdk start];
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];

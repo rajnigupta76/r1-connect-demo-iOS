@@ -35,6 +35,7 @@
 		ECD5361B18055A04000A2909 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD5361A18055A04000A2909 /* libsqlite3.dylib */; };
 		ECD5361D18055A10000A2909 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD5361C18055A10000A2909 /* SystemConfiguration.framework */; };
 		ECD5362118055CFA000A2909 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD5362018055CFA000A2909 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		ECFE02E619767DAF001C1125 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECFE02E519767DAF001C1125 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		ECD5361A18055A04000A2909 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		ECD5361C18055A10000A2909 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		ECD5362018055CFA000A2909 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		ECFE02E519767DAF001C1125 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECFE02E619767DAF001C1125 /* CoreBluetooth.framework in Frameworks */,
 				ECD5362118055CFA000A2909 /* AdSupport.framework in Frameworks */,
 				ECD5361D18055A10000A2909 /* SystemConfiguration.framework in Frameworks */,
 				EC918FFB180FE147009EB1D7 /* LibR1Connect.a in Frameworks */,
@@ -136,6 +139,7 @@
 		ECD535AF18055780000A2909 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ECFE02E519767DAF001C1125 /* CoreBluetooth.framework */,
 				ECD5362018055CFA000A2909 /* AdSupport.framework */,
 				ECD5361C18055A10000A2909 /* SystemConfiguration.framework */,
 				ECD5361A18055A04000A2909 /* libsqlite3.dylib */,
