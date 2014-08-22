@@ -21,23 +21,29 @@
 		
 
 #1. System Requirements
-The R1 Connect SDK supports all mobile and tablet devices running iOS 5.0 with Xcode 4.5 and above. The downloadable directory (see below "[a. Import Files](#a-import-files)") contains the library and headers for the R1 Connect SDK. 
+The R1 Connect SDK supports all mobile and tablet devices running iOS 6.0 with Xcode 4.5 and above. The downloadable directory (see below "[a. Import Files](#a-import-files)") contains the library and headers for the R1 Connect SDK. 
 
 The library supports the following architectures:
 
+For deploying to iDevices:
+
 * arm7
-*	arm7s
-*	arm64
+* arm7s
+* arm64
+
+For testing using Simulator
+
 * i386
 * x86_64
-The library supports iOS version 5 and higher.
+* 
+The library supports iOS version 6.0 and higher.
 
 #2. SDK Initialization
 
 ## a. Import Files
 1.	Download the r1connect lib files:
            git clone git@github.com:radiumone/r1-connect-demo-iOS.git
-2.	Open your iOS project in xCode.
+2.	Open your iOS project in Xcode.
 3.	Select File -> Add Files to “[YOUR XCODE PROJECT]” project
 4.	Select all files in the "Lib" Folder from the repo you just cloned
 5.	When the dialog box appears, check the Copy Items into destination group’s folder checkbox.
@@ -82,11 +88,9 @@ At the top of your application delegate include any required headers:
 (NSDictionary *)launchOptions {     
     R1SDK *sdk = [R1SDK sharedInstance];  
     
-    // Initialize Analytics      
+    // Initialize SDK
     sdk.applicationId = @"YOUR APPLICATION ID";  //Ask your RadiumOne contact for an app id
     
-    // Start SDK     
-   [sdk start];      
     return YES; 
 }
 ```
@@ -96,12 +100,6 @@ The following is a list of configuration parameters for the R1 Connect SDK.  Mos
 
 ####Configuration Parameters
 
-***advertisingEnabled***
-
-Indicates (to the SDK) whether or not the application is displaying advertisiments.  A value of TRUE prevents the SDK from accessing IDFA to comply with Apple's advertising policy when advertisements are served within the application (outside of the SDK).
-```objc
-[R1SDK sharedInstance].advertisingEnabled = FALSE;
-```
 
 ***applicationUserId***
 
@@ -125,6 +123,8 @@ If your application did not use location information before this SDK installatio
 ```objc
 [R1SDK sharedInstance].locationService.enabled = YES;
 ```
+
+You must import R1LocationService.h to use this feature.
 
 When enabled, such as in the example above, location information will be sent automatically. However, locationService doesn’t fetch the location constantly. For instance, when the location is received the SDK will turn off the location in CLLocationManager and wait 10 minutes (by default) before attempting to retrieve it again. You can change this value:
 ```objc
@@ -157,18 +157,6 @@ The application version associated with this emitter. By default, this property 
 [R1Emitter sharedInstance].appVersion = @"1.0.2";
 ```
 
-***sessionStart***
-
-If true, indicates the start of a new session. Note that when a emitter is first instantiated, this is initialized to true. To prevent this default behavior, set this to `NO` when the tracker is first obtained.
- 
-Setting this does not send any data. If this is true, when the next emitter call is made, a parameter will be added to the resulting emitter information indicating the start of a session.  This flag will be cleared.
-
-```objc
-[R1Emitter sharedInstance].sessionStart = YES;
-// Your code here
-[R1Emitter sharedInstance].sessionStart = NO;
-```
-
 ***sessionTimeout***
 
 If positive, indicates how long, in seconds, the application must transition to the inactive or background state for before the tracker will automatically indicate the start of a new session when the app becomes active again by setting sessionStart to true. For example, if this is set to 30 seconds, and the user receives a phone call that lasts for 45 seconds while using the app, upon returning to the app, the sessionStart parameter will be set to true. If the phone call lasted 10 seconds, sessionStart will not be modified.
@@ -183,6 +171,31 @@ By default, this is 30 seconds.
 
 #3. Feature Activation
 ##a. Analytics Activation
+
+####Setup your App Delegate
+
+```objc
+#import "R1SDK.h"
+#import "R1Emitter.h"
+#import "R1Push.h"
+```
+
+
+```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    R1SDK *sdk = [R1SDK sharedInstance];
+    
+    // Initialize Analytics      
+    sdk.applicationId = @"YOUR APPLICATION ID";  //Ask your RadiumOne contact for an app id
+    
+    // Start SDK
+    [sdk start];
+    
+    return YES;
+}
+```
+
 ### i. Automatic Events
 
 
@@ -521,37 +534,37 @@ This doc assumes that you are enrolled in the iOS Developer Program. If you are 
 ######Apple Developer Members Center
 Make sure you are logged into the [Apple Developer Members Center](https://daw.apple.com/cgi-bin/WebObjects/DSAuthWeb.woa/wa/login?&appIdKey=891bd3417a7776362562d2197f89480a8547b108fd934911bcbea0110d07f757&path=%2F%2Fmembercenter%2Findex.action). Once you are logged in you can locate your application in the “Identifiers” folder list.
 
-![Files in xCode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image001.jpg)
+![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image001.jpg)
 
 ######Registered App ID
 If you have not registered an App ID yet it is important that you do so now. You will need to click the “+” symbol, fill out the form, and check the “Push Notifications” checkbox. Please keep in mind it is possible to edit these choices after the App ID is registered.
 
 
-![Files in xCode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image002.jpg)
-![Files in xCode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image003.jpg)
+![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image002.jpg)
+![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image003.jpg)
 
 You can expand the application and when doing so you will see two settings for push notifications. They will have either yellow or green status icons like here:
 
-![Files in xCode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image004.jpg)
+![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image004.jpg)
 
 You will need to click Edit to continue. If the Edit button is not visible it is because you do not have “Team Agent” role access. This role is necessary for getting an SSL certificate.
 
 ######Creating an SSL Certificate
 To enable the Development or Production Push SSL Certificate please click Edit. (It is important to note that each certificate is limited to a single app, identified by its bundle ID and limited to one of two environments, either Development or Production. Read more info [here](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ProvisioningDevelopment.html#//apple_ref/doc/uid/TP40008194-CH104-SW1).)
 
-![Files in xCode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image005.jpg)
+![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image005.jpg)
 
 
 You will see a Create Certificate button, after clicking it you will see the “Add iOS Certificate Assistant”. Please follow the instructions presented in the assistant which includes launching the “Keychain Access” application, generating a “Certificate Signing Request (CSR)”, generating an SSL Certificate, etc.
 
 If you follow the assistant correctly, after downloading and opening the SSL Certificate you should have it added under “My Certificates” or “Certificates” in your “Keychain Access” application. Also when you are returned to the Configure App ID page the certificate should be badged with a green circle and the label “Enabled”.
 
-![Files in xCode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image006.jpg)
+![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image006.jpg)
 
 ######Exporting the SSL Certificate
 If not already in the “Keychain Access” app that contains your certificate, please open it and select the certificate that you just added. Once you select the certificate go to File > Export Items and export it as a Personal Information Exchange (.p12) file. When saving the file be sure to use the Personal Information Exchange (.p12) format.
 
-![Files in xCode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image007.jpg)
+![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image007.jpg)
     
 ######Emailing your SSL certificate
 After downloading your 2 certificates (one for production, one for development), please send them to your RadiumOne account manager (with certificate passwords if you choose to add any).
@@ -620,6 +633,10 @@ Once your Account Manager has set up tracking, you will start receiving attribut
 
 ##d. Geofencing Activation
 
+````
+#import "R1GeofencingSDK.h"
+````
+
 Geofencing is disabled by default.  You can enable it in the `application:didFinishLaunchingWithOptions:` method or later.
 
     sdk.geofencingEnabled = YES;
@@ -644,9 +661,6 @@ In your `sendLocalEnterNotification:` and `sendLocalExitNotification:` methods,
 you can relay your event messages to `application:didReceiveLocalNotification:`
 by overriding it on your application delegate to display these local notifications using your own keys. For example:
 
-````
-#import "R1GeofencingSDK.h"
-````
 
 ```objc
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification

@@ -9,8 +9,10 @@
 
 @property(nonatomic, copy) NSString *applicationUserId;
 
-@property(nonatomic, assign) BOOL advertisingEnabled;
+@property(nonatomic, assign) BOOL disableAllAdvertisingIds;
+
 @property(nonatomic, assign) BOOL geofencingEnabled;
+@property(nonatomic, assign) BOOL engageEnabled;
 
 /*!
  The current user location.
