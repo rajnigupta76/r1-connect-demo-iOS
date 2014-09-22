@@ -1,98 +1,98 @@
 #Table of Contents
-- [1. System Requirements](#user-content-1-system-requirements)
-- [2. SDK Initialization](#user-content-2-sdk-initialization)
-	- [a. Import Files](#user-content-a-import-files)
-	- [b. Link the Static Library](#user-content-b-link-the-static-library)
-	- [c. Initialize the SDK](#user-content-c-initialize-the-sdk)
-	- [d. Advanced Settings](#user-content-d-advanced-settings)
-- [3. Feature Activation](#user-content-3-feature-activation)
-	- [a. Analytics Activation (optional)](#user-content-a-analytics-activation)
-		- [i. Automatic Events](#user-content-i-automatic-events)
-		- [ii. Standard Events](#user-content-ii-standard-events)
-		- [iii. Custom Events](#user-content-iii-custom-events)
-		- [iv. Best Practices](#user-content-iv-best-practices)
-	- [b. Push Notification Activation (optional)](#user-content-b-push-notification-activation)
-		- [i. Initialization](#user-content-i-initialization)
-		- [ii. Setup Apple Push Notification Services](#user-content-ii-setup-apple-push-notification-services)
-		- [iii. Segment your Audience](#user-content-iii-segment-your-audience)
-	- [c. Attribution Tracking Activation (optional)](#user-content-c-attribution-tracking-activation)
-		- [i. Track RadiumOne Campaigns](#user-content-i-track-radiumone-campaigns)
-		- [ii. Track 3rd party Campaigns](#user-content-ii-track-3rd-party-campaigns)
-		
+  - [1. System Requirements](#user-content-1-system-requirements)
+  - [2. SDK Initialization](#user-content-2-sdk-initialization)
+  - [a. Import Files](#user-content-a-import-files)
+  - [b. Link the Static Library](#user-content-b-link-the-static-library)
+  - [c. Initialize the SDK](#user-content-c-initialize-the-sdk)
+  - [d. Advanced Settings](#user-content-d-advanced-settings)
+  - [3. Feature Activation](#user-content-3-feature-activation)
+  - [a. Analytics Activation (optional)](#user-content-a-analytics-activation)
+  - [i. Automatic Events](#user-content-i-automatic-events)
+  - [ii. Standard Events](#user-content-ii-standard-events)
+  - [iii. Custom Events](#user-content-iii-custom-events)
+  - [iv. Best Practices](#user-content-iv-best-practices)
+  - [b. Push Notification Activation (optional)](#user-content-b-push-notification-activation)
+  - [i. Initialization](#user-content-i-initialization)
+  - [ii. Setup Apple Push Notification Services](#user-content-ii-setup-apple-push-notification-services)
+  - [iii. Segment your Audience](#user-content-iii-segment-your-audience)
+  - [c. Attribution Tracking Activation (optional)](#user-content-c-attribution-tracking-activation)
+  - [i. Track RadiumOne Campaigns](#user-content-i-track-radiumone-campaigns)
+- [ii. Track 3rd party Campaigns](#user-content-ii-track-3rd-party-campaigns)
+
 
 #1. System Requirements
-The R1 Connect SDK supports all mobile and tablet devices running iOS 6.0 with Xcode 4.5 and above. The downloadable directory (see below "[a. Import Files](#a-import-files)") contains the library and headers for the R1 Connect SDK. 
+  The R1 Connect SDK supports all mobile and tablet devices running iOS 6.0 or newer with a base requirement of Xcode 4.5 used for development (Xcode 6.0 or newer is recommended). The downloadable directory (see below "[a. Import Files](#a-import-files)") contains the library and headers for the R1 Connect SDK. 
 
-The library supports the following architectures:
+  The library supports the following architectures:
 
-For deploying to iDevices:
+  For deploying to iDevices:
 
-* arm7
-* arm7s
-* arm64
+  * arm7
+  * arm7s
+  * arm64
 
-For testing using Simulator
+  For testing using Simulator
 
-* i386
-* x86_64
-* 
-The library supports iOS version 6.0 and higher.
+  * i386
+  * x86_64
+  * 
+  The library supports iOS version 6.0 and higher.
 
 #2. SDK Initialization
 
 ## a. Import Files
-1.	Download the r1connect lib files:
-           git clone git@github.com:radiumone/r1-connect-demo-iOS.git
-2.	Open your iOS project in Xcode.
-3.	Select File -> Add Files to “[YOUR XCODE PROJECT]” project
-4.	Select all files in the "Lib" Folder from the repo you just cloned
-5.	When the dialog box appears, check the Copy Items into destination group’s folder checkbox.
- 
+  1.	Download the r1connect lib files:
+  git clone git@github.com:radiumone/r1-connect-demo-iOS.git
+  2.	Open your iOS project in Xcode.
+  3.	Select File -> Add Files to “[YOUR XCODE PROJECT]” project
+  4.	Select all files in the "Lib" Folder from the repo you just cloned
+  5.	When the dialog box appears, check the Copy Items into destination group’s folder checkbox.
 
 
-<img src="https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/library_files.png"  width="440" />
+
+  <img src="https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/library_files.png"  width="440" />
 
 ## b. Link the Static Library
-Go to "Build Phases" and make sure LibR1Connect.a file is set in the “Link Binary With Libraries” section. If absent, please add it.
+  Go to "Build Phases" and make sure LibR1Connect.a file is set in the “Link Binary With Libraries” section. If absent, please add it.
 
-Make sure you add:
+  Make sure you add:
 
-- CoreLocation.framework
-- CoreBluetooth.framework
-- AdSupport.framework
-- CoreTelephony.framework
-- SystemConfiguration.framework
-- libsqlite3.dylib
-- CoreLocation.framework
+  - CoreLocation.framework
+  - CoreBluetooth.framework
+  - AdSupport.framework
+  - CoreTelephony.framework
+  - SystemConfiguration.framework
+  - libsqlite3.dylib
+  - CoreLocation.framework
 
 
- <img src="https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/link_with_binary.png"  width="440" />
+  <img src="https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/link_with_binary.png"  width="440" />
 
- 
-Verify that the Background Modes switch is turned on in the Capabilities tab for your target.
- 
+
+  Verify that the Background Modes switch is turned on in the Capabilities tab for your target.
+
 ## c. Initialize the SDK
-You will need to initialize the R1 Connect Library in your App Delegate.
+  You will need to initialize the R1 Connect Library in your App Delegate.
 ####Import the required header files
-At the top of your application delegate include any required headers:
+  At the top of your application delegate include any required headers:
 
-```objc
+  ```objc
 #import "R1SDK.h"
 #import "R1Emitter.h"
-```
+  ```
 
 ####Initialize the R1Connect Instance
 
-```objc
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:
-(NSDictionary *)launchOptions {     
+  ```objc
+  - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:
+  (NSDictionary *)launchOptions {     
     R1SDK *sdk = [R1SDK sharedInstance];  
-    
+
     // Initialize SDK
     sdk.applicationId = @"YOUR APPLICATION ID";  //Ask your RadiumOne contact for an app id
-    
+
     return YES; 
-}
+  }
 ```
 
 ## d. Advanced Settings
@@ -124,6 +124,16 @@ If your application did not use location information before this SDK installatio
 [R1SDK sharedInstance].locationService.enabled = YES;
 ```
 
+N.B. - The Connect locationService uses the Location Manager in iOS.  For deployment on iOS 8 and newer, it is required that the application's property list (plist) file include one of the two following keys:
+    
+    NSLocationAlwaysUsageDescription
+    //provide location updates whether the user is actively using the application or not via infrequent background location updates
+    // OR
+    NSLocationWhenInUseUsageDescription
+    //provide location updates only while the user has your application as the foreground running app
+
+These are string values that need to include a description suitable to present to a user.  The description should explain the reason the application is requesting access to the user's location.  Therefore, description you give should try to incorporate or reference the user benefit that may be possible through sharing location.
+
 You must import R1LocationService.h to use this feature.
 
 When enabled, such as in the example above, location information will be sent automatically. However, locationService doesn’t fetch the location constantly. For instance, when the location is received the SDK will turn off the location in CLLocationManager and wait 10 minutes (by default) before attempting to retrieve it again. You can change this value:
@@ -134,7 +144,7 @@ When enabled, such as in the example above, location information will be sent au
 ***appName***
 
 The application name associated with the emitter. By default, this property is populated with the `CFBundleName` string from the application bundle. If you wish to override this property, you must do so before making any tracking calls.
-		
+
 ```objc
 [R1Emitter sharedInstance].appName = @"Custom application name";
 ```
@@ -160,9 +170,9 @@ The application version associated with this emitter. By default, this property 
 ***sessionTimeout***
 
 If positive, indicates how long, in seconds, the application must transition to the inactive or background state for before the tracker will automatically indicate the start of a new session when the app becomes active again by setting sessionStart to true. For example, if this is set to 30 seconds, and the user receives a phone call that lasts for 45 seconds while using the app, upon returning to the app, the sessionStart parameter will be set to true. If the phone call lasted 10 seconds, sessionStart will not be modified.
- 
+
 To disable automatic session tracking, set this to a negative value. To indicate the start of a session anytime the app becomes inactive or backgrounded, set this to zero.
- 
+
 By default, this is 30 seconds.
 
 ```objc
@@ -184,15 +194,15 @@ By default, this is 30 seconds.
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    R1SDK *sdk = [R1SDK sharedInstance];
-    
-    // Initialize Analytics      
-    sdk.applicationId = @"YOUR APPLICATION ID";  //Ask your RadiumOne contact for an app id
-    
-    // Start SDK
-    [sdk start];
-    
-    return YES;
+  R1SDK *sdk = [R1SDK sharedInstance];
+
+  // Initialize Analytics      
+  sdk.applicationId = @"YOUR APPLICATION ID";  //Ask your RadiumOne contact for an app id
+
+  // Start SDK
+  [sdk start];
+
+  return YES;
 }
 ```
 
@@ -230,8 +240,8 @@ Tracks a user login within the app
 
 ```objc
 [[R1Emitter sharedInstance] emitLoginWithUserID:@"userId"
-                           	       userName:@"user_name"
-                         	      otherInfo:@{@"custom_key":@"value"}];
+userName:@"user_name"
+otherInfo:@{@"custom_key":@"value"}];
 ```
 
 **Registration**
@@ -240,11 +250,11 @@ Records a user registration within the app
 
 ```objc
 [[R1Emitter sharedInstance] emitRegistrationWithUserID:@"userId"
-                                              userName:@"userName"
-                                               country:@"country"
-                                                 state:@"state"
-                                                  city:@"city"
-                                             otherInfo:@{@"custom_key":@"value"}];
+userName:@"userName"
+country:@"country"
+state:@"state"
+city:@"city"
+otherInfo:@{@"custom_key":@"value"}];
 ```
 
 **Facebook connect**
@@ -255,7 +265,7 @@ Allows access to Facebook services
 NSArray *permissions = @[[R1EmitterSocialPermission socialPermissionWithName:@"photos" granted:YES]];
 
 [[R1Emitter sharedInstance] emitFBConnectWithPermissions:permissions
-                                  	       otherInfo:@{@"custom_key":@"value"}];
+otherInfo:@{@"custom_key":@"value"}];
 ```
 
 **Twitter connect**
@@ -266,9 +276,9 @@ Allows access to Twitter services
 NSArray *permissions = @[[R1EmitterSocialPermission socialPermissionWithName:@"photos" granted:YES]];
 
 [[R1Emitter sharedInstance] emitTConnectWithUserID:@"12345"
-                                          userName:@"user_name"
-                                       permissions:permissions
-                                  	 otherInfo:@{@"custom_key":@"value"}];
+userName:@"user_name"
+permissions:permissions
+otherInfo:@{@"custom_key":@"value"}];
 ```
 
 **User Info**
@@ -277,18 +287,18 @@ Enables you to send user profiles to the backend.
 
 ```objc
 R1EmitterUserInfo *userInfo = [R1EmitterUserInfo userInfoWithUserID:@"userId"
-                           userName:@"userName"
-                              email:@"user@email.com"
-                          firstName:@"first name"
-                           lastName:@"last name"
-                      streetAddress:@"streetAddress"
-                              phone:@"phone"
-                               city:@"city"
-                              state:@"state"
-                                zip:@"zip"];
+userName:@"userName"
+email:@"user@email.com"
+firstName:@"first name"
+lastName:@"last name"
+streetAddress:@"streetAddress"
+phone:@"phone"
+city:@"city"
+state:@"state"
+zip:@"zip"];
 
 [[R1Emitter sharedInstance] emitUserInfo:userInfo
-                               otherInfo:@{@"custom_key":@"value"}];
+otherInfo:@{@"custom_key":@"value"}];
 ```
 
 **Upgrade**
@@ -313,91 +323,91 @@ A page view that provides info about that screen
 
 ```objc
 [[R1Emitter sharedInstance] emitScreenViewWithDocumentTitle:@"title"
-                            					 contentDescription:@"description"
-                           						documentLocationUrl:@"http://www.example.com/path"
-                              					   documentHostName:@"example.com"
-                                  					   documentPath:@"path"
-                                     					  otherInfo:@{@"custom_key":@"value"}];
+contentDescription:@"description"
+documentLocationUrl:@"http://www.example.com/path"
+documentHostName:@"example.com"
+documentPath:@"path"
+otherInfo:@{@"custom_key":@"value"}];
 ```
 
 **Transaction**
 
 ```objc
 [[R1Emitter sharedInstance] emitTransactionWithID:@"transaction_id"
-                                  	  storeID:@"store_id"
-                                 	storeName:@"store_name"
-                                    	   cartID:@"cart_id"
-                                   	  orderID:@"order_id"
-                                 	totalSale:1.5
-                                  	 currency:@"USD"
-                             	    shippingCosts:10.5
-                            	   transactionTax:12.0
-                                 	otherInfo:@{@"custom_key":@"value"}];
+storeID:@"store_id"
+storeName:@"store_name"
+cartID:@"cart_id"
+orderID:@"order_id"
+totalSale:1.5
+currency:@"USD"
+shippingCosts:10.5
+transactionTax:12.0
+otherInfo:@{@"custom_key":@"value"}];
 ```
 
 **TransactionItem**
 
 ```objc
 R1EmitterLineItem *lineItem = [R1EmitterLineItem itemWithID:@"product_id"
-                              			       name:@"product_name"
-                          			   quantity:5
-                     			      unitOfMeasure:@"unit"
-                          			   msrPrice:10
-                         			  pricePaid:10
-                          			   currency:@"USD"
-                      			       itemCategory:@"category"];
+name:@"product_name"
+quantity:5
+unitOfMeasure:@"unit"
+msrPrice:10
+pricePaid:10
+currency:@"USD"
+itemCategory:@"category"];
 
 [[R1Emitter sharedInstance] emitTransactionItemWithTransactionID:@"transaction_id"
-                                                 	lineItem:lineItem
-                                                       otherInfo:@{@"custom_key":@"value"}];
+lineItem:lineItem
+otherInfo:@{@"custom_key":@"value"}];
 ```
 
 **Create Cart**
 
 ```objc
 [[R1Emitter sharedInstance] emitCartCreateWithCartID:@"cart_id"
-                                	   otherInfo:@{@"custom_key":@"value"}];
+otherInfo:@{@"custom_key":@"value"}];
 ```
 
 **Delete Cart**
 
 ```objc
 [[R1Emitter sharedInstance] emitCartDeleteWithCartID:@"cart_id"
-                       			   otherInfo:@{@"custom_key":@"value"}];
+otherInfo:@{@"custom_key":@"value"}];
 ```
 
 **Add To Cart**
 
 ```objc
 R1EmitterLineItem *lineItem = [R1EmitterLineItem itemWithID:@"product_id"
-                              			       name:@"product_name"
-                          			   quantity:5
-                     			      unitOfMeasure:@"unit"
-                          			   msrPrice:10
-                         			  pricePaid:10
-                          			   currency:@"USD"
-                      			       itemCategory:@"category"];
+name:@"product_name"
+quantity:5
+unitOfMeasure:@"unit"
+msrPrice:10
+pricePaid:10
+currency:@"USD"
+itemCategory:@"category"];
 
 [[R1Emitter sharedInstance] emitAddToCartWithCartID:@"cart_id"
-        				   lineItem:lineItem
-                                 	  otherInfo:@{@"custom_key":@"value"}];
+lineItem:lineItem
+otherInfo:@{@"custom_key":@"value"}];
 ```
 
 **Delete From Cart**
 
 ```objc
 R1EmitterLineItem *lineItem = [R1EmitterLineItem itemWithID:@"product_id"
-                              			       name:@"product_name"
-                          			   quantity:5
-                     			      unitOfMeasure:@"unit"
-                          			   msrPrice:10
-                         			  pricePaid:10
-                          			   currency:@"USD"
-                      			       itemCategory:@"category"];
+name:@"product_name"
+quantity:5
+unitOfMeasure:@"unit"
+msrPrice:10
+pricePaid:10
+currency:@"USD"
+itemCategory:@"category"];
 
 [[R1Emitter sharedInstance] emitDeleteFromCartWithCartID:@"cart_id"
-        					lineItem:lineItem
-                                 	       otherInfo:@{@"custom_key":@"value"}];
+lineItem:lineItem
+otherInfo:@{@"custom_key":@"value"}];
 ```
 
 
@@ -413,7 +423,7 @@ To include tracking of custom events for the mobile app, the following callbacks
 
 // Emits a custom event with parameters
 [[R1Emitter sharedInstance] emitEvent:@"Your custom event name"
-			  			   withParameters:@{@"key":@"value"}];
+withParameters:@{@"key":@"value"}];
 ```
 
 
@@ -433,9 +443,9 @@ Another common mistake is to add parameters to the event that have too many poss
 
 ```objc
 [[R1Emitter sharedInstance] emitEvent:@"ProfileViewing"
-			withParameters:@{"profileFollowers":profileFollowers}];
+withParameters:@{"profileFollowers":profileFollowers}];
 ```
-			  			   
+
 Again, the problem here is that each profile may have any number of followers. This will fragment your data too much to extract any valuable information.
 
 A good strategy would be to define relevant buckets for high variance parameters. In this case, it might be more relevant to separate traffic on the profiles with a lot of followers from traffic on profiles with very few followers. You could define 3 categories: 
@@ -448,10 +458,10 @@ A proper event could be
 
 ```objc
 [[R1Emitter sharedInstance] emitEvent:@"ProfileViewing"
-			withParameters:@{"profileFollowersBucket":@"VERY_INFLUENTIAL"}];
+withParameters:@{"profileFollowersBucket":@"VERY_INFLUENTIAL"}];
 ```
 
-			  			   
+
 This will enable you to create more insightful reports.
 
 ##b. Push Notification Activation
@@ -471,22 +481,22 @@ This will enable you to create more insightful reports.
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    R1SDK *sdk = [R1SDK sharedInstance];
-    
-    // Initialize SDK
-    sdk.applicationId = @"Application ID";  //Ask your RadiumOne contact for an app id
-    
-    // Initialize Push Notification
-    sdk.clientKey = @"Your Client Key";  //Ask your RadiumOne contact for a client key
-    [[R1Push sharedInstance] handleNotification:[launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey]
-                                 applicationState: application.applicationState];
-    [[R1Push sharedInstance] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                                 UIRemoteNotificationTypeSound |
-                                                                 UIRemoteNotificationTypeAlert)];
-    
-    // Start SDK
-    [sdk start];
-    return YES;
+  R1SDK *sdk = [R1SDK sharedInstance];
+
+  // Initialize SDK
+  sdk.applicationId = @"Application ID";  //Ask your RadiumOne contact for an app id
+
+  // Initialize Push Notification
+  sdk.clientKey = @"Your Client Key";  //Ask your RadiumOne contact for a client key
+  [[R1Push sharedInstance] handleNotification:[launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey]
+    applicationState: application.applicationState];
+  [[R1Push sharedInstance] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+      UIRemoteNotificationTypeSound |
+      UIRemoteNotificationTypeAlert)];
+
+  // Start SDK
+  [sdk start];
+  return YES;
 }
 ```
 
@@ -498,18 +508,28 @@ This will enable you to create more insightful reports.
 ```objc
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    [[R1Push sharedInstance] registerDeviceToken:deviceToken];
+  [[R1Push sharedInstance] registerDeviceToken:deviceToken];
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    [[R1Push sharedInstance] failToRegisterDeviceTokenWithError:error];
+  [[R1Push sharedInstance] failToRegisterDeviceTokenWithError:error];
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [[R1Push sharedInstance] handleNotification:userInfo applicationState:application.applicationState];
+  [[R1Push sharedInstance] handleNotification:userInfo applicationState:application.applicationState];
+}
+
+// For iOS 8 and newer, it is required to implement the following callback method
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+  if(![application isRegisteredForRemoteNotifications])
+  {
+    [application registerForRemoteNotifications];
+  }
 }
 ```
- 
+
 Push is disabled by default. You can enable it in the *application:didFinishLaunchingWithOptions* method or later.
 
 ```objc
@@ -565,7 +585,7 @@ If you follow the assistant correctly, after downloading and opening the SSL Cer
 If not already in the “Keychain Access” app that contains your certificate, please open it and select the certificate that you just added. Once you select the certificate go to File > Export Items and export it as a Personal Information Exchange (.p12) file. When saving the file be sure to use the Personal Information Exchange (.p12) format.
 
 ![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image007.jpg)
-    
+
 ######Emailing your SSL certificate
 After downloading your 2 certificates (one for production, one for development), please send them to your RadiumOne account manager (with certificate passwords if you choose to add any).
 
@@ -585,7 +605,7 @@ The maximum length of a Tag is 128 characters.
 ```
 
 ***Add multiple Tags***
-	
+
 ```objc
 [[R1Push sharedInstance].tags addTags:@[ @"NEW TAG 1", @"NEW TAG 2" ]];
 ```
@@ -613,7 +633,7 @@ or
 ```
 
 ***Get all Tags***
-	
+
 ```objc
 NSArray *currentTags = [R1Push sharedInstance].tags.tags;
 ```
@@ -639,13 +659,13 @@ Once your Account Manager has set up tracking, you will start receiving attribut
 
 Geofencing is disabled by default.  You can enable it in the `application:didFinishLaunchingWithOptions:` method or later.
 
-    sdk.geofencingEnabled = YES;
-    
+sdk.geofencingEnabled = YES;
+
 To disable geofencing, either remove the above call or set its value to NO
 
 The R1GeofencingSDK also allows you to notify your users and drive engagements
 via local notification. When a user `entered` or `exited` a region (both
-`CLGeographicalRegion` and `CLBeaconRegion`) you can obtain relevant information
+    `CLGeographicalRegion` and `CLBeaconRegion`) you can obtain relevant information
 using the `NSNotification` object, and the notification object has the following
 keys to access the `CLRegion` object and its name string respectively:
 ````
@@ -658,25 +678,43 @@ You can register region enter/exit notifications as needed as shown below:
 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendLocalExitNotification:) name:kR1GeofenceDidExitNotification object:nil];
 ````
 In your `sendLocalEnterNotification:` and `sendLocalExitNotification:` methods,
-you can relay your event messages to `application:didReceiveLocalNotification:`
-by overriding it on your application delegate to display these local notifications using your own keys. For example:
+   you can relay your event messages to `application:didReceiveLocalNotification:`
+   by overriding it on your application delegate to display these local notifications using your own keys. For example:
 
 
-```objc
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+   ```objc
+   - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
   if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
     // you may want to show an alert
-    
+
     NSString *alertString = [notification.userInfo objectForKey:<Your_Own_NotificationAlertBodyKey>];
     application.applicationIconBadgeNumber = 0; // reset the badge to zero
-    
+
     NSString *alertTitle = [notification.userInfo objectForKey:<Your__Own_NotificationAlertTypeKey>];
-    
+
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alert show];
   }
 }
 
 ```
+
+N.B. - The Connect locationService uses the Location Manager in iOS.  For
+deployment on iOS 8 and newer, it is required that the application's property
+list (plist) file include one of the two following keys:
+
+    NSLocationAlwaysUsageDescription
+    //provide location updates whether the user is actively using the
+    application or not via infrequent background location updates
+    // OR
+    NSLocationWhenInUseUsageDescription
+    //provide location updates only while the user has your application as the
+    foreground running app
+
+These are string values that need to include a description suitable to present
+to a user.  The description should explain the reason the application is
+requesting access to the user's location.  Therefore, description you give
+should try to incorporate or reference the user benefit that may be possible
+through sharing location.
 
