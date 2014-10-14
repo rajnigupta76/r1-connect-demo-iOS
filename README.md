@@ -1,23 +1,24 @@
 #Table of Contents
   - [1. System Requirements](#user-content-1-system-requirements)
   - [2. SDK Initialization](#user-content-2-sdk-initialization)
-  - [a. Import Files](#user-content-a-import-files)
-  - [b. Link the Static Library](#user-content-b-link-the-static-library)
-  - [c. Initialize the SDK](#user-content-c-initialize-the-sdk)
-  - [d. Advanced Settings](#user-content-d-advanced-settings)
+    - [a. Import Files](#user-content-a-import-files)
+    - [b. Link the Static Library](#user-content-b-link-the-static-library)
+    - [c. Initialize the SDK](#user-content-c-initialize-the-sdk)
+    - [d. Advanced Settings](#user-content-d-advanced-settings)
   - [3. Feature Activation](#user-content-3-feature-activation)
-  - [a. Analytics Activation (optional)](#user-content-a-analytics-activation)
-  - [i. Automatic Events](#user-content-i-automatic-events)
-  - [ii. Standard Events](#user-content-ii-standard-events)
-  - [iii. Custom Events](#user-content-iii-custom-events)
-  - [iv. Best Practices](#user-content-iv-best-practices)
-  - [b. Push Notification Activation (optional)](#user-content-b-push-notification-activation)
-  - [i. Initialization](#user-content-i-initialization)
-  - [ii. Setup Apple Push Notification Services](#user-content-ii-setup-apple-push-notification-services)
-  - [iii. Segment your Audience](#user-content-iii-segment-your-audience)
-  - [c. Attribution Tracking Activation (optional)](#user-content-c-attribution-tracking-activation)
-  - [i. Track RadiumOne Campaigns](#user-content-i-track-radiumone-campaigns)
-- [ii. Track 3rd party Campaigns](#user-content-ii-track-3rd-party-campaigns)
+    - [a. Analytics Activation (optional)](#user-content-a-analytics-activation)
+      - [i. Automatic Events](#user-content-i-automatic-events)
+      - [ii. Standard Events](#user-content-ii-standard-events)
+      - [iii. Custom Events](#user-content-iii-custom-events)
+      - [iv. Best Practices](#user-content-iv-best-practices)
+    - [b. Push Notification Activation (optional)](#user-content-b-push-notification-activation)
+      - [i. Initialization](#user-content-i-initialization)
+      - [ii. Setup Apple Push Notification Services](#user-content-ii-setup-apple-push-notification-services)
+      - [iii. Segment your Audience](#user-content-iii-segment-your-audience)
+    - [c. Attribution Tracking Activation (optional)](#user-content-c-attribution-tracking-activation)
+      - [i. Track RadiumOne Campaigns](#user-content-i-track-radiumone-campaigns)
+      - [ii. Track 3rd party Campaigns](#user-content-ii-track-3rd-party-campaigns)
+  - [4. Submitting your App to Apple](#user-content-4-submitting-your-app-to-apple)
 
 
 #1. System Requirements
@@ -718,3 +719,24 @@ requesting access to the user's location.  Therefore, description you give
 should try to incorporate or reference the user benefit that may be possible
 through sharing location.
 
+#4. Submitting your App
+
+When preparing to send your binary to Apple, you will set up an application target in the iTunes Connect portal (http://itunesconnect.apple.com for details).  During this process, you will be presented with the question, "Does this app use the Advertising Identifier (IDFA)?"
+
+  ![Image of idfaCheck]
+(Doc/idfaCheck.png)
+
+Your application may or may not be using this value for your own purposes, but the Connect SDK does access it (described below). So, it is required that you answer, "Yes" to the aforementioned question.
+
+If your application is utilizing Connect's analytics, geofencing or push notification features, be sure to check the last use case option - that the application uses the IDFA to "Attribute an action taken within this app to a previously served advertisement" as advertisments that you might have served can be related to users actions within your app.
+
+  ![Image of idfaAnalyticsOption]
+(Doc/idfaAnalyticsOption.png)
+
+If your application is also using Connect's Engage (display advertisements) feature, be sure to select the option: "Serve advertisements within the app". Naturally, if your application is only using the Engage functionality, leave all other options unchecked (as related to Connect's use of the IDFA)
+
+  ![Image of idfaAllOptions]
+(Doc/idfaAllOptions.png)
+
+
+You will also need to confirm that your app honors a user's "Limit Ad Tracking" setting in iOS.  The Connect SDK does honor this flag and will not access or otherwise utilize the IDFA value if the user has selected the "Limit Ad Tracking" feature.  Ensure that this confirmation and the previously mentioned IDFA use options are checked to facilitate a smooth application review process.
