@@ -40,13 +40,13 @@
 {
     NSMutableString *str = [NSMutableString string];
     
-    [str appendFormat:@"ProductID: %@", (lineItem.itemID != nil) ? lineItem.itemID : @"Empty"];
+    [str appendFormat:@"ProductID: %@", (lineItem.productID != nil) ? lineItem.productID : @"Empty"];
     
-    if (lineItem.itemName != nil)
+    if (lineItem.productName != nil)
     {
         if ([str length] > 0)
             [str appendString:@"\n"];
-        [str appendFormat:@"ProductName: %@", lineItem.itemName];
+        [str appendFormat:@"ProductName: %@", lineItem.productName];
     }
     
     if (lineItem.quantity != 0)
@@ -105,7 +105,7 @@
 {
     NSString *text = [REEventLineItemCell textForLineItem:lineItem];
 
-    CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:16] constrainedToSize:CGSizeMake(width-72, FLT_MAX) lineBreakMode:UILineBreakModeCharacterWrap];
+    CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:16] constrainedToSize:CGSizeMake(width-72, FLT_MAX) lineBreakMode:NSLineBreakByCharWrapping];
     
     if (textSize.height < 44)
         return 44;

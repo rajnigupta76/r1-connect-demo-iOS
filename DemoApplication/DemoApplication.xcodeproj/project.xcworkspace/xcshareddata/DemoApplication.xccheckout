@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>3FDE316C-3217-46AD-ADB4-BEEEBD1F6E5A</string>
+	<string>3DB61A95-8995-4669-BBE3-12A4CEB95EE8</string>
 	<key>IDESourceControlProjectName</key>
 	<string>DemoApplication</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>5A82B812-081E-412B-8F16-79294B1F0D28</key>
-		<string>https://github.com/SteppeChange/ASDK-iOS.git</string>
+		<key>73D0979C-A376-46A0-9A0F-5359D69A4E4F</key>
+		<string>ssh://github.com/SteppeChange/ASDK-iOS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Library/DemoApplication/DemoApplication.xcodeproj/project.xcworkspace</string>
+	<string>ASDK/DemoApplication/DemoApplication.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>5A82B812-081E-412B-8F16-79294B1F0D28</key>
+		<key>73D0979C-A376-46A0-9A0F-5359D69A4E4F</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/SteppeChange/ASDK-iOS.git</string>
+	<string>ssh://github.com/SteppeChange/ASDK-iOS.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>5A82B812-081E-412B-8F16-79294B1F0D28</string>
+	<string>73D0979C-A376-46A0-9A0F-5359D69A4E4F</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>5A82B812-081E-412B-8F16-79294B1F0D28</string>
+			<string>73D0979C-A376-46A0-9A0F-5359D69A4E4F</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ASDK-iOS</string>
 		</dict>

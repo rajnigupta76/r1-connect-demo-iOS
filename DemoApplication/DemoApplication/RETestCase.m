@@ -46,10 +46,10 @@
 {
     switch (self.type)
     {
+        case RETestCaseTypeAction:
+            return @"Action Event";
         case RETestCaseTypeLogin:
             return @"Login Event";
-        case RETestCaseTypeUserInfo:
-            return @"User Info";
         case RETestCaseTypeRegistration:
             return @"Registration Event";
         case RETestCaseTypeFBConnect:
@@ -88,31 +88,26 @@
     
     switch (self.type)
     {
+        case RETestCaseTypeAction:
+            [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"action" visibleKey:@"Action" type:REEventParameterTypeString]];
+            [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"label" visibleKey:@"Label" type:REEventParameterTypeString]];
+            [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"value" visibleKey:@"Value" type:REEventParameterTypeLong]];
+            break;
         case RETestCaseTypeLogin:
             [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"userID" visibleKey:@"UserID" type:REEventParameterTypeString]];
             [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"userName" visibleKey:@"UserName" type:REEventParameterTypeString]];
             break;
-        case RETestCaseTypeUserInfo:
+        case RETestCaseTypeRegistration:
             [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"userID" visibleKey:@"UserID" type:REEventParameterTypeString]];
             [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"userName" visibleKey:@"UserName" type:REEventParameterTypeString]];
             [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"email" visibleKey:@"Email" type:REEventParameterTypeString]];
-            [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"firstName" visibleKey:@"FirstName" type:REEventParameterTypeString]];
-            [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"lastName" visibleKey:@"LastName" type:REEventParameterTypeString]];
             [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"streetAddress" visibleKey:@"Street Address" type:REEventParameterTypeString]];
             [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"phone" visibleKey:@"Phone" type:REEventParameterTypeString]];
             [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"city" visibleKey:@"City" type:REEventParameterTypeString]];
             [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"state" visibleKey:@"State" type:REEventParameterTypeString]];
             [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"zip" visibleKey:@"Zip" type:REEventParameterTypeString]];
             break;
-        case RETestCaseTypeRegistration:
-            [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"userID" visibleKey:@"UserID" type:REEventParameterTypeString]];
-            [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"userName" visibleKey:@"UserName" type:REEventParameterTypeString]];
-            [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"country" visibleKey:@"Country" type:REEventParameterTypeString]];
-            [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"state" visibleKey:@"State" type:REEventParameterTypeString]];
-            [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"city" visibleKey:@"City" type:REEventParameterTypeString]];
-            break;
         case RETestCaseTypeFBConnect:
-            break;
         case RETestCaseTypeTConnect:
             [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"userID" visibleKey:@"UserID" type:REEventParameterTypeString]];
             [parameters addObject:[REEventParameter eventPredefinedParameterWithKey:@"userName" visibleKey:@"UserName" type:REEventParameterTypeString]];
@@ -199,38 +194,33 @@
             [emitter emitEvent:eventName
                 withParameters:parameters];
             break;
+        case RETestCaseTypeAction:
+            [emitter emitAction:[parameters objectForKey:@"action"]
+                          label:[parameters objectForKey:@"label"]
+                          value:[[parameters objectForKey:@"value"] longLongValue]
+                      otherInfo:[parameters objectForKey:@"other_info"]];
+            break;
         case RETestCaseTypeLogin:
             [emitter emitLoginWithUserID:[parameters objectForKey:@"userID"]
                                 userName:[parameters objectForKey:@"userName"]
                                otherInfo:[parameters objectForKey:@"other_info"]];
             break;
-        case RETestCaseTypeUserInfo:
-        {
-            R1EmitterUserInfo *userInfo = [R1EmitterUserInfo userInfoWithUserID:[parameters objectForKey:@"userID"]
-                                                                       userName:[parameters objectForKey:@"userName"]
-                                                                          email:[parameters objectForKey:@"email"]
-                                                                      firstName:[parameters objectForKey:@"firstName"]
-                                                                       lastName:[parameters objectForKey:@"lastName"]
-                                                                  streetAddress:[parameters objectForKey:@"streetAddress"]
-                                                                          phone:[parameters objectForKey:@"phone"]
-                                                                           city:[parameters objectForKey:@"city"]
-                                                                          state:[parameters objectForKey:@"state"]
-                                                                            zip:[parameters objectForKey:@"zip"]];
-            [emitter emitUserInfo:userInfo
-                        otherInfo:[parameters objectForKey:@"other_info"]];
-        }
-            break;
         case RETestCaseTypeRegistration:
             [emitter emitRegistrationWithUserID:[parameters objectForKey:@"userID"]
                                        userName:[parameters objectForKey:@"userName"]
-                                        country:[parameters objectForKey:@"country"]
-                                          state:[parameters objectForKey:@"state"]
+                                          email:[parameters objectForKey:@"email"]
+                                  streetAddress:[parameters objectForKey:@"streetAddress"]
+                                          phone:[parameters objectForKey:@"phone"]
                                            city:[parameters objectForKey:@"city"]
+                                          state:[parameters objectForKey:@"state"]
+                                            zip:[parameters objectForKey:@"zip"]
                                       otherInfo:[parameters objectForKey:@"other_info"]];
             break;
         case RETestCaseTypeFBConnect:
-            [emitter emitFBConnectWithPermissions:[parameters objectForKey:@"permissions"]
-                                        otherInfo:[parameters objectForKey:@"other_info"]];
+            [emitter emitFBConnectWithUserID:[parameters objectForKey:@"userID"]
+                                    userName:[parameters objectForKey:@"userName"]
+                                 permissions:[parameters objectForKey:@"permissions"]
+                                   otherInfo:[parameters objectForKey:@"other_info"]];
 
             break;
         case RETestCaseTypeTConnect:

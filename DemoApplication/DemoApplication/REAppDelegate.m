@@ -1,14 +1,9 @@
 #import "REAppDelegate.h"
 #import "REInitialViewController.h"
-#import "R1SDK.h"
-#import "R1Push.h"
 #import "R1Emitter.h"
 
-#error Enter your application ID
-#define R1_APPLICATION_ID @""
-
-#error Enter your client KEY
-#define R1_CLIENT_KEY @""
+#error Enter Your Emitter ID
+#define R1_EMITTER_ID @""
 
 @implementation REAppDelegate
 
@@ -21,19 +16,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    R1SDK *sdk = [R1SDK sharedInstance];
-    
-    sdk.applicationId = R1_APPLICATION_ID;
-    // Only if you want use push
-    sdk.clientKey = R1_CLIENT_KEY;
-
-    // Optional emitter parameters
-    sdk.emitter.appVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"r1EmitterLastApplicationVersion"];
-    sdk.emitter.appId = [[NSUserDefaults standardUserDefaults] objectForKey:@"r1EmitterDemoAppId"];
-    
-    sdk.geofencingEnabled = YES;
-    
-    [sdk start];
+    // Optional parameters
+    //[R1Emitter sharedInstance].applicationUserID = @"[YOUR APPLICATION USER ID]";
+    //[R1Emitter sharedInstance].appId = @"[YOUR APPLICATION ID]";
+    [[R1Emitter sharedInstance] startWithEmitterId:R1_EMITTER_ID];
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
@@ -45,13 +31,6 @@
     
     [self.window makeKeyAndVisible];
 
-    [[R1Push sharedInstance] handleNotification:[launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey]
-                               applicationState:application.applicationState];
-    
-    [[R1Push sharedInstance] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                                          UIRemoteNotificationTypeSound |
-                                                                          UIRemoteNotificationTypeAlert)];
-    
     return YES;
 }
 
@@ -81,25 +60,5 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-    // Only if you want use push
-    [[R1Push sharedInstance] registerDeviceToken:deviceToken];
-}
-
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *) error
-{
-    // Only if you want use push
-    [[R1Push sharedInstance] failToRegisterDeviceTokenWithError:error];
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    // Only if you want use push
-    [[R1Push sharedInstance] handleNotification:userInfo
-                               applicationState:application.applicationState];
-}
-
 
 @end

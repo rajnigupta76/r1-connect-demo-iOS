@@ -1,12 +1,19 @@
 #import "REInitialViewController.h"
-#import "RETextValueCell.h"
-#import "R1SDK.h"
+#import "RETestCase.h"
 #import "R1Emitter.h"
-#import "R1Push.h"
+#import "REEventParametersViewController.h"
+#import "REEventParameter.h"
+#import "RESDKParametersViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
-#import "RESharedParametersViewController.h"
-#import "REEmitterParametersViewController.h"
-#import "REEmitterViewController.h"
+@interface REInitialViewController ()
+
+@property (nonatomic, assign) BOOL started;
+@property (nonatomic, retain) CLLocationManager *locationManager;
+
+@property (nonatomic, retain) NSArray *testCases;
+
+@end
 
 @implementation REInitialViewController
 
@@ -15,37 +22,75 @@
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self)
     {
-        self.navigationItem.title = @"Emitter & Push SDK";
+        self.started = NO;
+        self.navigationItem.title = @"R1 Emmiter Demo";
+        
+        self.locationManager = [[[CLLocationManager alloc] init] autorelease];
+        self.locationManager.delegate = (id)self;
+        if (self.locationManager.location != nil)
+            [self updateLocation:self.locationManager.location];
+        [self.locationManager startUpdatingLocation];
+        
+        [self initTestCases];
     }
     return self;
 }
 
-- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+- (void) dealloc
 {
-    return 3;
+    [self.locationManager stopUpdatingLocation];
+    self.locationManager = nil;
+    
+    self.testCases = nil;
+    
+    [super dealloc];
+}
+
+- (void) initTestCases
+{
+    self.testCases = @[[RETestCase testCaseWithType:RETestCaseTypeEvent],
+                       [RETestCase testCaseWithType:RETestCaseTypeAction],
+                       [RETestCase testCaseWithType:RETestCaseTypeLogin],
+                       [RETestCase testCaseWithType:RETestCaseTypeRegistration],
+                       [RETestCase testCaseWithType:RETestCaseTypeFBConnect],
+                       [RETestCase testCaseWithType:RETestCaseTypeTConnect],
+                       [RETestCase testCaseWithType:RETestCaseTypeTransaction],
+                       [RETestCase testCaseWithType:RETestCaseTypeTransactionItem],
+                       [RETestCase testCaseWithType:RETestCaseTypeCartCreate],
+                       [RETestCase testCaseWithType:RETestCaseTypeCartDelete],
+                       [RETestCase testCaseWithType:RETestCaseTypeAddToCart],
+                       [RETestCase testCaseWithType:RETestCaseTypeDeleteFromCart],
+                       [RETestCase testCaseWithType:RETestCaseTypeUpgrade],
+                       [RETestCase testCaseWithType:RETestCaseTypeTrialUpgrade],
+                       [RETestCase testCaseWithType:RETestCaseTypeScreenView]];
+}
+
+- (void) updateLocation:(CLLocation *) location
+{
+    [R1Emitter sharedInstance].location = location.coordinate;
+}
+
+- (void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    if (newLocation != nil)
+        [self updateLocation:newLocation];
+}
+
+- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    NSInteger locationsCount = [locations count];
+    if (locationsCount > 0)
+        [self updateLocation:[locations objectAtIndex:locationsCount-1]];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"Emit Methods";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    R1SDK *sdk = [R1SDK sharedInstance];
-    
-    if (!sdk.emitter.isStarted && !sdk.push.isStarted)
-        return 1;
-    
-    switch (section)
-    {
-        case 0:
-            return 1;
-        case 1:
-            return sdk.emitter.isStarted ? 2 : 0;
-        case 2:
-            return sdk.push.isStarted ? 1 : 0;
-            
-        default:
-            break;
-    }
-
-    return 0;
+    return [self.testCases count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -53,67 +98,42 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"StartCell"] autorelease];
-        cell.textLabel.textAlignment = UITextAlignmentLeft;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"] autorelease];
     }
     
-    switch (indexPath.section)
-    {
-        case 0:
-            cell.textLabel.text = @"Shared Options";
-            break;
-        case 1:
-            if (indexPath.row == 0)
-                cell.textLabel.text = @"Emitter Options";
-            else
-                cell.textLabel.text = @"Emitter Methods";
-            break;
-        case 2:
-            cell.textLabel.text = @"Push Options";
-            break;
-            
-        default:
-            break;
-    }
+    cell.textLabel.text = ((RETestCase *)[self.testCases objectAtIndex:indexPath.row]).title;
     
     return cell;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.section)
-    {
-        case 0:
-        {
-            RESharedParametersViewController *viewController = [[RESharedParametersViewController alloc] initViewController];
-            [self.navigationController pushViewController:viewController animated:YES];
-            [viewController release];
-        }
-            break;
-        case 1:
-            if (indexPath.row == 0)
-            {
-                REEmitterParametersViewController *viewController = [[REEmitterParametersViewController alloc] initViewController];
-                [self.navigationController pushViewController:viewController animated:YES];
-                [viewController release];
-            }else
-            {
-                REEmitterViewController *viewController = [[REEmitterViewController alloc] initViewController];
-                [self.navigationController pushViewController:viewController animated:YES];
-                [viewController release];
-            }
-            break;
-        case 2:
-            [R1SDK showPushOptionsInNavigationController:self.navigationController animated:YES];
-            break;
-            
-        default:
-            break;
-    }
-
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    RETestCase *testCase = [self.testCases objectAtIndex:indexPath.row];
+    
+    REEventParametersViewController *parametersViewController = [[REEventParametersViewController alloc] initViewControllerWithTestCase:testCase];
+    parametersViewController.delegate = (id)self;
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:parametersViewController];
+    
+    [self presentModalViewController:navController animated:YES];
+    
+    [navController release];
+    
+    [parametersViewController release];
+}
+
+- (void) eventParametersViewControllerDidCancelled:(REEventParametersViewController *) eventParametersViewController
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void) eventParametersViewController:(REEventParametersViewController *) eventParametersViewController didFinishedWithEventName:(NSString *) eventName withParameters:(NSDictionary *) parameters
+{
+    [eventParametersViewController.testCase emitWithEventName:eventName withParameters:parameters];
+
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end
