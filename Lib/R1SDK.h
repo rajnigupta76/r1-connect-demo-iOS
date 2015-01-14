@@ -31,14 +31,6 @@
 
 - (void) start; // Start emitter and push
 
-// Show Push options
-+ (void) presendModalPushOptionsFromViewController:(UIViewController *) viewController animated:(BOOL)animated;
-+ (void) showPushOptionsInNavigationController:(UINavigationController *) navigationController animated:(BOOL)animated;
-
-// Show Location options
-+ (void) presendModalLocationOptionsFromViewController:(UIViewController *) viewController animated:(BOOL)animated;
-+ (void) showLocationOptionsInNavigationController:(UINavigationController *) navigationController animated:(BOOL)animated;
-
 + (NSString *) sha1:(NSString *) inputString;
 + (NSString *) md5:(NSString *) inputString;
 

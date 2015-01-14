@@ -1,0 +1,679 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EC19AF7A16A6D4200001942E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC19AF7916A6D4200001942E /* SystemConfiguration.framework */; };
+		EC1BC934169AFA5400F5D479 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1BC933169AFA5400F5D479 /* UIKit.framework */; };
+		EC1BC936169AFA5400F5D479 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1BC935169AFA5400F5D479 /* Foundation.framework */; };
+		EC1BC938169AFA5400F5D479 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1BC937169AFA5400F5D479 /* CoreGraphics.framework */; };
+		EC1BC940169AFA5500F5D479 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1BC93F169AFA5500F5D479 /* main.m */; };
+		EC1BC944169AFA5500F5D479 /* REAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1BC943169AFA5500F5D479 /* REAppDelegate.m */; };
+		EC1BC946169AFA5500F5D479 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EC1BC945169AFA5500F5D479 /* Default.png */; };
+		EC1BC948169AFA5500F5D479 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC1BC947169AFA5500F5D479 /* Default@2x.png */; };
+		EC1BC94A169AFA5500F5D479 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC1BC949169AFA5500F5D479 /* Default-568h@2x.png */; };
+		EC1BC9BD169C3CB400F5D479 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1BC9BC169C3CB400F5D479 /* libsqlite3.dylib */; };
+		EC44FB9316A4248500120849 /* REInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC44FB9116A4248500120849 /* REInitialViewController.m */; };
+		EC874B451952B30A00E2604E /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC874B441952B30A00E2604E /* CoreBluetooth.framework */; };
+		EC8FC1C317F9A0D5003CBE92 /* sound1.caf in Resources */ = {isa = PBXBuildFile; fileRef = EC8FC1BD17F9A0D5003CBE92 /* sound1.caf */; };
+		EC8FC1C417F9A0D5003CBE92 /* sound2.caf in Resources */ = {isa = PBXBuildFile; fileRef = EC8FC1BE17F9A0D5003CBE92 /* sound2.caf */; };
+		EC8FC1C517F9A0D5003CBE92 /* sound3.caf in Resources */ = {isa = PBXBuildFile; fileRef = EC8FC1BF17F9A0D5003CBE92 /* sound3.caf */; };
+		EC8FC1C617F9A0D5003CBE92 /* sound4.caf in Resources */ = {isa = PBXBuildFile; fileRef = EC8FC1C017F9A0D5003CBE92 /* sound4.caf */; };
+		EC8FC1C717F9A0D5003CBE92 /* sound5.caf in Resources */ = {isa = PBXBuildFile; fileRef = EC8FC1C117F9A0D5003CBE92 /* sound5.caf */; };
+		EC8FC1C817F9A0D5003CBE92 /* sound6.caf in Resources */ = {isa = PBXBuildFile; fileRef = EC8FC1C217F9A0D5003CBE92 /* sound6.caf */; };
+		ECB12A8F17F57CCD00E22495 /* libR1EmitterSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB12A8E17F57CAE00E22495 /* libR1EmitterSDK.a */; };
+		ECB12A9117F57DDC00E22495 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB12A9017F57DDC00E22495 /* Security.framework */; };
+		ECD388281A40882000326588 /* RESwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD388251A40882000326588 /* RESwitchCell.m */; };
+		ECD388291A40882000326588 /* RETextValueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD388271A40882000326588 /* RETextValueCell.m */; };
+		ECD388401A4089AA00326588 /* REEmitterParametersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD3882B1A4089AA00326588 /* REEmitterParametersViewController.m */; };
+		ECD388411A4089AA00326588 /* REEmitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD3882D1A4089AA00326588 /* REEmitterViewController.m */; };
+		ECD388421A4089AA00326588 /* REEventLineItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD3882F1A4089AA00326588 /* REEventLineItemCell.m */; };
+		ECD388431A4089AA00326588 /* REEventLineItemEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD388311A4089AA00326588 /* REEventLineItemEditorViewController.m */; };
+		ECD388441A4089AA00326588 /* REEventParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD388331A4089AA00326588 /* REEventParameter.m */; };
+		ECD388451A4089AA00326588 /* REEventParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD388351A4089AA00326588 /* REEventParameterCell.m */; };
+		ECD388461A4089AA00326588 /* REEventParameterEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD388371A4089AA00326588 /* REEventParameterEditorViewController.m */; };
+		ECD388471A4089AA00326588 /* REEventParametersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD388391A4089AA00326588 /* REEventParametersViewController.m */; };
+		ECD388481A4089AA00326588 /* REEventParameterTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD3883B1A4089AA00326588 /* REEventParameterTypeViewController.m */; };
+		ECD388491A4089AA00326588 /* RESocialPermissionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD3883D1A4089AA00326588 /* RESocialPermissionCell.m */; };
+		ECD3884A1A4089AA00326588 /* RETestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD3883F1A4089AA00326588 /* RETestCase.m */; };
+		ECD3884D1A408A4400326588 /* REGeofencingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD3884C1A408A4400326588 /* REGeofencingViewController.m */; };
+		ECD388501A408A7900326588 /* RESharedParametersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD3884F1A408A7900326588 /* RESharedParametersViewController.m */; };
+		ECD388551A408AC400326588 /* RELocationParametersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD388521A408AC400326588 /* RELocationParametersViewController.m */; };
+		ECD388561A408AC400326588 /* REPushParametersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD388541A408AC400326588 /* REPushParametersViewController.m */; };
+		ECDB2F7A16B17BC60033B16F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECDB2F7916B17BC60033B16F /* CoreLocation.framework */; };
+		ECF41A9817254E9E00DEE01E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECF41A9717254E9E00DEE01E /* CoreTelephony.framework */; };
+		ECF92D831910D38A00B8F38F /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECF92D821910D38A00B8F38F /* AdSupport.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EC874B4A1952B30A00E2604E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECB12A8817F57CAE00E22495 /* R1EmitterSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FBB3BCDE194B784D00D8BF2E;
+			remoteInfo = R1GSDK;
+		};
+		EC874B4C1952B30A00E2604E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECB12A8817F57CAE00E22495 /* R1EmitterSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FBB3BCF5194B784D00D8BF2E;
+			remoteInfo = R1GSDKTests;
+		};
+		ECB12A8D17F57CAE00E22495 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECB12A8817F57CAE00E22495 /* R1EmitterSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EC0731B516A6C02900C63FDE;
+			remoteInfo = R1EmitterSDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EC19AF7916A6D4200001942E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		EC1BC92F169AFA5400F5D479 /* R1EmitterDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = R1EmitterDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC1BC933169AFA5400F5D479 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EC1BC935169AFA5400F5D479 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EC1BC937169AFA5400F5D479 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EC1BC93B169AFA5400F5D479 /* R1EmitterDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "R1EmitterDemo-Info.plist"; sourceTree = "<group>"; };
+		EC1BC93F169AFA5500F5D479 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EC1BC941169AFA5500F5D479 /* R1EmitterDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "R1EmitterDemo-Prefix.pch"; sourceTree = "<group>"; };
+		EC1BC942169AFA5500F5D479 /* REAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = REAppDelegate.h; sourceTree = "<group>"; };
+		EC1BC943169AFA5500F5D479 /* REAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = REAppDelegate.m; sourceTree = "<group>"; };
+		EC1BC945169AFA5500F5D479 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		EC1BC947169AFA5500F5D479 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		EC1BC949169AFA5500F5D479 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		EC1BC9BC169C3CB400F5D479 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		EC44FB9016A4248500120849 /* REInitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REInitialViewController.h; sourceTree = "<group>"; };
+		EC44FB9116A4248500120849 /* REInitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REInitialViewController.m; sourceTree = "<group>"; };
+		EC874B441952B30A00E2604E /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		EC8FC1BD17F9A0D5003CBE92 /* sound1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound1.caf; sourceTree = "<group>"; };
+		EC8FC1BE17F9A0D5003CBE92 /* sound2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound2.caf; sourceTree = "<group>"; };
+		EC8FC1BF17F9A0D5003CBE92 /* sound3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound3.caf; sourceTree = "<group>"; };
+		EC8FC1C017F9A0D5003CBE92 /* sound4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound4.caf; sourceTree = "<group>"; };
+		EC8FC1C117F9A0D5003CBE92 /* sound5.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound5.caf; sourceTree = "<group>"; };
+		EC8FC1C217F9A0D5003CBE92 /* sound6.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound6.caf; sourceTree = "<group>"; };
+		ECB12A8817F57CAE00E22495 /* R1EmitterSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = R1EmitterSDK.xcodeproj; path = ../R1EmitterSDK/R1EmitterSDK.xcodeproj; sourceTree = "<group>"; };
+		ECB12A9017F57DDC00E22495 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		ECD388241A40882000326588 /* RESwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RESwitchCell.h; path = ../../Library/DemoApplication/DemoApplication/RESwitchCell.h; sourceTree = "<group>"; };
+		ECD388251A40882000326588 /* RESwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RESwitchCell.m; path = ../../Library/DemoApplication/DemoApplication/RESwitchCell.m; sourceTree = "<group>"; };
+		ECD388261A40882000326588 /* RETextValueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RETextValueCell.h; path = ../../Library/DemoApplication/DemoApplication/RETextValueCell.h; sourceTree = "<group>"; };
+		ECD388271A40882000326588 /* RETextValueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RETextValueCell.m; path = ../../Library/DemoApplication/DemoApplication/RETextValueCell.m; sourceTree = "<group>"; };
+		ECD3882A1A4089AA00326588 /* REEmitterParametersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REEmitterParametersViewController.h; path = ../../Library/DemoApplication/DemoApplication/REEmitterParametersViewController.h; sourceTree = "<group>"; };
+		ECD3882B1A4089AA00326588 /* REEmitterParametersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REEmitterParametersViewController.m; path = ../../Library/DemoApplication/DemoApplication/REEmitterParametersViewController.m; sourceTree = "<group>"; };
+		ECD3882C1A4089AA00326588 /* REEmitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REEmitterViewController.h; path = ../../Library/DemoApplication/DemoApplication/REEmitterViewController.h; sourceTree = "<group>"; };
+		ECD3882D1A4089AA00326588 /* REEmitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REEmitterViewController.m; path = ../../Library/DemoApplication/DemoApplication/REEmitterViewController.m; sourceTree = "<group>"; };
+		ECD3882E1A4089AA00326588 /* REEventLineItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REEventLineItemCell.h; path = ../../Library/DemoApplication/DemoApplication/REEventLineItemCell.h; sourceTree = "<group>"; };
+		ECD3882F1A4089AA00326588 /* REEventLineItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REEventLineItemCell.m; path = ../../Library/DemoApplication/DemoApplication/REEventLineItemCell.m; sourceTree = "<group>"; };
+		ECD388301A4089AA00326588 /* REEventLineItemEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REEventLineItemEditorViewController.h; path = ../../Library/DemoApplication/DemoApplication/REEventLineItemEditorViewController.h; sourceTree = "<group>"; };
+		ECD388311A4089AA00326588 /* REEventLineItemEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REEventLineItemEditorViewController.m; path = ../../Library/DemoApplication/DemoApplication/REEventLineItemEditorViewController.m; sourceTree = "<group>"; };
+		ECD388321A4089AA00326588 /* REEventParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REEventParameter.h; path = ../../Library/DemoApplication/DemoApplication/REEventParameter.h; sourceTree = "<group>"; };
+		ECD388331A4089AA00326588 /* REEventParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REEventParameter.m; path = ../../Library/DemoApplication/DemoApplication/REEventParameter.m; sourceTree = "<group>"; };
+		ECD388341A4089AA00326588 /* REEventParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REEventParameterCell.h; path = ../../Library/DemoApplication/DemoApplication/REEventParameterCell.h; sourceTree = "<group>"; };
+		ECD388351A4089AA00326588 /* REEventParameterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REEventParameterCell.m; path = ../../Library/DemoApplication/DemoApplication/REEventParameterCell.m; sourceTree = "<group>"; };
+		ECD388361A4089AA00326588 /* REEventParameterEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REEventParameterEditorViewController.h; path = ../../Library/DemoApplication/DemoApplication/REEventParameterEditorViewController.h; sourceTree = "<group>"; };
+		ECD388371A4089AA00326588 /* REEventParameterEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REEventParameterEditorViewController.m; path = ../../Library/DemoApplication/DemoApplication/REEventParameterEditorViewController.m; sourceTree = "<group>"; };
+		ECD388381A4089AA00326588 /* REEventParametersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REEventParametersViewController.h; path = ../../Library/DemoApplication/DemoApplication/REEventParametersViewController.h; sourceTree = "<group>"; };
+		ECD388391A4089AA00326588 /* REEventParametersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REEventParametersViewController.m; path = ../../Library/DemoApplication/DemoApplication/REEventParametersViewController.m; sourceTree = "<group>"; };
+		ECD3883A1A4089AA00326588 /* REEventParameterTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REEventParameterTypeViewController.h; path = ../../Library/DemoApplication/DemoApplication/REEventParameterTypeViewController.h; sourceTree = "<group>"; };
+		ECD3883B1A4089AA00326588 /* REEventParameterTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REEventParameterTypeViewController.m; path = ../../Library/DemoApplication/DemoApplication/REEventParameterTypeViewController.m; sourceTree = "<group>"; };
+		ECD3883C1A4089AA00326588 /* RESocialPermissionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RESocialPermissionCell.h; path = ../../Library/DemoApplication/DemoApplication/RESocialPermissionCell.h; sourceTree = "<group>"; };
+		ECD3883D1A4089AA00326588 /* RESocialPermissionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RESocialPermissionCell.m; path = ../../Library/DemoApplication/DemoApplication/RESocialPermissionCell.m; sourceTree = "<group>"; };
+		ECD3883E1A4089AA00326588 /* RETestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RETestCase.h; path = ../../Library/DemoApplication/DemoApplication/RETestCase.h; sourceTree = "<group>"; };
+		ECD3883F1A4089AA00326588 /* RETestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RETestCase.m; path = ../../Library/DemoApplication/DemoApplication/RETestCase.m; sourceTree = "<group>"; };
+		ECD3884B1A408A4400326588 /* REGeofencingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REGeofencingViewController.h; path = ../../Library/DemoApplication/DemoApplication/REGeofencingViewController.h; sourceTree = "<group>"; };
+		ECD3884C1A408A4400326588 /* REGeofencingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REGeofencingViewController.m; path = ../../Library/DemoApplication/DemoApplication/REGeofencingViewController.m; sourceTree = "<group>"; };
+		ECD3884E1A408A7900326588 /* RESharedParametersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RESharedParametersViewController.h; path = ../../Library/DemoApplication/DemoApplication/RESharedParametersViewController.h; sourceTree = "<group>"; };
+		ECD3884F1A408A7900326588 /* RESharedParametersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RESharedParametersViewController.m; path = ../../Library/DemoApplication/DemoApplication/RESharedParametersViewController.m; sourceTree = "<group>"; };
+		ECD388511A408AC400326588 /* RELocationParametersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RELocationParametersViewController.h; path = ../../Library/DemoApplication/DemoApplication/RELocationParametersViewController.h; sourceTree = "<group>"; };
+		ECD388521A408AC400326588 /* RELocationParametersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RELocationParametersViewController.m; path = ../../Library/DemoApplication/DemoApplication/RELocationParametersViewController.m; sourceTree = "<group>"; };
+		ECD388531A408AC400326588 /* REPushParametersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REPushParametersViewController.h; path = ../../Library/DemoApplication/DemoApplication/REPushParametersViewController.h; sourceTree = "<group>"; };
+		ECD388541A408AC400326588 /* REPushParametersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REPushParametersViewController.m; path = ../../Library/DemoApplication/DemoApplication/REPushParametersViewController.m; sourceTree = "<group>"; };
+		ECDB2F7916B17BC60033B16F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		ECF41A9717254E9E00DEE01E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		ECF92D821910D38A00B8F38F /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EC1BC92C169AFA5400F5D479 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC874B451952B30A00E2604E /* CoreBluetooth.framework in Frameworks */,
+				ECF92D831910D38A00B8F38F /* AdSupport.framework in Frameworks */,
+				ECB12A9117F57DDC00E22495 /* Security.framework in Frameworks */,
+				ECB12A8F17F57CCD00E22495 /* libR1EmitterSDK.a in Frameworks */,
+				ECF41A9817254E9E00DEE01E /* CoreTelephony.framework in Frameworks */,
+				ECDB2F7A16B17BC60033B16F /* CoreLocation.framework in Frameworks */,
+				EC19AF7A16A6D4200001942E /* SystemConfiguration.framework in Frameworks */,
+				EC1BC9BD169C3CB400F5D479 /* libsqlite3.dylib in Frameworks */,
+				EC1BC934169AFA5400F5D479 /* UIKit.framework in Frameworks */,
+				EC1BC936169AFA5400F5D479 /* Foundation.framework in Frameworks */,
+				EC1BC938169AFA5400F5D479 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EC1BC924169AFA5400F5D479 = {
+			isa = PBXGroup;
+			children = (
+				EC1BC939169AFA5400F5D479 /* R1EmitterDemo */,
+				EC1BC932169AFA5400F5D479 /* Frameworks */,
+				EC1BC930169AFA5400F5D479 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EC1BC930169AFA5400F5D479 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC1BC92F169AFA5400F5D479 /* R1EmitterDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC1BC932169AFA5400F5D479 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EC874B441952B30A00E2604E /* CoreBluetooth.framework */,
+				ECF92D821910D38A00B8F38F /* AdSupport.framework */,
+				ECB12A9017F57DDC00E22495 /* Security.framework */,
+				ECB12A8817F57CAE00E22495 /* R1EmitterSDK.xcodeproj */,
+				ECF41A9717254E9E00DEE01E /* CoreTelephony.framework */,
+				ECDB2F7916B17BC60033B16F /* CoreLocation.framework */,
+				EC19AF7916A6D4200001942E /* SystemConfiguration.framework */,
+				EC1BC9BC169C3CB400F5D479 /* libsqlite3.dylib */,
+				EC1BC933169AFA5400F5D479 /* UIKit.framework */,
+				EC1BC935169AFA5400F5D479 /* Foundation.framework */,
+				EC1BC937169AFA5400F5D479 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EC1BC939169AFA5400F5D479 /* R1EmitterDemo */ = {
+			isa = PBXGroup;
+			children = (
+				ECB12A9317F57E2700E22495 /* Common */,
+				ECB12A9217F57E2100E22495 /* Emitter */,
+				EC44FB9016A4248500120849 /* REInitialViewController.h */,
+				EC44FB9116A4248500120849 /* REInitialViewController.m */,
+				ECD3884E1A408A7900326588 /* RESharedParametersViewController.h */,
+				ECD3884F1A408A7900326588 /* RESharedParametersViewController.m */,
+				ECD3884B1A408A4400326588 /* REGeofencingViewController.h */,
+				ECD3884C1A408A4400326588 /* REGeofencingViewController.m */,
+				ECD388511A408AC400326588 /* RELocationParametersViewController.h */,
+				ECD388521A408AC400326588 /* RELocationParametersViewController.m */,
+				ECD388531A408AC400326588 /* REPushParametersViewController.h */,
+				ECD388541A408AC400326588 /* REPushParametersViewController.m */,
+				EC1BC942169AFA5500F5D479 /* REAppDelegate.h */,
+				EC1BC943169AFA5500F5D479 /* REAppDelegate.m */,
+				EC1BC93A169AFA5400F5D479 /* Supporting Files */,
+			);
+			path = R1EmitterDemo;
+			sourceTree = "<group>";
+		};
+		EC1BC93A169AFA5400F5D479 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EC8FC1BC17F9A0D5003CBE92 /* sounds */,
+				EC1BC93B169AFA5400F5D479 /* R1EmitterDemo-Info.plist */,
+				EC1BC93F169AFA5500F5D479 /* main.m */,
+				EC1BC941169AFA5500F5D479 /* R1EmitterDemo-Prefix.pch */,
+				EC1BC945169AFA5500F5D479 /* Default.png */,
+				EC1BC947169AFA5500F5D479 /* Default@2x.png */,
+				EC1BC949169AFA5500F5D479 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EC8FC1BC17F9A0D5003CBE92 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				EC8FC1BD17F9A0D5003CBE92 /* sound1.caf */,
+				EC8FC1BE17F9A0D5003CBE92 /* sound2.caf */,
+				EC8FC1BF17F9A0D5003CBE92 /* sound3.caf */,
+				EC8FC1C017F9A0D5003CBE92 /* sound4.caf */,
+				EC8FC1C117F9A0D5003CBE92 /* sound5.caf */,
+				EC8FC1C217F9A0D5003CBE92 /* sound6.caf */,
+			);
+			path = sounds;
+			sourceTree = "<group>";
+		};
+		ECB12A8917F57CAE00E22495 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ECB12A8E17F57CAE00E22495 /* libR1EmitterSDK.a */,
+				EC874B4B1952B30A00E2604E /* R1GSDK.app */,
+				EC874B4D1952B30A00E2604E /* R1GSDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ECB12A9217F57E2100E22495 /* Emitter */ = {
+			isa = PBXGroup;
+			children = (
+				ECD3882A1A4089AA00326588 /* REEmitterParametersViewController.h */,
+				ECD3882B1A4089AA00326588 /* REEmitterParametersViewController.m */,
+				ECD3882C1A4089AA00326588 /* REEmitterViewController.h */,
+				ECD3882D1A4089AA00326588 /* REEmitterViewController.m */,
+				ECD3882E1A4089AA00326588 /* REEventLineItemCell.h */,
+				ECD3882F1A4089AA00326588 /* REEventLineItemCell.m */,
+				ECD388301A4089AA00326588 /* REEventLineItemEditorViewController.h */,
+				ECD388311A4089AA00326588 /* REEventLineItemEditorViewController.m */,
+				ECD388321A4089AA00326588 /* REEventParameter.h */,
+				ECD388331A4089AA00326588 /* REEventParameter.m */,
+				ECD388341A4089AA00326588 /* REEventParameterCell.h */,
+				ECD388351A4089AA00326588 /* REEventParameterCell.m */,
+				ECD388361A4089AA00326588 /* REEventParameterEditorViewController.h */,
+				ECD388371A4089AA00326588 /* REEventParameterEditorViewController.m */,
+				ECD388381A4089AA00326588 /* REEventParametersViewController.h */,
+				ECD388391A4089AA00326588 /* REEventParametersViewController.m */,
+				ECD3883A1A4089AA00326588 /* REEventParameterTypeViewController.h */,
+				ECD3883B1A4089AA00326588 /* REEventParameterTypeViewController.m */,
+				ECD3883C1A4089AA00326588 /* RESocialPermissionCell.h */,
+				ECD3883D1A4089AA00326588 /* RESocialPermissionCell.m */,
+				ECD3883E1A4089AA00326588 /* RETestCase.h */,
+				ECD3883F1A4089AA00326588 /* RETestCase.m */,
+			);
+			name = Emitter;
+			sourceTree = "<group>";
+		};
+		ECB12A9317F57E2700E22495 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				ECD388241A40882000326588 /* RESwitchCell.h */,
+				ECD388251A40882000326588 /* RESwitchCell.m */,
+				ECD388261A40882000326588 /* RETextValueCell.h */,
+				ECD388271A40882000326588 /* RETextValueCell.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EC1BC92E169AFA5400F5D479 /* R1EmitterDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC1BC94D169AFA5500F5D479 /* Build configuration list for PBXNativeTarget "R1EmitterDemo" */;
+			buildPhases = (
+				EC1BC92B169AFA5400F5D479 /* Sources */,
+				EC1BC92C169AFA5400F5D479 /* Frameworks */,
+				EC1BC92D169AFA5400F5D479 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = R1EmitterDemo;
+			productName = R1EmitterDemo;
+			productReference = EC1BC92F169AFA5400F5D479 /* R1EmitterDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EC1BC926169AFA5400F5D479 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = RE;
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Home;
+				TargetAttributes = {
+					EC1BC92E169AFA5400F5D479 = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = EC1BC929169AFA5400F5D479 /* Build configuration list for PBXProject "R1EmitterDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = EC1BC924169AFA5400F5D479;
+			productRefGroup = EC1BC930169AFA5400F5D479 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = ECB12A8917F57CAE00E22495 /* Products */;
+					ProjectRef = ECB12A8817F57CAE00E22495 /* R1EmitterSDK.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				EC1BC92E169AFA5400F5D479 /* R1EmitterDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EC874B4B1952B30A00E2604E /* R1GSDK.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = R1GSDK.app;
+			remoteRef = EC874B4A1952B30A00E2604E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EC874B4D1952B30A00E2604E /* R1GSDKTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = R1GSDKTests.xctest;
+			remoteRef = EC874B4C1952B30A00E2604E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ECB12A8E17F57CAE00E22495 /* libR1EmitterSDK.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libR1EmitterSDK.a;
+			remoteRef = ECB12A8D17F57CAE00E22495 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EC1BC92D169AFA5400F5D479 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC8FC1C717F9A0D5003CBE92 /* sound5.caf in Resources */,
+				EC8FC1C417F9A0D5003CBE92 /* sound2.caf in Resources */,
+				EC8FC1C817F9A0D5003CBE92 /* sound6.caf in Resources */,
+				EC8FC1C617F9A0D5003CBE92 /* sound4.caf in Resources */,
+				EC8FC1C317F9A0D5003CBE92 /* sound1.caf in Resources */,
+				EC8FC1C517F9A0D5003CBE92 /* sound3.caf in Resources */,
+				EC1BC946169AFA5500F5D479 /* Default.png in Resources */,
+				EC1BC948169AFA5500F5D479 /* Default@2x.png in Resources */,
+				EC1BC94A169AFA5500F5D479 /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EC1BC92B169AFA5400F5D479 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECD388281A40882000326588 /* RESwitchCell.m in Sources */,
+				ECD388491A4089AA00326588 /* RESocialPermissionCell.m in Sources */,
+				ECD388461A4089AA00326588 /* REEventParameterEditorViewController.m in Sources */,
+				ECD388481A4089AA00326588 /* REEventParameterTypeViewController.m in Sources */,
+				ECD388411A4089AA00326588 /* REEmitterViewController.m in Sources */,
+				EC1BC940169AFA5500F5D479 /* main.m in Sources */,
+				ECD388471A4089AA00326588 /* REEventParametersViewController.m in Sources */,
+				ECD388451A4089AA00326588 /* REEventParameterCell.m in Sources */,
+				ECD388421A4089AA00326588 /* REEventLineItemCell.m in Sources */,
+				ECD3884A1A4089AA00326588 /* RETestCase.m in Sources */,
+				ECD388561A408AC400326588 /* REPushParametersViewController.m in Sources */,
+				EC1BC944169AFA5500F5D479 /* REAppDelegate.m in Sources */,
+				EC44FB9316A4248500120849 /* REInitialViewController.m in Sources */,
+				ECD3884D1A408A4400326588 /* REGeofencingViewController.m in Sources */,
+				ECD388501A408A7900326588 /* RESharedParametersViewController.m in Sources */,
+				ECD388431A4089AA00326588 /* REEventLineItemEditorViewController.m in Sources */,
+				ECD388551A408AC400326588 /* RELocationParametersViewController.m in Sources */,
+				ECD388291A40882000326588 /* RETextValueCell.m in Sources */,
+				ECD388441A4089AA00326588 /* REEventParameter.m in Sources */,
+				ECD388401A4089AA00326588 /* REEmitterParametersViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		EC1BC94B169AFA5500F5D479 /* Debug_MA_Demo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "R1EmitterLib/ProtocolBuffers/objectivec/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug_MA_Demo;
+		};
+		EC1BC94C169AFA5500F5D479 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "R1EmitterLib/ProtocolBuffers/objectivec/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EC1BC94E169AFA5500F5D479 /* Debug_MA_Demo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Gove (KBFTSA28LE)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "R1EmitterDemo/R1EmitterDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../R1EmitterSDK/R1EmitterSDK/**";
+				INFOPLIST_FILE = "R1EmitterDemo/R1EmitterDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "54efcf6c-5ae7-43ae-8d2e-ded2deaa02b9";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug_MA_Demo;
+		};
+		EC1BC94F169AFA5500F5D479 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "R1EmitterDemo/R1EmitterDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../R1EmitterSDK/R1EmitterSDK/**";
+				INFOPLIST_FILE = "R1EmitterDemo/R1EmitterDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		EC44FBAF16A45BB900120849 /* Enterprise_MA_Demo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "R1EmitterLib/ProtocolBuffers/objectivec/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Enterprise_MA_Demo;
+		};
+		EC44FBB016A45BB900120849 /* Enterprise_MA_Demo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: RadiumOne, Inc. (ent)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "R1EmitterDemo/R1EmitterDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../R1EmitterSDK/R1EmitterSDK/**";
+				INFOPLIST_FILE = "R1EmitterDemo/R1EmitterDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "313e7cda-abbf-4f80-9202-f84b468d2a13";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "313e7cda-abbf-4f80-9202-f84b468d2a13";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Enterprise_MA_Demo;
+		};
+		ECCBFBC1180C20760049084B /* Debug_MA_Prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					USE_PROD_SERVER,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "R1EmitterLib/ProtocolBuffers/objectivec/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug_MA_Prod;
+		};
+		ECCBFBC2180C20760049084B /* Debug_MA_Prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Gove (KBFTSA28LE)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "R1EmitterDemo/R1EmitterDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../R1EmitterSDK/R1EmitterSDK/**";
+				INFOPLIST_FILE = "R1EmitterDemo/R1EmitterDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "54efcf6c-5ae7-43ae-8d2e-ded2deaa02b9";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug_MA_Prod;
+		};
+		ECCBFBC8180C222D0049084B /* Enterprise_MA_Prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = USE_PROD_SERVER;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "R1EmitterLib/ProtocolBuffers/objectivec/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Enterprise_MA_Prod;
+		};
+		ECCBFBC9180C222D0049084B /* Enterprise_MA_Prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: RadiumOne, Inc. (ent)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "R1EmitterDemo/R1EmitterDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../R1EmitterSDK/R1EmitterSDK/**";
+				INFOPLIST_FILE = "R1EmitterDemo/R1EmitterDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "313e7cda-abbf-4f80-9202-f84b468d2a13";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "313e7cda-abbf-4f80-9202-f84b468d2a13";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Enterprise_MA_Prod;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EC1BC929169AFA5400F5D479 /* Build configuration list for PBXProject "R1EmitterDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC1BC94B169AFA5500F5D479 /* Debug_MA_Demo */,
+				ECCBFBC1180C20760049084B /* Debug_MA_Prod */,
+				EC1BC94C169AFA5500F5D479 /* Release */,
+				EC44FBAF16A45BB900120849 /* Enterprise_MA_Demo */,
+				ECCBFBC8180C222D0049084B /* Enterprise_MA_Prod */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC1BC94D169AFA5500F5D479 /* Build configuration list for PBXNativeTarget "R1EmitterDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC1BC94E169AFA5500F5D479 /* Debug_MA_Demo */,
+				ECCBFBC2180C20760049084B /* Debug_MA_Prod */,
+				EC1BC94F169AFA5500F5D479 /* Release */,
+				EC44FBB016A45BB900120849 /* Enterprise_MA_Demo */,
+				ECCBFBC9180C222D0049084B /* Enterprise_MA_Prod */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EC1BC926169AFA5400F5D479 /* Project object */;
+}

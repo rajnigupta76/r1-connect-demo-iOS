@@ -64,8 +64,6 @@
   - CoreTelephony.framework
   - SystemConfiguration.framework
   - libsqlite3.dylib
-  - CoreLocation.framework
-
 
   <img src="https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/link_with_binary.png"  width="440" />
 
@@ -476,6 +474,7 @@ This will enable you to create more insightful reports.
 #import "R1SDK.h"
 #import "R1Emitter.h"
 #import "R1Push.h"
+#import "R1WebCommand.h"
 ```
 
 
@@ -518,16 +517,6 @@ This will enable you to create more insightful reports.
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
   [[R1Push sharedInstance] handleNotification:userInfo applicationState:application.applicationState];
-}
-
-// For iOS 8 and newer, it is required to implement the following callback method
-
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
-{
-  if(![application isRegisteredForRemoteNotifications])
-  {
-    [application registerForRemoteNotifications];
-  }
 }
 ```
 
