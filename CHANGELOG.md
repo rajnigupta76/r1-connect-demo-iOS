@@ -1,3 +1,12 @@
+##Version 2.4.0
+
+###1. Added
+
+#####1. Rich push and deep linking support
+
+    #import "R1WebCommand.h"
+
+
 ##Version 2.1.0
 
 ###1. Updated

@@ -24,20 +24,12 @@
 #1. System Requirements
   The R1 Connect SDK supports all mobile and tablet devices running iOS 6.0 or newer with a base requirement of Xcode 4.5 used for development (Xcode 6.0 or newer is recommended). The downloadable directory (see below "[a. Import Files](#a-import-files)") contains the library and headers for the R1 Connect SDK. 
 
-  The library supports the following architectures:
+The library supports the following architectures (iOS version 6.0 and higher):
 
-  For deploying to iDevices:
+-arm7, arm7s, arm64 for deploying to physical devices
 
-  * arm7
-  * arm7s
-  * arm64
-
-  For testing using Simulator
-
-  * i386
-  * x86_64
-  * 
-  The library supports iOS version 6.0 and higher.
+-i386, x86_64 for Simulator testing
+ 
 
 #2. SDK Initialization
 
@@ -54,21 +46,22 @@
   <img src="https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/library_files.png"  width="440" />
 
 ## b. Link the Static Library
-  Go to "Build Phases" and make sure LibR1Connect.a file is set in the “Link Binary With Libraries” section. If absent, please add it.
+Go to "Build Phases" and make sure LibR1Connect.a file is set in the “Link Binary With Libraries” section. If absent, please add it.
 
-  Make sure you add:
+Make sure you add:
 
-  - CoreLocation.framework
-  - CoreBluetooth.framework
-  - AdSupport.framework
-  - CoreTelephony.framework
-  - SystemConfiguration.framework
-  - libsqlite3.dylib
-
-  <img src="https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/link_with_binary.png"  width="440" />
+- libsqlite3.dylib
+- CoreLocation.framework
+- CoreBluetooth.framework
+- AdSupport.framework
+- CoreTelephony.framework
+- SystemConfiguration.framework
 
 
-  Verify that the Background Modes switch is turned on in the Capabilities tab for your target.
+<img src="https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/link_with_binary.png"  width="440" />
+
+Verify that the Background Modes switch is turned on in the Capabilities tab for your target.
+
 
 ## c. Initialize the SDK
   You will need to initialize the R1 Connect Library in your App Delegate.
@@ -474,7 +467,7 @@ This will enable you to create more insightful reports.
 #import "R1SDK.h"
 #import "R1Emitter.h"
 #import "R1Push.h"
-#import "R1WebCommand.h"
+#import "R1WebCommand.h" // required for rich push
 ```
 
 
