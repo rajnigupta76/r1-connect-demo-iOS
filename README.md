@@ -12,9 +12,11 @@
       - [iii. Custom Events](#user-content-iii-custom-events)
       - [iv. Best Practices](#user-content-iv-best-practices)
     - [b. Push Notification Activation (optional)](#user-content-b-push-notification-activation)
-      - [i. Initialization](#user-content-i-initialization)
-      - [ii. Setup Apple Push Notification Services](#user-content-ii-setup-apple-push-notification-services)
-      - [iii. Segment your Audience](#user-content-iii-segment-your-audience)
+      - [i. Setup Apple Push Notification Services](#user-content-i-setup-apple-push-notification-services)
+      - [ii. Initialization](#user-content-ii-initialization)
+      - [iii. Rich Push Initialization](#user-content-iii-rich-push-initialization)
+      - [iv. Deep Link Initialization](#user-content-iv-deep-link-initialization)
+      - [v. Segment your Audience](#user-content-v-segment-your-audience)
     - [c. Attribution Tracking Activation (optional)](#user-content-c-attribution-tracking-activation)
       - [i. Track RadiumOne Campaigns](#user-content-i-track-radiumone-campaigns)
       - [ii. Track 3rd party Campaigns](#user-content-ii-track-3rd-party-campaigns)
@@ -458,7 +460,57 @@ This will enable you to create more insightful reports.
 
 ##b. Push Notification Activation
 
-###i. Initialization
+###i. Setup Apple Push Notification Services
+
+####Prerequisites for Apple Push Notification Services Setup
+######The Importance of Setting your App as in “Production” or in “Development”
+When creating or editing an app on RadiumOne Connect you can set the status of the app to either “Production” or “Development”. “Production” status for an app is considered to be a live app that is in the hands of real users and will have notifications and other data running on live servers. A “Development” status for an app is one that you are still performing testing on and will not be viewed by any real-life audiences because it will stay on test servers.
+
+In the context of push notifications, it is important to know this difference because Apple will treat these two servers separately. Also device tokens for “Development” will not work on “Production” and vice versa. We recommend a Development app version and Production app version for your app on RadiumOne Connect to keep Push SSL certificates separate for each. You can also continue testing and experimenting on one app without worrying about it affecting your live app audience in any way.
+######iOS Developer Program Enrollment
+This doc assumes that you are enrolled in the iOS Developer Program. If you are not, please enroll [here](https://developer.apple.com/programs/ios/). Being in the Apple Developer Program is a required component to have your iOS app communicate with the RadiumOne Connect service for push notifications and is necessary for the next step of setting up your app with the Apple Push Notification Service (APNs). It is also essential that you have “Team Agent” role access in the iOS Developer Program to complete this process.
+
+####Configuring your App for Apple Push Notifications
+######Apple Developer Members Center
+Make sure you are logged into the [Apple Developer Members Center](https://daw.apple.com/cgi-bin/WebObjects/DSAuthWeb.woa/wa/login?&appIdKey=891bd3417a7776362562d2197f89480a8547b108fd934911bcbea0110d07f757&path=%2F%2Fmembercenter%2Findex.action). Once you are logged in you can locate your application in the “Identifiers” folder list.
+
+![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image001.jpg)
+
+######Registered App ID
+If you have not registered an App ID yet it is important that you do so now. You will need to click the “+” symbol, fill out the form, and check the “Push Notifications” checkbox. Please keep in mind it is possible to edit these choices after the App ID is registered.
+
+
+![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image002.jpg)
+![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image003.jpg)
+
+You can expand the application and when doing so you will see two settings for push notifications. They will have either yellow or green status icons like here:
+
+![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image004.jpg)
+
+You will need to click Edit to continue. If the Edit button is not visible it is because you do not have “Team Agent” role access. This role is necessary for getting an SSL certificate.
+
+######Creating an SSL Certificate
+To enable the Development or Production Push SSL Certificate please click Edit. (It is important to note that each certificate is limited to a single app, identified by its bundle ID and limited to one of two environments, either Development or Production. Read more info [here](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ProvisioningDevelopment.html#//apple_ref/doc/uid/TP40008194-CH104-SW1).)
+
+![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image005.jpg)
+
+
+You will see a Create Certificate button, after clicking it you will see the “Add iOS Certificate Assistant”. Please follow the instructions presented in the assistant which includes launching the “Keychain Access” application, generating a “Certificate Signing Request (CSR)”, generating an SSL Certificate, etc.
+
+If you follow the assistant correctly, after downloading and opening the SSL Certificate you should have it added under “My Certificates” or “Certificates” in your “Keychain Access” application. Also when you are returned to the Configure App ID page the certificate should be badged with a green circle and the label “Enabled”.
+
+![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image006.jpg)
+
+######Exporting the SSL Certificate
+If not already in the “Keychain Access” app that contains your certificate, please open it and select the certificate that you just added. Once you select the certificate go to File > Export Items and export it as a Personal Information Exchange (.p12) file. When saving the file be sure to use the Personal Information Exchange (.p12) format.
+
+![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image007.jpg)
+
+######Emailing your SSL certificate
+After downloading your 2 certificates (one for production, one for development), please send them to your RadiumOne account manager (with certificate passwords if you choose to add any).
+
+
+###ii. Initialization
 
 ####Setup your App Delegate
 
@@ -523,57 +575,18 @@ Push is disabled by default. You can enable it in the *application:didFinishLaun
 NOTE: If you enabled it in the *application:didFinishLaunchingWithOptions* method, the Push Notification AlertView will be showed at first application start.
 
 
-###ii. Setup Apple Push Notification Services
+###iii. Rich Push Initialization    
 
-####Prerequisites for Apple Push Notification Services Setup
-######The Importance of Setting your App as in “Production” or in “Development”
-When creating or editing an app on RadiumOne Connect you can set the status of the app to either “Production” or “Development”. “Production” status for an app is considered to be a live app that is in the hands of real users and will have notifications and other data running on live servers. A “Development” status for an app is one that you are still performing testing on and will not be viewed by any real-life audiences because it will stay on test servers.
-
-In the context of push notifications, it is important to know this difference because Apple will treat these two servers separately. Also device tokens for “Development” will not work on “Production” and vice versa. We recommend a Development app version and Production app version for your app on RadiumOne Connect to keep Push SSL certificates separate for each. You can also continue testing and experimenting on one app without worrying about it affecting your live app audience in any way.
-######iOS Developer Program Enrollment
-This doc assumes that you are enrolled in the iOS Developer Program. If you are not, please enroll [here](https://developer.apple.com/programs/ios/). Being in the Apple Developer Program is a required component to have your iOS app communicate with the RadiumOne Connect service for push notifications and is necessary for the next step of setting up your app with the Apple Push Notification Service (APNs). It is also essential that you have “Team Agent” role access in the iOS Developer Program to complete this process.
-
-####Configuring your App for Apple Push Notifications
-######Apple Developer Members Center
-Make sure you are logged into the [Apple Developer Members Center](https://daw.apple.com/cgi-bin/WebObjects/DSAuthWeb.woa/wa/login?&appIdKey=891bd3417a7776362562d2197f89480a8547b108fd934911bcbea0110d07f757&path=%2F%2Fmembercenter%2Findex.action). Once you are logged in you can locate your application in the “Identifiers” folder list.
-
-![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image001.jpg)
-
-######Registered App ID
-If you have not registered an App ID yet it is important that you do so now. You will need to click the “+” symbol, fill out the form, and check the “Push Notifications” checkbox. Please keep in mind it is possible to edit these choices after the App ID is registered.
+Rich *Push Notifications* send a URL that opens in a WebView upon user response to a system notification.  No set up is required for this feature.
 
 
-![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image002.jpg)
-![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image003.jpg)
+###iv. Deep Link Initialization    
 
-You can expand the application and when doing so you will see two settings for push notifications. They will have either yellow or green status icons like here:
-
-![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image004.jpg)
-
-You will need to click Edit to continue. If the Edit button is not visible it is because you do not have “Team Agent” role access. This role is necessary for getting an SSL certificate.
-
-######Creating an SSL Certificate
-To enable the Development or Production Push SSL Certificate please click Edit. (It is important to note that each certificate is limited to a single app, identified by its bundle ID and limited to one of two environments, either Development or Production. Read more info [here](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ProvisioningDevelopment.html#//apple_ref/doc/uid/TP40008194-CH104-SW1).)
-
-![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image005.jpg)
+Deep linking *Push Notifications* open up a designated view in an application upon user response to a system notification.  To properly handle deep link push receipts, please read Apple's documentation:  https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/Inter-AppCommunication/Inter-AppCommunication.html#//apple_ref/doc/uid/TP40007072-CH6-SW10
+http://wiki.akosma.com/IPhone_URL_Schemes
 
 
-You will see a Create Certificate button, after clicking it you will see the “Add iOS Certificate Assistant”. Please follow the instructions presented in the assistant which includes launching the “Keychain Access” application, generating a “Certificate Signing Request (CSR)”, generating an SSL Certificate, etc.
-
-If you follow the assistant correctly, after downloading and opening the SSL Certificate you should have it added under “My Certificates” or “Certificates” in your “Keychain Access” application. Also when you are returned to the Configure App ID page the certificate should be badged with a green circle and the label “Enabled”.
-
-![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image006.jpg)
-
-######Exporting the SSL Certificate
-If not already in the “Keychain Access” app that contains your certificate, please open it and select the certificate that you just added. Once you select the certificate go to File > Export Items and export it as a Personal Information Exchange (.p12) file. When saving the file be sure to use the Personal Information Exchange (.p12) format.
-
-![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image007.jpg)
-
-######Emailing your SSL certificate
-After downloading your 2 certificates (one for production, one for development), please send them to your RadiumOne account manager (with certificate passwords if you choose to add any).
-
-
-###iii. Segment your Audience    
+###v. Segment your Audience    
 
 You can specify Tags for *R1 Connect SDK* to send *Push Notifications* to certain groups of users.
 
