@@ -18,6 +18,7 @@
 		EC1BC94A169AFA5500F5D479 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC1BC949169AFA5500F5D479 /* Default-568h@2x.png */; };
 		EC1BC9BD169C3CB400F5D479 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1BC9BC169C3CB400F5D479 /* libsqlite3.dylib */; };
 		EC44FB9316A4248500120849 /* REInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC44FB9116A4248500120849 /* REInitialViewController.m */; };
+		EC6746C91A8124E60074A973 /* r1DebugDevices in Resources */ = {isa = PBXBuildFile; fileRef = EC6746C81A8124E60074A973 /* r1DebugDevices */; };
 		EC874B451952B30A00E2604E /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC874B441952B30A00E2604E /* CoreBluetooth.framework */; };
 		EC8FC1C317F9A0D5003CBE92 /* sound1.caf in Resources */ = {isa = PBXBuildFile; fileRef = EC8FC1BD17F9A0D5003CBE92 /* sound1.caf */; };
 		EC8FC1C417F9A0D5003CBE92 /* sound2.caf in Resources */ = {isa = PBXBuildFile; fileRef = EC8FC1BE17F9A0D5003CBE92 /* sound2.caf */; };
@@ -90,6 +91,7 @@
 		EC1BC9BC169C3CB400F5D479 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		EC44FB9016A4248500120849 /* REInitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REInitialViewController.h; sourceTree = "<group>"; };
 		EC44FB9116A4248500120849 /* REInitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REInitialViewController.m; sourceTree = "<group>"; };
+		EC6746C81A8124E60074A973 /* r1DebugDevices */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = r1DebugDevices; sourceTree = "<group>"; };
 		EC874B441952B30A00E2604E /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		EC8FC1BD17F9A0D5003CBE92 /* sound1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound1.caf; sourceTree = "<group>"; };
 		EC8FC1BE17F9A0D5003CBE92 /* sound2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound2.caf; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				EC1BC942169AFA5500F5D479 /* REAppDelegate.h */,
 				EC1BC943169AFA5500F5D479 /* REAppDelegate.m */,
 				EC1BC93A169AFA5400F5D479 /* Supporting Files */,
+				EC6746C81A8124E60074A973 /* r1DebugDevices */,
 			);
 			path = R1EmitterDemo;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				EC8FC1C717F9A0D5003CBE92 /* sound5.caf in Resources */,
 				EC8FC1C417F9A0D5003CBE92 /* sound2.caf in Resources */,
 				EC8FC1C817F9A0D5003CBE92 /* sound6.caf in Resources */,
+				EC6746C91A8124E60074A973 /* r1DebugDevices in Resources */,
 				EC8FC1C617F9A0D5003CBE92 /* sound4.caf in Resources */,
 				EC8FC1C317F9A0D5003CBE92 /* sound1.caf in Resources */,
 				EC8FC1C517F9A0D5003CBE92 /* sound3.caf in Resources */,

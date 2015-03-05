@@ -11,6 +11,7 @@
       - [ii. Standard Events](#user-content-ii-standard-events)
       - [iii. Custom Events](#user-content-iii-custom-events)
       - [iv. Best Practices](#user-content-iv-best-practices)
+      - [v. Debugging Tool](#user-content-v-debugging-tool)
     - [b. Push Notification Activation (optional)](#user-content-b-push-notification-activation)
       - [i. Setup Apple Push Notification Services](#user-content-i-setup-apple-push-notification-services)
       - [ii. Initialization](#user-content-ii-initialization)
@@ -457,6 +458,14 @@ withParameters:@{"profileFollowersBucket":@"VERY_INFLUENTIAL"}];
 
 
 This will enable you to create more insightful reports.
+
+###v. Debugging Tool
+
+This tool allows you to verify that the events that you have set up are triggering correctly.  You can access the debugging area of the portal to view the JSON events sent by your application.
+
+####Setup
+
+To enable the debugging tool, you should create a flat file titled "r1DebugDevices" with a list of IDFAs and add it to your project root through File -> Add Files to "Project.".  There should be one ID per line.
 
 ##b. Push Notification Activation
 
