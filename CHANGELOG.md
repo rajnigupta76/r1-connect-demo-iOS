@@ -4,7 +4,7 @@
 
 #####1. Debugging with SDK Tools on the Portal
 
-You can now see the JSONs sent when triggered by events in your application. You will be able to see the events in the SDK Tools section on the portal. To enable the debugging tool, you should create a flat file titled "r1DebugDevices" with a list of IDFAs and add it to your project root through File -> Add Files to "Project.". There should be one ID per line.
+You can now see the JSON data sent when triggered by events in your application. You will be able to see the events in the SDK Tools section on the portal. To enable the debugging tool, you should create a flat file titled "r1DebugDevices" with a list of IDFAs and add it to your project root through File -> Add Files to "Project.". There should be one ID per line.
 
 ##Version 2.4.0
 
