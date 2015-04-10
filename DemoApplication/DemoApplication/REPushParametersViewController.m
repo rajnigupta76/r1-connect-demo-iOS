@@ -33,9 +33,9 @@
 
     if ([self.navigationController.viewControllers indexOfObject:self] == 0)
     {
-        self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Close"
-                                                                                  style:UIBarButtonItemStyleBordered
-                                                                                 target:self action:@selector(closeButtonPressed)] autorelease];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close"
+                                                                                 style:UIBarButtonItemStyleBordered
+                                                                                target:self action:@selector(closeButtonPressed)];
     }
 }
 
@@ -86,7 +86,7 @@
         
         if (cell == nil)
         {
-            cell = [[[RESwitchCell alloc] initCellWithReuseIdentifier:CellIdentifier] autorelease];
+            cell = [[RESwitchCell alloc] initCellWithReuseIdentifier:CellIdentifier];
             [cell.switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         }
         
@@ -103,7 +103,7 @@
         
         if (cell == nil)
         {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
         }
         
@@ -119,7 +119,7 @@
         
         if (cell == nil)
         {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         cell.textLabel.text = @"Add Tag";
@@ -132,7 +132,7 @@
     
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 
     cell.textLabel.text = [[R1Push sharedInstance].tags.tags objectAtIndex:indexPath.row];
@@ -205,7 +205,6 @@
         textField.text = [NSString stringWithFormat:@"%lu", (unsigned long)[R1Push sharedInstance].badgeNumber];
         
         [badgeAlertView show];
-        [badgeAlertView release];
         
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         
@@ -245,7 +244,6 @@
     textField.placeholder = @"Tag";
     
     [addAlertView show];
-    [addAlertView release];
 }
 
 - (void) alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex

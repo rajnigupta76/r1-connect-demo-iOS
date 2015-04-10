@@ -12,10 +12,10 @@
 
 @interface REEventParametersViewController ()
 
-@property (nonatomic, retain) RETextValueCell *eventNameCell;
-@property (nonatomic, retain) NSMutableArray *parameters;
-@property (nonatomic, retain) NSMutableArray *permissions;
-@property (nonatomic, retain) R1EmitterLineItem *lineItem;
+@property (nonatomic, strong) RETextValueCell *eventNameCell;
+@property (nonatomic, strong) NSMutableArray *parameters;
+@property (nonatomic, strong) NSMutableArray *permissions;
+@property (nonatomic, strong) R1EmitterLineItem *lineItem;
 
 @end
 
@@ -28,12 +28,7 @@
     {
         self.navigationItem.title = @"New Event";
         
-        self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                               target:self action:@selector(cancelButtonPressed)] autorelease];
-
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Send"
-                                                                                   style:UIBarButtonItemStyleDone
-                                                                                  target:self action:@selector(doneButtonPressed)] autorelease];
+        [self createNavigationButtons];
 
         self.parameters = [NSMutableArray array];
         self.permissions = [NSMutableArray array];
@@ -46,16 +41,11 @@
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self)
     {
-        _testCase = [testCase retain];
+        _testCase = testCase;
         
         self.navigationItem.title = @"New Event";
         
-        self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                               target:self action:@selector(cancelButtonPressed)] autorelease];
-        
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Send"
-                                                                                   style:UIBarButtonItemStyleDone
-                                                                                  target:self action:@selector(doneButtonPressed)] autorelease];
+        [self createNavigationButtons];
         
         self.parameters = [NSMutableArray array];
         self.permissions = [NSMutableArray array];
@@ -69,18 +59,14 @@
     return self;
 }
 
-- (void) dealloc
+- (void) createNavigationButtons
 {
-    self.eventNameCell = nil;
-    self.parameters = nil;
-    self.permissions = nil;
-    self.lineItem = nil;
-    self.predefinedEventName = nil;
-    self.predefinedEventParameters = nil;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                          target:self action:@selector(cancelButtonPressed)];
     
-    [_testCase release];
-    
-    [super dealloc];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Send"
+                                                                              style:UIBarButtonItemStyleDone
+                                                                             target:self action:@selector(doneButtonPressed)];
 }
 
 - (void) setHasLineItem:(BOOL)hasLineItem
@@ -92,7 +78,7 @@
     
     if (_hasLineItem)
     {
-        self.lineItem = [[[R1EmitterLineItem alloc] initWithItemID:[REEventParameter randomString]] autorelease];
+        self.lineItem = [[R1EmitterLineItem alloc] initWithItemID:[REEventParameter randomString]];
     }else
     {
         self.lineItem = nil;
@@ -175,21 +161,18 @@
 
 - (void) showErrorAlertView:(NSString *) error
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                        message:error
-                                                       delegate:nil
-                                              cancelButtonTitle:@"Ok"
-                                              otherButtonTitles:nil];
-    
-    [alertView show];
-    [alertView release];
+    [[[UIAlertView alloc] initWithTitle:@"Error"
+                                message:error
+                               delegate:nil
+                      cancelButtonTitle:@"Ok"
+                      otherButtonTitles:nil] show];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    self.eventNameCell = [[[RETextValueCell alloc] initCellWithReuseIdentifier:@"EventNameCell"] autorelease];
+    self.eventNameCell = [[RETextValueCell alloc] initCellWithReuseIdentifier:@"EventNameCell"];
     self.eventNameCell.textField.returnKeyType = UIReturnKeyDone;
     self.eventNameCell.textField.placeholder = @"Event Name";
     self.eventNameCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -378,7 +361,7 @@
     
     if (cell == nil)
     {
-        cell = [[[REEventLineItemCell alloc] initCellWithReuseIdentifier:CellIdentifier] autorelease];
+        cell = [[REEventLineItemCell alloc] initCellWithReuseIdentifier:CellIdentifier];
     }
     
     cell.lineItem = self.lineItem;
@@ -394,7 +377,7 @@
     
     if (cell == nil)
     {
-        cell = [[[REEventParameterCell alloc] initCellWithReuseIdentifier:CellIdentifier] autorelease];
+        cell = [[REEventParameterCell alloc] initCellWithReuseIdentifier:CellIdentifier];
     }
     
     cell.eventParameter = [self.predefinedEventParameters objectAtIndex:indexPath.row];
@@ -411,7 +394,7 @@
         
         if (cell == nil)
         {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         cell.textLabel.text = @"Insert Parameter";
@@ -424,7 +407,7 @@
     
     if (cell == nil)
     {
-        cell = [[[REEventParameterCell alloc] initCellWithReuseIdentifier:CellIdentifier] autorelease];
+        cell = [[REEventParameterCell alloc] initCellWithReuseIdentifier:CellIdentifier];
     }
     
     cell.eventParameter = [self.parameters objectAtIndex:indexPath.row];
@@ -441,7 +424,7 @@
         
         if (cell == nil)
         {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         cell.textLabel.text = @"Insert Permission";
@@ -546,9 +529,6 @@
         
         [self presentViewController:navController animated:YES completion:nil];
         
-        [navController release];
-        [editorViewController release];
-        
         return;
     }
     
@@ -562,7 +542,6 @@
             RESocialPermissionCell *cell = [[RESocialPermissionCell alloc] initCellWithReuseIdentifier:@"PermissionCell"];
             cell.permission = [R1EmitterSocialPermission socialPermissionWithName:@"" granted:YES];
             [self.permissions addObject:cell];
-            [cell release];
             
             [self.tableView insertRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:[self.permissions count]-1 inSection:indexPath.section] ]
                                   withRowAnimation:UITableViewRowAnimationLeft];
@@ -586,8 +565,6 @@
             [self.parameters addObject:eventParameter];
             [self.tableView insertRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:[self.parameters count]-1 inSection:[self parametersSection]] ]
                                   withRowAnimation:UITableViewRowAnimationLeft];
-            
-            [eventParameter release];
         }else
         {
             eventParameter = [self.parameters objectAtIndex:indexPath.row];
@@ -613,8 +590,6 @@
     REEventParameterEditorViewController *editorViewController = [[REEventParameterEditorViewController alloc] initWithEventParameter:eventParameter];
     
     [self.navigationController pushViewController:editorViewController animated:YES];
-    
-    [editorViewController release];
 }
 
 - (void) eventLineItemEditorViewControllerDidCancelled:(REEventLineItemEditorViewController *) eventLineItemEditorViewController

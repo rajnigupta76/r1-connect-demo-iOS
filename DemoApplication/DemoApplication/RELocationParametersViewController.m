@@ -5,7 +5,7 @@
 
 @interface RELocationParametersViewController ()
 
-@property (nonatomic, retain) R1LocationService *locationService;
+@property (nonatomic, strong) R1LocationService *locationService;
 @property (nonatomic, assign) BOOL hasObservers;
 
 @end
@@ -29,8 +29,6 @@
     [self removeObservers];
 
     self.locationService = nil;
-    
-    [super dealloc];
 }
 
 - (void)viewDidLoad
@@ -138,7 +136,7 @@
             
             if (cell == nil)
             {
-                cell = [[[RESwitchCell alloc] initCellWithReuseIdentifier:CellIdentifier] autorelease];
+                cell = [[RESwitchCell alloc] initCellWithReuseIdentifier:CellIdentifier];
                 [cell.switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
             }
             
@@ -153,7 +151,7 @@
         
         if (cell == nil)
         {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
         
@@ -171,7 +169,7 @@
         
         if (cell == nil)
         {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             cell.accessoryType = UITableViewCellAccessoryNone;
 
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
@@ -187,7 +185,7 @@
     
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
@@ -317,7 +315,6 @@
     textField.text = [NSString stringWithFormat:@"%0.0f", [[R1SDK sharedInstance].locationService autoupdateTimeout]];
     
     [alertView show];
-    [alertView release];
 }
 
 - (void) alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex

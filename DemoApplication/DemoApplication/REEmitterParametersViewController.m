@@ -4,8 +4,8 @@
 
 @interface REEmitterParametersViewController ()
 
-@property (nonatomic, retain) RETextValueCell *appIdCell;
-@property (nonatomic, retain) RETextValueCell *appVersionCell;
+@property (nonatomic, strong) RETextValueCell *appIdCell;
+@property (nonatomic, strong) RETextValueCell *appVersionCell;
 
 @end
 
@@ -21,19 +21,11 @@
     return self;
 }
 
-- (void) dealloc
-{
-    self.appIdCell = nil;
-    self.appVersionCell = nil;
-    
-    [super dealloc];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    self.appIdCell = [[[RETextValueCell alloc] initCellWithReuseIdentifier:@"AppUserIdCell"] autorelease];
+    self.appIdCell = [[RETextValueCell alloc] initCellWithReuseIdentifier:@"AppUserIdCell"];
     self.appIdCell.textField.returnKeyType = UIReturnKeyDone;
     self.appIdCell.textField.placeholder = @"iTunes Application ID";
     self.appIdCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -42,7 +34,7 @@
     self.appIdCell.textField.enablesReturnKeyAutomatically = YES;
     self.appIdCell.textField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"r1EmitterDemoAppId"];
     
-    self.appVersionCell = [[[RETextValueCell alloc] initCellWithReuseIdentifier:@"AppVersionCell"] autorelease];
+    self.appVersionCell = [[RETextValueCell alloc] initCellWithReuseIdentifier:@"AppVersionCell"];
     self.appVersionCell.textField.returnKeyType = UIReturnKeyDone;
     self.appVersionCell.textField.placeholder = @"Application Version";
     self.appVersionCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -110,7 +102,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ResetCell"];
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ResetCell"] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ResetCell"];
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.textLabel.text = @"Reset";
@@ -134,7 +126,6 @@
         alertView.tag = 100;
         
         [alertView show];
-        [alertView release];
         return;
     }
 }

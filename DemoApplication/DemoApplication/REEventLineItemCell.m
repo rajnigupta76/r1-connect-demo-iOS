@@ -18,17 +18,9 @@
     return self;
 }
 
-- (void) dealloc
-{
-    self.lineItem = nil;
-    
-    [super dealloc];
-}
-
 - (void) setLineItem:(R1EmitterLineItem *)lineItem
 {
-    [_lineItem release];
-    _lineItem = [lineItem retain];
+    _lineItem = lineItem;
     
     if (self.lineItem == nil)
         return;

@@ -3,7 +3,7 @@
 
 @interface RESocialPermissionCell ()
 
-@property (nonatomic, retain) UISwitch *grantedSwitch;
+@property (nonatomic, strong) UISwitch *grantedSwitch;
 
 @end
 
@@ -18,20 +18,11 @@
         self.textField.returnKeyType = UIReturnKeyDone;
         self.textField.delegate = (id)self;
         
-        self.grantedSwitch = [[[UISwitch alloc] initWithFrame:CGRectZero] autorelease];
+        self.grantedSwitch = [[UISwitch alloc] initWithFrame:CGRectZero];
         [self.grantedSwitch addTarget:self action:@selector(grantedSwitchChanged) forControlEvents:UIControlEventValueChanged];
         [self.contentView addSubview:self.grantedSwitch];
     }
     return self;
-}
-
-- (void) dealloc
-{
-    self.permission = nil;
-    
-    self.grantedSwitch = nil;
-    
-    [super dealloc];
 }
 
 - (void) setPermission:(R1EmitterSocialPermission *)permission
@@ -39,8 +30,7 @@
     if (permission == _permission)
         return;
     
-    [_permission release];
-    _permission = [permission retain];
+    _permission = permission;
     
     self.textField.text = _permission.name;
     self.grantedSwitch.on = _permission.granted;

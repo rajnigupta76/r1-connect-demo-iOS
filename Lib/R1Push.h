@@ -42,9 +42,4 @@
 - (void) handleForegroundNotification:(NSDictionary *)notification;
 - (void) handleBackgroundNotification:(NSDictionary *)notification;
 
-- (void) handleForegroundRichPushNotification:(NSDictionary *)notification;
-- (void) handleBackgroundRichPushNotification:(NSDictionary *)notification;
-
-- (void) handleWebCommand:(R1WebCommand *) webCommand;
-
 @end

@@ -36,7 +36,7 @@
     RESwitchCell *switchCell = (RESwitchCell *)[tableView dequeueReusableCellWithIdentifier:@"SwitchCell"];
     if (switchCell == nil)
     {
-        switchCell = [[[RESwitchCell alloc] initCellWithReuseIdentifier:@"SwitchCell"] autorelease];
+        switchCell = [[RESwitchCell alloc] initCellWithReuseIdentifier:@"SwitchCell"];
         switchCell.textLabel.text = @"Geofencing Enabled";
         [switchCell.switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
     }

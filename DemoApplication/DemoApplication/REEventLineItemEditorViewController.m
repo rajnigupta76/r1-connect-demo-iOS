@@ -10,16 +10,16 @@
 @interface REEventLineItemEditorViewController ()
 
 @property (nonatomic, assign) BOOL isNewItem;
-@property (nonatomic, retain) R1EmitterLineItem *lineItem;
+@property (nonatomic, strong) R1EmitterLineItem *lineItem;
 
-@property (nonatomic, retain) RETextValueCell *productIDCell;
-@property (nonatomic, retain) RETextValueCell *productNameCell;
-@property (nonatomic, retain) RETextValueCell *quantityCell;
-@property (nonatomic, retain) RETextValueCell *unitOfMeasureCell;
-@property (nonatomic, retain) RETextValueCell *msrPriceCell;
-@property (nonatomic, retain) RETextValueCell *pricePaidCell;
-@property (nonatomic, retain) RETextValueCell *currencyCell;
-@property (nonatomic, retain) RETextValueCell *itemCategoryCell;
+@property (nonatomic, strong) RETextValueCell *productIDCell;
+@property (nonatomic, strong) RETextValueCell *productNameCell;
+@property (nonatomic, strong) RETextValueCell *quantityCell;
+@property (nonatomic, strong) RETextValueCell *unitOfMeasureCell;
+@property (nonatomic, strong) RETextValueCell *msrPriceCell;
+@property (nonatomic, strong) RETextValueCell *pricePaidCell;
+@property (nonatomic, strong) RETextValueCell *currencyCell;
+@property (nonatomic, strong) RETextValueCell *itemCategoryCell;
 
 @end
 
@@ -55,39 +55,26 @@
     return self;
 }
 
-- (void) dealloc
-{
-    self.lineItem = nil;
-    
-    self.productIDCell = nil;
-    self.productNameCell = nil;
-    self.quantityCell = nil;
-    self.unitOfMeasureCell = nil;
-    self.msrPriceCell = nil;
-    self.pricePaidCell = nil;
-    self.currencyCell = nil;
-    self.itemCategoryCell = nil;
-    
-    [super dealloc];
-}
-
 - (void) configureNavigationItemsAnimated:(BOOL) animated
 {
     if ([self inTextFieldEditing])
     {
         [self.navigationItem setLeftBarButtonItem:nil animated:animated];
         
-        [self.navigationItem setRightBarButtonItem:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                                  target:self action:@selector(doneEditButtonPressed)] autorelease]  animated:animated];
+        [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                                  target:self action:@selector(doneEditButtonPressed)]
+                                          animated:animated];
 
         return;
     }
     
-    [self.navigationItem setLeftBarButtonItem:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                             target:self action:@selector(cancelButtonPressed)] autorelease]  animated:animated];
+    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                             target:self action:@selector(cancelButtonPressed)]
+                                     animated:animated];
     
-    [self.navigationItem setRightBarButtonItem:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                             target:self action:@selector(doneButtonPressed)] autorelease]  animated:animated];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                             target:self action:@selector(doneButtonPressed)]
+                                      animated:animated];
 }
 
 - (void) cancelButtonPressed
@@ -104,7 +91,7 @@
     }
     
     if (self.isNewItem)
-        self.lineItem = [[[R1EmitterLineItem alloc] initWithItemID:self.productIDCell.textField.text] autorelease];
+        self.lineItem = [[R1EmitterLineItem alloc] initWithItemID:self.productIDCell.textField.text];
     
     self.lineItem.itemID = self.productIDCell.textField.text;
     self.lineItem.itemName = self.productNameCell.textField.text;
@@ -191,7 +178,7 @@
 {
     [super viewDidLoad];
 
-    self.productIDCell = [[[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"productIDCell"] autorelease];
+    self.productIDCell = [[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"productIDCell"];
     self.productIDCell.textLabel.text = self.productIDCell.textField.placeholder = @"Product ID";
     self.productIDCell.textField.returnKeyType = UIReturnKeyDone;
     self.productIDCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -203,7 +190,7 @@
 //    if (!self.isNewItem)
 //        self.productIDCell.textField.userInteractionEnabled = NO;
 
-    self.productNameCell = [[[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"productNameCell"] autorelease];
+    self.productNameCell = [[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"productNameCell"];
     self.productNameCell.textLabel.text = self.productNameCell.textField.placeholder = @"Product Name";
     self.productNameCell.textField.returnKeyType = UIReturnKeyDone;
     self.productNameCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -213,7 +200,7 @@
     self.productNameCell.textField.keyboardType = UIKeyboardTypeDefault;
     self.productNameCell.textField.text = (self.lineItem == nil) ? [REEventParameter randomString] : self.lineItem.itemName;
     
-    self.quantityCell = [[[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"quantityCell"] autorelease];
+    self.quantityCell = [[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"quantityCell"];
     self.quantityCell.textLabel.text = self.quantityCell.textField.placeholder = @"Quantity";
     self.quantityCell.textField.returnKeyType = UIReturnKeyDone;
     self.quantityCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -223,7 +210,7 @@
     self.quantityCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     self.quantityCell.textField.text = [[NSNumber numberWithLong:(self.lineItem == nil) ? arc4random() : self.lineItem.quantity] stringValue];
     
-    self.unitOfMeasureCell = [[[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"unitOfMeasureCell"] autorelease];
+    self.unitOfMeasureCell = [[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"unitOfMeasureCell"];
     self.unitOfMeasureCell.textLabel.text = self.unitOfMeasureCell.textField.placeholder = @"Unit Of Measure";
     self.unitOfMeasureCell.textField.returnKeyType = UIReturnKeyDone;
     self.unitOfMeasureCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -233,7 +220,7 @@
     self.unitOfMeasureCell.textField.keyboardType = UIKeyboardTypeDefault;
     self.unitOfMeasureCell.textField.text = (self.lineItem == nil) ? [REEventParameter randomString] : self.lineItem.unitOfMeasure;
 
-    self.msrPriceCell = [[[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"msrPriceCell"] autorelease];
+    self.msrPriceCell = [[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"msrPriceCell"];
     self.msrPriceCell.textLabel.text = self.msrPriceCell.textField.placeholder = @"Msr Price";
     self.msrPriceCell.textField.returnKeyType = UIReturnKeyDone;
     self.msrPriceCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -243,7 +230,7 @@
     self.msrPriceCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     self.msrPriceCell.textField.text = [NSString stringWithFormat:@"%f", (self.lineItem == nil) ? arc4random() : self.lineItem.msrPrice];
     
-    self.pricePaidCell = [[[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"msrPriceCell"] autorelease];
+    self.pricePaidCell = [[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"msrPriceCell"];
     self.pricePaidCell.textLabel.text = self.pricePaidCell.textField.placeholder = @"Price Paid";
     self.pricePaidCell.textField.returnKeyType = UIReturnKeyDone;
     self.pricePaidCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -253,7 +240,7 @@
     self.pricePaidCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     self.pricePaidCell.textField.text = [NSString stringWithFormat:@"%f", (self.lineItem == nil) ? arc4random() : self.lineItem.pricePaid];
     
-    self.currencyCell = [[[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"currencyCell"] autorelease];
+    self.currencyCell = [[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"currencyCell"];
     self.currencyCell.textLabel.text = self.unitOfMeasureCell.textField.placeholder = @"Currency";
     self.currencyCell.textField.returnKeyType = UIReturnKeyDone;
     self.currencyCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -263,7 +250,7 @@
     self.currencyCell.textField.keyboardType = UIKeyboardTypeDefault;
     self.currencyCell.textField.text = (self.lineItem == nil) ? [REEventParameter randomString] : self.lineItem.currency;
     
-    self.itemCategoryCell = [[[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"itemCategoryCell"] autorelease];
+    self.itemCategoryCell = [[RETextValueCell alloc] initLabelCellWithReuseIdentifier:@"itemCategoryCell"];
     self.itemCategoryCell.textLabel.text = self.unitOfMeasureCell.textField.placeholder = @"ItemCategory";
     self.itemCategoryCell.textField.returnKeyType = UIReturnKeyDone;
     self.itemCategoryCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -372,8 +359,6 @@
 
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-//    NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
-
     return YES;
 }
 
@@ -385,14 +370,11 @@
 
 - (void) showErrorAlertView:(NSString *) error
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                        message:error
-                                                       delegate:nil
-                                              cancelButtonTitle:@"Ok"
-                                              otherButtonTitles:nil];
-    
-    [alertView show];
-    [alertView release];
+    [[[UIAlertView alloc] initWithTitle:@"Error"
+                                message:error
+                               delegate:nil
+                      cancelButtonTitle:@"Ok"
+                      otherButtonTitles:nil] show];
 }
 
 @end

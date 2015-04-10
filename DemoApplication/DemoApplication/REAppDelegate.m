@@ -18,13 +18,6 @@
 
 @implementation REAppDelegate
 
-- (void)dealloc
-{
-    [_navigationController release];
-    [_window release];
-    [super dealloc];
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     R1SDK *sdk = [R1SDK sharedInstance];
@@ -41,11 +34,11 @@
     
     [sdk start];
     
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-    self.navigationController = [[[UINavigationController alloc] initWithRootViewController:[[[REInitialViewController alloc] initViewController] autorelease]] autorelease];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:[[REInitialViewController alloc] initViewController]];
     
     [self.window setRootViewController:self.navigationController];
     
@@ -127,7 +120,6 @@
         void (^completion)(void) = ^{
             [self.navigationController popToRootViewControllerAnimated:NO];
             [self.navigationController pushViewController:vc animated:YES];
-            [vc release];
         };
         
         UIViewController *visibleVC = [[self.navigationController viewControllers] lastObject];
@@ -179,7 +171,6 @@
                                                   otherButtonTitles:@"OK", nil];
         
         [alertView show];
-        [alertView release];
     }
 }
 

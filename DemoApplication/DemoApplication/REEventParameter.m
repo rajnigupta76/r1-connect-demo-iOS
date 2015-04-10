@@ -25,7 +25,7 @@
 
 + (REEventParameter *) eventPredefinedParameterWithKey:(NSString *) key visibleKey:(NSString *) visibleKey type:(REEventParameterType) type
 {
-    REEventParameter *eventParameter = [[[REEventParameter alloc] initPredefinedWithKey:key visibleKey:visibleKey] autorelease];
+    REEventParameter *eventParameter = [[REEventParameter alloc] initPredefinedWithKey:key visibleKey:visibleKey];
     eventParameter.type = type;
     
     [eventParameter generateRandomValue];
@@ -37,9 +37,7 @@
 {
     self.key = nil;
     self.value = nil;
-    [_visibleKey release], _visibleKey = nil;
-    
-    [super dealloc];
+    _visibleKey = nil;
 }
 
 - (NSString *) stringFromValue

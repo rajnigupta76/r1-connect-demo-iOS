@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		EC918FFB180FE147009EB1D7 /* LibR1Connect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC918FFA180FE147009EB1D7 /* LibR1Connect.a */; };
 		ECC5C51A1A9DE50800F5ABD9 /* r1DebugDevices in Resources */ = {isa = PBXBuildFile; fileRef = ECC5C5191A9DE50800F5ABD9 /* r1DebugDevices */; };
+		ECCF63591AC1B11C007C457F /* R1SampleInboxTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCF63561AC1B11C007C457F /* R1SampleInboxTableViewCell.m */; };
+		ECCF635A1AC1B11C007C457F /* R1SampleInboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCF63581AC1B11C007C457F /* R1SampleInboxViewController.m */; };
 		ECD3885B1A408B4400326588 /* RELocationParametersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD388581A408B4400326588 /* RELocationParametersViewController.m */; };
 		ECD3885C1A408B4400326588 /* REPushParametersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD3885A1A408B4400326588 /* REPushParametersViewController.m */; };
 		ECD535B118055780000A2909 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD535B018055780000A2909 /* Foundation.framework */; };
@@ -46,6 +48,13 @@
 		EC918FFA180FE147009EB1D7 /* LibR1Connect.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = LibR1Connect.a; sourceTree = "<group>"; };
 		EC97170A18E58BC500E3B236 /* R1EmitterUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = R1EmitterUserInfo.h; sourceTree = "<group>"; };
 		ECC5C5191A9DE50800F5ABD9 /* r1DebugDevices */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = r1DebugDevices; sourceTree = "<group>"; };
+		ECCF63501AC1B0A3007C457F /* R1Inbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = R1Inbox.h; sourceTree = "<group>"; };
+		ECCF63511AC1B0A3007C457F /* R1InboxMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = R1InboxMessage.h; sourceTree = "<group>"; };
+		ECCF63521AC1B0A3007C457F /* R1InboxMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = R1InboxMessages.h; sourceTree = "<group>"; };
+		ECCF63551AC1B11C007C457F /* R1SampleInboxTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = R1SampleInboxTableViewCell.h; sourceTree = "<group>"; };
+		ECCF63561AC1B11C007C457F /* R1SampleInboxTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = R1SampleInboxTableViewCell.m; sourceTree = "<group>"; };
+		ECCF63571AC1B11C007C457F /* R1SampleInboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = R1SampleInboxViewController.h; sourceTree = "<group>"; };
+		ECCF63581AC1B11C007C457F /* R1SampleInboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = R1SampleInboxViewController.m; sourceTree = "<group>"; };
 		ECD388571A408B4400326588 /* RELocationParametersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RELocationParametersViewController.h; sourceTree = "<group>"; };
 		ECD388581A408B4400326588 /* RELocationParametersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RELocationParametersViewController.m; sourceTree = "<group>"; };
 		ECD388591A408B4400326588 /* REPushParametersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REPushParametersViewController.h; sourceTree = "<group>"; };
@@ -131,6 +140,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ECCF63541AC1B10E007C457F /* Inbox */ = {
+			isa = PBXGroup;
+			children = (
+				ECCF63551AC1B11C007C457F /* R1SampleInboxTableViewCell.h */,
+				ECCF63561AC1B11C007C457F /* R1SampleInboxTableViewCell.m */,
+				ECCF63571AC1B11C007C457F /* R1SampleInboxViewController.h */,
+				ECCF63581AC1B11C007C457F /* R1SampleInboxViewController.m */,
+			);
+			name = Inbox;
+			sourceTree = "<group>";
+		};
 		ECD388231A4087F700326588 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,7 +228,7 @@
 		ECD535B618055780000A2909 /* DemoApplication */ = {
 			isa = PBXGroup;
 			children = (
-				ECC5C5191A9DE50800F5ABD9 /* r1DebugDevices */,
+				ECCF63541AC1B10E007C457F /* Inbox */,
 				ECD388231A4087F700326588 /* Common */,
 				ECD3885D1A408B4D00326588 /* Emitter */,
 				ECD535F1180557CD000A2909 /* REInitialViewController.h */,
@@ -224,6 +244,7 @@
 				ECD535BF18055780000A2909 /* REAppDelegate.h */,
 				ECD535C018055780000A2909 /* REAppDelegate.m */,
 				ECD535C218055780000A2909 /* Images.xcassets */,
+				ECC5C5191A9DE50800F5ABD9 /* r1DebugDevices */,
 				ECD535B718055780000A2909 /* Supporting Files */,
 			);
 			path = DemoApplication;
@@ -243,6 +264,9 @@
 		ECD5360C180557E1000A2909 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				ECCF63501AC1B0A3007C457F /* R1Inbox.h */,
+				ECCF63511AC1B0A3007C457F /* R1InboxMessage.h */,
+				ECCF63521AC1B0A3007C457F /* R1InboxMessages.h */,
 				EC918FFA180FE147009EB1D7 /* LibR1Connect.a */,
 				ECD5360E180557E1000A2909 /* R1Emitter.h */,
 				ECD5360F180557E1000A2909 /* R1EmitterLineItem.h */,
@@ -335,6 +359,7 @@
 			files = (
 				ECD53607180557CD000A2909 /* RESharedParametersViewController.m in Sources */,
 				ECD53600180557CD000A2909 /* REEventLineItemEditorViewController.m in Sources */,
+				ECCF63591AC1B11C007C457F /* R1SampleInboxTableViewCell.m in Sources */,
 				ECD53605180557CD000A2909 /* REEventParameterTypeViewController.m in Sources */,
 				ECD535FF180557CD000A2909 /* REEventLineItemCell.m in Sources */,
 				ECD53609180557CD000A2909 /* RESwitchCell.m in Sources */,
@@ -344,6 +369,7 @@
 				ECD53603180557CD000A2909 /* REEventParameterEditorViewController.m in Sources */,
 				ECD53602180557CD000A2909 /* REEventParameterCell.m in Sources */,
 				ECD3885C1A408B4400326588 /* REPushParametersViewController.m in Sources */,
+				ECCF635A1AC1B11C007C457F /* R1SampleInboxViewController.m in Sources */,
 				ECD535BD18055780000A2909 /* main.m in Sources */,
 				ECD5360A180557CD000A2909 /* RETestCase.m in Sources */,
 				ECD53601180557CD000A2909 /* REEventParameter.m in Sources */,
@@ -451,6 +477,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoApplication/DemoApplication-Prefix.pch";
 				INFOPLIST_FILE = "DemoApplication/DemoApplication-Info.plist";
@@ -467,6 +494,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DemoApplication/DemoApplication-Prefix.pch";
 				INFOPLIST_FILE = "DemoApplication/DemoApplication-Info.plist";

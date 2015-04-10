@@ -18,6 +18,7 @@
       - [iii. Rich Push Initialization](#user-content-iii-rich-push-initialization)
       - [iv. Deep Link Initialization](#user-content-iv-deep-link-initialization)
       - [v. Segment your Audience](#user-content-v-segment-your-audience)
+      - [vi. Inbox Integration](#user-content-vi-inbox-integration)
     - [c. Attribution Tracking Activation (optional)](#user-content-c-attribution-tracking-activation)
       - [i. Track RadiumOne Campaigns](#user-content-i-track-radiumone-campaigns)
       - [ii. Track 3rd party Campaigns](#user-content-ii-track-3rd-party-campaigns)
@@ -642,6 +643,395 @@ or
 ```objc
 NSArray *currentTags = [R1Push sharedInstance].tags.tags;
 ```
+
+###vi. Inbox Integration
+If you want to enable inbox functionality, you need to use R1Inbox class and import *R1Inbox.h* header at the top of your class file:
+
+```objc
+#import "R1Inbox.h"
+```
+
+If you want to add some label or button with count of unread or total Inbox messages, you should implement `-(void) inboxMessageUnreadCountChanged` or `-(void) inboxMessagesDidChanged` methods from `R1InboxMessagesDelegate` protocol in your class. After that, add your class as delegate to `[R1Inbox sharedInstance].messages`
+
+```objc
+- (void) addInboxMessagesDelegate
+{
+	[[R1Inbox sharedInstance].messages addDelegate:self];
+}
+
+-(void) inboxMessageUnreadCountChanged
+{
+	NSString *btnTitle = [NSString stringWithFormat:@"Inbox (%lu unread)", (unsigned long)[R1Inbox sharedInstance].messages.unreadMessagesCount];
+	
+	[self.inboxButton setTitle:btnTitle forState:UIControlStateNormal];
+}
+
+```
+
+Do not forget to remove your class from delegates when your class gets deallocated:
+
+```objc
+- (void) dealloc
+{
+    [[R1Inbox sharedInstance].messages removeDelegate:self];
+    ...
+}
+```
+
+To display the list of Inbox messages, you should create your own ViewController to provide required customization. In this case, this screen would not look foreign to your application.
+
+You can see the sample of Inbox implementation in DemoApplication project in files *R1SampleInboxTableViewCell.h*, *R1SampleInboxTableViewCell.m*, *R1SampleInboxViewController.h*, *R1SampleInboxViewController.m*.
+
+*R1SampleInboxTableViewCell.h*
+
+```objc
+#import <UIKit/UIKit.h>
+
+@class R1InboxMessage;
+
+@interface R1SampleInboxTableViewCell : UITableViewCell
+
+// Sets or Gets R1InboxMessage object and configures cell for it
+@property (nonatomic, strong) R1InboxMessage *inboxMessage;
+
+- (id) initWithReuseIdentifier:(NSString *)reuseIdentifier;
+
+// Calculates the height of the cell
++ (CGFloat) heightForCellWithInboxMessage:(R1InboxMessage *) inboxMessage cellWidth:(CGFloat) cellWidth;
+
+@end
+```
+
+*R1SampleInboxTableViewCell.m*
+
+```objc
+#import "R1SampleInboxTableViewCell.h"
+#import "R1Inbox.h"
+
+@interface R1SampleInboxTableViewCell ()
+
+@property (nonatomic, strong) UIView *unreadMarker;
+@property (nonatomic, strong) UILabel *alertLabel;
+
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
+
+@end
+
+@implementation R1SampleInboxTableViewCell
+
+- (id) initWithReuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+    if (self)
+    {
+        self.alertLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.alertLabel.numberOfLines = 0;
+        self.alertLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        [self.contentView addSubview:self.alertLabel];
+        
+        self.unreadMarker = [[UIView alloc] initWithFrame:CGRectZero];
+        self.unreadMarker.layer.cornerRadius = 3;
+        self.unreadMarker.backgroundColor = [UIColor blueColor];
+        [self.contentView addSubview:self.unreadMarker];
+        
+        self.textLabel.font = [UIFont boldSystemFontOfSize:14];
+        self.alertLabel.font = [UIFont systemFontOfSize:14];
+        
+        self.detailTextLabel.textAlignment = NSTextAlignmentRight;
+        
+        self.dateFormatter = [[NSDateFormatter alloc] init];
+        [self.dateFormatter setDateStyle:NSDateFormatterShortStyle];
+        [self.dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+    }
+    return self;
+}
+
+// Configures the cell for displaying Inbox Message
+- (void) setInboxMessage:(R1InboxMessage *)inboxMessage
+{
+    if (_inboxMessage == inboxMessage)
+    {
+        [self configureUnreadMarker];
+        return;
+    }
+    
+    _inboxMessage = inboxMessage;
+    
+    self.textLabel.text = inboxMessage.title;
+    self.alertLabel.text = inboxMessage.alert;
+    
+    self.detailTextLabel.text = [self.dateFormatter stringFromDate:inboxMessage.createdDate];
+    [self configureUnreadMarker];
+    
+    [self setNeedsLayout];
+}
+
+// Shows or hides unread marker view
+- (void) configureUnreadMarker
+{
+    if ([self.unreadMarker isHidden] != _inboxMessage.unread)
+        return;
+    
+    [self.unreadMarker setHidden:!_inboxMessage.unread];
+}
+
+- (void) layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.unreadMarker.frame = CGRectMake(4, (self.contentView.bounds.size.height - 6)/2, 6, 6);
+    
+    self.detailTextLabel.frame = CGRectMake(0, 0, self.contentView.bounds.size.width-10, 20);
+    
+    if (self.textLabel.text == nil)
+    {
+        self.alertLabel.frame = CGRectMake(15, 15, self.contentView.bounds.size.width-20, self.contentView.bounds.size.height-20);
+    }else
+    {
+        self.textLabel.frame = CGRectMake(15, 15, self.contentView.bounds.size.width-20, 20);
+        self.alertLabel.frame = CGRectMake(15, 35, self.contentView.bounds.size.width-20, self.contentView.bounds.size.height-45);
+    }
+}
+
+// Calculates the height of the cell
++ (CGFloat) heightForCellWithInboxMessage:(R1InboxMessage *) inboxMessage cellWidth:(CGFloat) cellWidth
+{
+    CGFloat height = 25;
+    
+    if (inboxMessage.title != nil)
+        height += 20;
+    
+    if (inboxMessage.alert != nil)
+    {
+        if ([inboxMessage.alert respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)])
+        {
+            NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+            paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+            
+            NSDictionary *attributes = @{NSFontAttributeName : [UIFont systemFontOfSize:14],
+                                         NSParagraphStyleAttributeName: paragraph};
+            
+            height += [inboxMessage.alert boundingRectWithSize:CGSizeMake(cellWidth-20, 100)
+                                                       options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
+                                                    attributes:attributes
+                                                       context:nil].size.height;
+        }else
+        {
+            height += [inboxMessage.alert sizeWithFont:[UIFont systemFontOfSize:14]
+                                     constrainedToSize:CGSizeMake(cellWidth-20, 100)
+                                         lineBreakMode:NSLineBreakByWordWrapping].height;
+        }
+        
+        height += 1;
+    }
+    
+    if (height < 50)
+        return 50;
+    
+    return height;
+}
+
+@end
+```
+*R1SampleInboxViewController.h*
+
+```objc
+#import <UIKit/UIKit.h>
+#import "R1Inbox.h"
+
+@protocol R1SampleInboxViewControllerDelegate;
+
+@interface R1SampleInboxViewController : UITableViewController <R1InboxMessagesDelegate>
+
+@property (nonatomic, assign) id<R1SampleInboxViewControllerDelegate> inboxDelegate;
+
+- (id) initInboxViewController;
+
+@end
+
+@protocol R1SampleInboxViewControllerDelegate <NSObject>
+
+- (void) sampleInboxViewControllerDidFinished:(R1SampleInboxViewController *) sampleInboxViewController;
+
+@end
+```
+
+*R1SampleInboxViewController.m*
+
+```objc
+#import "R1SampleInboxViewController.h"
+#import "R1SampleInboxTableViewCell.h"
+#import "R1Inbox.h"
+
+@interface R1SampleInboxViewController ()
+
+@property (nonatomic, strong) R1InboxMessages *inboxMessages;
+
+@end
+
+@implementation R1SampleInboxViewController
+
+// Initialize UITableViewController
+- (id) initInboxViewController
+{
+    self = [super initWithStyle:UITableViewStylePlain];
+    if (self)
+    {
+        self.inboxMessages = [R1Inbox sharedInstance].messages;
+        
+        [self updateTitle];
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                              target:self action:@selector(closeInboxViewController)];
+    }
+    return self;
+}
+
+// Called when user presses 'Done' button
+- (void) closeInboxViewController
+{
+    [self.inboxDelegate sampleInboxViewControllerDidFinished:self];
+}
+
+// Updates the title of ViewController with number of unread messages
+- (void) updateTitle
+{
+    if (self.inboxMessages.unreadMessagesCount == 0)
+        self.navigationItem.title = @"Inbox";
+    else
+        self.navigationItem.title = [NSString stringWithFormat:@"Inbox (%lu unread)", (unsigned long)self.inboxMessages.unreadMessagesCount];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self updateTitle];
+
+    // Add this view controller to the list of delegates when it appears
+    [self.inboxMessages addDelegate:self];
+}
+
+- (void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    // Remove this view controller from the list of delegates when it disappears
+    [self.inboxMessages removeDelegate:self];
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Returns the total number of Inbox messages
+    return self.inboxMessages.messagesCount;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Returns the calculated height of the cell for R1InboxMessage object in row
+    return [R1SampleInboxTableViewCell heightForCellWithInboxMessage:[self.inboxMessages.messages objectAtIndex:indexPath.row]
+                                                           cellWidth:self.tableView.frame.size.width];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    R1SampleInboxTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    if (cell == nil)
+    {
+        cell = [[R1SampleInboxTableViewCell alloc] initWithReuseIdentifier:@"Cell"];
+    }
+    
+    // Sets up the cell for displaying R1InboxMessage object
+    cell.inboxMessage = [self.inboxMessages.messages objectAtIndex:indexPath.row];
+    
+    return cell;
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    R1InboxMessage *message = [self.inboxMessages.messages objectAtIndex:indexPath.row];
+
+    // Shows Inbox message when user interacts to the cell
+    [[R1Inbox sharedInstance] showMessage:message
+                           messageDidShow:^{
+                               [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+                           }];
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    R1InboxMessage *message = [self.inboxMessages.messages objectAtIndex:indexPath.row];
+    
+    [self.inboxMessages deleteMessage:message];
+}
+
+#pragma mark - R1InboxMessagesDelegate methods
+
+// This method called when the list of Inbox messages gets updated
+- (void) inboxMessagesWillChanged
+{
+    [self.tableView beginUpdates];
+}
+
+// This method called when any item in the list of Inbox messages gets changed (modified, inserted or removed)
+- (void) inboxMessagesDidChangeMessage:(R1InboxMessage *) inboxMessage
+                               atIndex:(NSUInteger) index
+                         forChangeType:(R1InboxMessagesChangeType)changeType
+                              newIndex:(NSUInteger) newIndex
+{
+    switch (changeType)
+    {
+        case R1InboxMessagesChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        case R1InboxMessagesChangeDelete:
+            [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        case R1InboxMessagesChangeUpdate:
+            ((R1SampleInboxTableViewCell *)[self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow:index inSection:0] ]).inboxMessage = [self.inboxMessages.messages objectAtIndex:index];
+
+            break;
+            
+        default:
+            break;
+    }
+}
+
+// This method called when the changes to list of Inbox messages are over
+- (void) inboxMessagesDidChanged
+{
+    [self.tableView endUpdates];
+}
+
+// This method called when the number of unread Inbox messages gets changed
+- (void) inboxMessageUnreadCountChanged
+{
+    [self updateTitle];
+}
+
+@end
+```
+
+In this example, initialize the R1SampleInboxViewController with the following method:
+
+ ```objc
+ [[R1SampleInboxViewController alloc] initInboxViewController]
+  ```
+
+
 
 ##c. Attribution Tracking Activation
 ###i. Track RadiumOne Campaigns

@@ -2,7 +2,7 @@
 
 @interface RESwitchCell : UITableViewCell
 
-@property (nonatomic, readonly) UISwitch *switchView;
+@property (nonatomic, strong, readonly) UISwitch *switchView;
 
 - (id) initCellWithReuseIdentifier:(NSString *)reuseIdentifier;
 

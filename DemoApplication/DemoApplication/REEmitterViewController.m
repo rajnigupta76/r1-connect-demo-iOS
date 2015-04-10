@@ -9,7 +9,7 @@
 
 @property (nonatomic, assign) BOOL started;
 
-@property (nonatomic, retain) NSArray *testCases;
+@property (nonatomic, strong) NSArray *testCases;
 
 @end
 
@@ -26,13 +26,6 @@
         [self initTestCases];
     }
     return self;
-}
-
-- (void) dealloc
-{
-    self.testCases = nil;
-    
-    [super dealloc];
 }
 
 - (void) initTestCases
@@ -68,9 +61,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     if (cell == nil)
-    {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"] autorelease];
-    }
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     
     cell.textLabel.text = ((RETestCase *)[self.testCases objectAtIndex:indexPath.row]).title;
     
@@ -89,9 +80,6 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:parametersViewController];
     
     [self presentViewController:navController animated:YES completion:nil];
-    
-    [navController release];
-    [parametersViewController release];
 }
 
 - (void) eventParametersViewControllerDidCancelled:(REEventParametersViewController *) eventParametersViewController

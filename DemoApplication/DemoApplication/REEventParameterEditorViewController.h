@@ -4,7 +4,7 @@
 
 @interface REEventParameterEditorViewController : UITableViewController
 
-@property (nonatomic, readonly) REEventParameter *eventParameter;
+@property (nonatomic, strong, readonly) REEventParameter *eventParameter;
 
 - (id) initWithEventParameter:(REEventParameter *) eventParameter;
 

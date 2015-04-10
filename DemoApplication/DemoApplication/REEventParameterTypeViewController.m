@@ -10,18 +10,10 @@
     {
         self.navigationItem.title = @"Parameter Type";
         
-        _eventParameter = [eventParameter retain];
+        _eventParameter = eventParameter;
     }
     return self;
 }
-
-- (void) dealloc
-{
-    [_eventParameter release], _eventParameter = nil;
-    
-    [super dealloc];
-}
-
 
 #pragma mark - Table view data source
 
@@ -42,7 +34,7 @@
     
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     cell.textLabel.text = [REEventParameter typeToString:(REEventParameterType)(indexPath.row+1)];

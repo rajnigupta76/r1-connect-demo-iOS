@@ -17,8 +17,6 @@
 - (void) dealloc
 {
     self.eventParameter = nil;
-    
-    [super dealloc];
 }
 
 - (void) setEventParameter:(REEventParameter *)eventParameter
@@ -27,8 +25,7 @@
     [_eventParameter removeObserver:self forKeyPath:@"key" context:nil];
     [_eventParameter removeObserver:self forKeyPath:@"value" context:nil];
     
-    [_eventParameter release];
-    _eventParameter = [eventParameter retain];
+    _eventParameter = eventParameter;
     
     self.textLabel.text = _eventParameter.visibleKey != nil ? _eventParameter.visibleKey : _eventParameter.key;
     self.detailTextLabel.text = [NSString stringWithFormat:@"%@ (%@)", ([_eventParameter stringFromValue] == nil) ? @"Empty" : [_eventParameter stringFromValue], [REEventParameter typeToString:_eventParameter.type]];

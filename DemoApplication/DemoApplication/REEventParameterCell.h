@@ -6,6 +6,6 @@
 
 - (id) initCellWithReuseIdentifier:(NSString *)reuseIdentifier;
 
-@property (nonatomic, retain) REEventParameter *eventParameter;
+@property (nonatomic, strong) REEventParameter *eventParameter;
 
 @end

@@ -16,7 +16,7 @@
 
 + (RETestCase *) testCaseWithType:(RETestCaseType) type
 {
-    return [[[RETestCase alloc] initWithType:type] autorelease];
+    return [[RETestCase alloc] initWithType:type];
 }
 
 - (NSString *) title

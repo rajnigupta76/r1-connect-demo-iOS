@@ -6,7 +6,7 @@
 
 @interface RESharedParametersViewController ()
 
-@property (nonatomic, retain) RETextValueCell *appUserIdCell;
+@property (nonatomic, strong) RETextValueCell *appUserIdCell;
 
 @end
 
@@ -22,18 +22,11 @@
     return self;
 }
 
-- (void) dealloc
-{
-    self.appUserIdCell = nil;
-    
-    [super dealloc];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.appUserIdCell = [[[RETextValueCell alloc] initCellWithReuseIdentifier:@"AppUserIdCell"] autorelease];
+    self.appUserIdCell = [[RETextValueCell alloc] initCellWithReuseIdentifier:@"AppUserIdCell"];
     self.appUserIdCell.textField.returnKeyType = UIReturnKeyDone;
     self.appUserIdCell.textField.placeholder = @"App User ID";
     self.appUserIdCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -81,7 +74,7 @@
         RESwitchCell *switchCell = (RESwitchCell *)[tableView dequeueReusableCellWithIdentifier:@"SwitchCell"];
         if (switchCell == nil)
         {
-            switchCell = [[[RESwitchCell alloc] initCellWithReuseIdentifier:@"SwitchCell"] autorelease];
+            switchCell = [[RESwitchCell alloc] initCellWithReuseIdentifier:@"SwitchCell"];
             switchCell.textLabel.text = @"Disable All Advertising Ids:";
             [switchCell.switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         }
@@ -94,7 +87,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
         cell.textLabel.textAlignment = NSTextAlignmentLeft;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
@@ -112,7 +105,6 @@
     {
         RELocationParametersViewController *locationServiceViewController = [[RELocationParametersViewController alloc] initViewController];
         [self.navigationController pushViewController:locationServiceViewController animated:YES];
-        [locationServiceViewController release];
         return;
     }
     

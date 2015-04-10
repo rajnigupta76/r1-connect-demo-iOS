@@ -6,7 +6,7 @@
 
 - (id) initCellWithReuseIdentifier:(NSString *)reuseIdentifier;
 
-@property (nonatomic, retain) R1EmitterLineItem *lineItem;
+@property (nonatomic, strong) R1EmitterLineItem *lineItem;
 
 + (CGFloat) heightForLineItem:(R1EmitterLineItem *) lineItem withWidth:(CGFloat) width;
 

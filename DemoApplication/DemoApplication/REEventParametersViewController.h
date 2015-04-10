@@ -5,13 +5,13 @@
 
 @interface REEventParametersViewController : UITableViewController
 
-@property (nonatomic, readonly) RETestCase *testCase;
+@property (nonatomic, strong, readonly) RETestCase *testCase;
 @property (nonatomic, assign) id<REEventParametersViewControllerDelegate> delegate;
 @property (nonatomic, assign) BOOL hasParameters;
 @property (nonatomic, assign) BOOL hasLineItem;
 @property (nonatomic, assign) BOOL hasPermissions;
-@property (nonatomic, retain) NSString *predefinedEventName;
-@property (nonatomic, retain) NSArray  *predefinedEventParameters;
+@property (nonatomic, strong) NSString *predefinedEventName;
+@property (nonatomic, strong) NSArray  *predefinedEventParameters;
 
 - (id) initViewController;
 - (id) initViewControllerWithTestCase:(RETestCase *) testCase;

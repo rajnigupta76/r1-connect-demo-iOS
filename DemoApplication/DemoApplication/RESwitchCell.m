@@ -14,14 +14,6 @@
     return self;
 }
 
-- (void) dealloc
-{
-    [_switchView release];
-    _switchView = nil;
-    
-    [super dealloc];
-}
-
 - (void) setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:NO];

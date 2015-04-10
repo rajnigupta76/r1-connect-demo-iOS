@@ -4,7 +4,7 @@
 
 @interface RESocialPermissionCell : RETextValueCell
 
-@property (nonatomic, retain) R1EmitterSocialPermission *permission;
+@property (nonatomic, strong) R1EmitterSocialPermission *permission;
 
 - (id) initCellWithReuseIdentifier:(NSString *)reuseIdentifier;
 

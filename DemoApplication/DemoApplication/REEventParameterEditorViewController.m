@@ -6,9 +6,9 @@
 
 @interface REEventParameterEditorViewController ()
 
-@property (nonatomic, retain) RETextValueCell *keyCell;
-@property (nonatomic, retain) RETextValueCell *valueCell;
-@property (nonatomic, retain) RESwitchCell *switchCell;
+@property (nonatomic, strong) RETextValueCell *keyCell;
+@property (nonatomic, strong) RETextValueCell *valueCell;
+@property (nonatomic, strong) RESwitchCell *switchCell;
 
 @end
 
@@ -21,7 +21,7 @@
     {
         self.navigationItem.title = @"Edit Parameter";
         
-        _eventParameter = [eventParameter retain];
+        _eventParameter = eventParameter;
         [self.eventParameter addObserver:self forKeyPath:@"type" options:0 context:nil];
     }
     return self;
@@ -29,21 +29,14 @@
 
 - (void) dealloc
 {
-    self.keyCell = nil;
-    self.valueCell = nil;
-    self.switchCell = nil;
-    
     [self.eventParameter removeObserver:self forKeyPath:@"type" context:nil];
-    [_eventParameter release], _eventParameter = nil;
-    
-    [super dealloc];
 }
 
 - (void) viewDidLoad
 {
     [super viewDidLoad];
     
-    self.keyCell = [[[RETextValueCell alloc] initCellWithReuseIdentifier:@"KeyCell"] autorelease];
+    self.keyCell = [[RETextValueCell alloc] initCellWithReuseIdentifier:@"KeyCell"];
     self.keyCell.textField.returnKeyType = UIReturnKeyDone;
     self.keyCell.textField.placeholder = @"Key (String)";
     self.keyCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -54,14 +47,14 @@
     if (self.eventParameter.isPredefined)
         self.keyCell.textField.userInteractionEnabled = NO;
     
-    self.valueCell = [[[RETextValueCell alloc] initCellWithReuseIdentifier:@"ValueCell"] autorelease];
+    self.valueCell = [[RETextValueCell alloc] initCellWithReuseIdentifier:@"ValueCell"];
     self.valueCell.textField.returnKeyType = UIReturnKeyDone;
     self.valueCell.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.valueCell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.valueCell.textField.delegate = (id)self;
     self.valueCell.textField.enablesReturnKeyAutomatically = YES;
     
-    self.switchCell = [[[RESwitchCell alloc] initCellWithReuseIdentifier:@"SwitchCell"] autorelease];
+    self.switchCell = [[RESwitchCell alloc] initCellWithReuseIdentifier:@"SwitchCell"];
     self.switchCell.textLabel.text = @"Value:";
     [self.switchCell.switchView addTarget:self action:@selector(switchChanged) forControlEvents:UIControlEventValueChanged];
 
@@ -172,7 +165,7 @@
     
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.accessoryType = (self.eventParameter.isPredefined) ? UITableViewCellAccessoryNone : UITableViewCellAccessoryDisclosureIndicator;
     }
     
@@ -197,8 +190,6 @@
         REEventParameterTypeViewController *parameterTypeViewController = [[REEventParameterTypeViewController alloc] initWithEventParameter:self.eventParameter];
         
         [self.navigationController pushViewController:parameterTypeViewController animated:YES];
-        
-        [parameterTypeViewController release];
         
         return;
     }

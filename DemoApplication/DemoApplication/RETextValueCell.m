@@ -60,13 +60,4 @@
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
 }
 
-- (void) dealloc
-{
-    [_textField performSelector:@selector(release)
-                     withObject:nil
-                     afterDelay:1.0];
-	
-    [super dealloc];
-}
-
 @end

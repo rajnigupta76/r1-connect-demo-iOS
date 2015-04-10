@@ -3,12 +3,20 @@
 #import "R1SDK.h"
 #import "R1Emitter.h"
 #import "R1Push.h"
+#import "R1Inbox.h"
 
 #import "RESharedParametersViewController.h"
 #import "REEmitterParametersViewController.h"
 #import "REPushParametersViewController.h"
 #import "REGeofencingViewController.h"
 #import "REEmitterViewController.h"
+#import "R1SampleInboxViewController.h"
+
+@interface REInitialViewController ()
+
+@property (nonatomic, strong) R1InboxMessages *inboxMessages;
+
+@end
 
 @implementation REInitialViewController
 
@@ -18,13 +26,22 @@
     if (self)
     {
         self.navigationItem.title = @"R1Connect SDK";
+        
+        self.inboxMessages = [R1Inbox sharedInstance].messages;
+        
+        [self.inboxMessages addDelegate:(id)self];
     }
     return self;
 }
 
+- (void) dealloc
+{
+    [self.inboxMessages removeDelegate:(id)self];
+}
+
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -43,6 +60,7 @@
         case 2:
             return sdk.push.isStarted ? 1 : 0;
         case 3:
+        case 4:
             return 1;
 
         default:
@@ -57,7 +75,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"StartCell"] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
         cell.textLabel.textAlignment = NSTextAlignmentLeft;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
@@ -77,6 +95,9 @@
             cell.textLabel.text = @"Push Options";
             break;
         case 3:
+            cell.textLabel.text = [NSString stringWithFormat:@"Inbox (%lu unread)", (unsigned long)self.inboxMessages.unreadMessagesCount];
+            break;
+        case 4:
             cell.textLabel.text = @"Geofencing Options";
             break;
 
@@ -108,6 +129,17 @@
             viewController = [[REPushParametersViewController alloc] initViewController];
             break;
         case 3:
+        {
+            R1SampleInboxViewController *inboxVC = [[R1SampleInboxViewController alloc] initInboxViewController];
+            inboxVC.inboxDelegate = (id)self;
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:inboxVC];
+            
+            [self presentViewController:navController
+                               animated:YES
+                             completion:nil];
+        }
+            break;
+        case 4:
             viewController = [[REGeofencingViewController alloc] initViewController];
             break;
             
@@ -118,10 +150,22 @@
     if (viewController != nil)
     {
         [self.navigationController pushViewController:viewController animated:YES];
-        [viewController release];
     }
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void) inboxMessageUnreadCountChanged
+{
+    if (![self isViewLoaded])
+        return;
+    
+    [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]].textLabel.text = [NSString stringWithFormat:@"Inbox (%lu unread)", (unsigned long)self.inboxMessages.unreadMessagesCount];
+}
+
+- (void) sampleInboxViewControllerDidFinished:(R1SampleInboxViewController *) sampleInboxViewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
