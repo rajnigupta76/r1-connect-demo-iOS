@@ -22,6 +22,13 @@ You can now see the JSON data sent when triggered by events in your application.
 
     #import "R1WebCommand.h"
 
+##Version 2.3
+
+Bug fix for a push refactor in 2.2.2 that prevented the SDK from registering for push notifications if it had already done so (in the case of an update, uninstall / reinstall, or third party token collection).  This issue affected all devices with iOS8.  As a result, our backend servers were unable to send push messages through apple to these devices.  The fix forces the app to register for push notifications on every startup.
+
+##Version 2.2.2
+
+Push messaging iOS8 support.  iOS8 users with older versions of the SDK will not properly register for or receive push messages.
 
 ##Version 2.1.0
 
