@@ -104,6 +104,13 @@ Optional current user identifier.
 [R1SDK sharedInstance].applicationUserId = @"12345";
 ```
 
+***cookieMapping***
+
+Enable or disable cookie mapping. By default is NO.  Setting this first party cookie will enable RadiumOne to be effective in targeting the user for advertising campaigns run on behalf of the Publisher. Only enable this setting if you plan to run advertising with RadiumOne.
+```objc
+[R1SDK sharedInstance].cookieMapping = YES;
+```
+
 ***location***
 
 The current user location coordinates. Use only if your application already uses location services.

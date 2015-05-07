@@ -1,3 +1,11 @@
+##Version 2.7.0
+
+###1. Added
+
+#####1. Cookie Mapping
+
+You can now enable cookie mapping which causes each deep linked Push notification to redirect the user to the Mobile Web browser on the device (Safari on iOS), set a first party cookie on the RadiumOne domain and bring the user back to the Deep Link section of the App as intended by the custom url. This behavior is only seen once in the lifetime of the cookie or if the IDFA of the user has changed. All future deep link Push notifications will take the user straight to the deep linked section of the app.
+
 ##Version 2.6.0
 
 ###1. Added

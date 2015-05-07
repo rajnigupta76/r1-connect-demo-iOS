@@ -14,7 +14,7 @@
 
 @property (nonatomic, copy, readonly) NSString *deviceToken;
 
-@property (nonatomic, readonly) R1PushTags *tags;
+@property (nonatomic, strong, readonly) R1PushTags *tags;
 
 @property (nonatomic, retain) NSTimeZone *timeZone;
 
