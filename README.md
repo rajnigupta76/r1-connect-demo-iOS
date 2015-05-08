@@ -64,8 +64,9 @@ Make sure you add:
 
 <img src="https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/link_with_binary.png"  width="440" />
 
-Verify that the Background Modes switch is turned on in the Capabilities tab for your target.
+It is important to add an entry to the 'Other Linker Flags' setting in your application's Build Settings in Xcode. Add '-ObjC' to the 'Other Linker Flags' setting if it is not already present. This is a common required flag when integrating static libraries with your code.
 
+Verify that the Background Modes switch is turned on in the Capabilities tab for your target.
 
 ## c. Initialize the SDK
   You will need to initialize the R1 Connect Library in your App Delegate.
