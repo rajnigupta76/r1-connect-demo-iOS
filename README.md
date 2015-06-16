@@ -22,7 +22,8 @@
     - [c. Attribution Tracking Activation (optional)](#user-content-c-attribution-tracking-activation)
       - [i. Track RadiumOne Campaigns](#user-content-i-track-radiumone-campaigns)
       - [ii. Track 3rd party Campaigns](#user-content-ii-track-3rd-party-campaigns)
-  - [4. Submitting your App to Apple](#user-content-4-submitting-your-app-to-apple)
+    - [d. Geofencing Activation](#user-content-d-geofencing-activation)
+  - [4. Submitting your App to Apple](#user-content-4-submitting-your-app)
 
 
 #1. System Requirements
@@ -64,9 +65,11 @@ Make sure you add:
 
 <img src="https://raw.github.com/radiumone/r1-connect-demo-iOS/readme_images/ReadmeImages/link_with_binary.png"  width="440" />
 
-It is important to add an entry to the 'Other Linker Flags' setting in your application's Build Settings in Xcode. Add '-ObjC' to the 'Other Linker Flags' setting if it is not already present. This is a common required flag when integrating static libraries with your code.
-
 Verify that the Background Modes switch is turned on in the Capabilities tab for your target.
+
+Also, it is important to add an entry to the 'Other Linker Flags' setting in your application's Build Settings in Xcode. Add '-ObjC' to the 'Other Linker Flags' setting if it is not already present. This is a common required flag when integrating static libraries with your code.
+
+
 
 ## c. Initialize the SDK
   You will need to initialize the R1 Connect Library in your App Delegate.
