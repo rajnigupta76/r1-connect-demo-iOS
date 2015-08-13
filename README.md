@@ -10,8 +10,9 @@
       - [i. Automatic Events](#user-content-i-automatic-events)
       - [ii. Standard Events](#user-content-ii-standard-events)
       - [iii. Custom Events](#user-content-iii-custom-events)
-      - [iv. Best Practices](#user-content-iv-best-practices)
-      - [v. Debugging Tool](#user-content-v-debugging-tool)
+      - [iv. In-App Webview Events](#user-content-iv-in-app-webview-events)
+      - [v. Best Practices](#user-content-v-best-practices)
+      - [vi. Debugging Tool](#user-content-vi-debugging-tool)
     - [b. Push Notification Activation (optional)](#user-content-b-push-notification-activation)
       - [i. Setup Apple Push Notification Services](#user-content-i-setup-apple-push-notification-services)
       - [ii. Initialization](#user-content-ii-initialization)
@@ -433,8 +434,123 @@ To include tracking of custom events for the mobile app, the following callbacks
 withParameters:@{@"key":@"value"}];
 ```
 
+###iv. In-App Webview Events
 
-###iv. Best Practices
+By setting up in-app webview events, you can track events that begin inside your native application but are completed in the embedded browser.  To do so, you will have to embed some JavaScript in the page that you will want to fire the event, and you need to properly trigger the webview in your application.
+
+####JavaScript Setup
+
+To properly fire the event from your webpage, please make the following call:
+
+```js
+R1Connect.emitEvent(eventName,eventParameters);
+```
+
+For example, both of the following work.  The use of parameters is optional.
+
+```js
+R1Connect.emitEvent("Test Event");
+R1Connect.emitEvent("Test Event",{"key":"value"});
+```
+
+Additionally, please attach the following r1connect.js file to your webpage:
+
+```js
+var R1ConnectBridgePlatforms = {
+    UNKNOWN: 0,
+    IOS: 1,
+    ANDROID: 2
+};
+
+window.R1Connect = {
+    iosBridgeScheme: "r1connectbridge://",
+
+    platform: R1ConnectBridgePlatforms.UNKNOWN,
+
+    iosURLQueue: [],
+    iosInProgress: false,
+
+    buildIOSUrl: function(eventName, parameters) {
+        var url = this.iosBridgeScheme + 'emit/?event=' + eventName;
+
+        if (parameters)
+            url += '&params='+JSON.stringify(parameters);
+
+        return url;
+    },
+
+    sendURLInFrame: function(url) {
+        var iframe = document.createElement("IFRAME");
+        iframe.setAttribute("src", encodeURI(url));
+        document.documentElement.appendChild(iframe);
+        iframe.parentNode.removeChild(iframe);
+
+        iframe = null;
+    },
+
+    emitEvent: function(eventName, parameters) {
+        if (this.platform == R1ConnectBridgePlatforms.UNKNOWN) {
+            if (window.R1ConnectJSInterface && window.R1ConnectJSInterface.emit)
+                this.platform = R1ConnectBridgePlatforms.ANDROID;
+            else
+                this.platform = R1ConnectBridgePlatforms.IOS;
+        }
+
+        if (this.platform == R1ConnectBridgePlatforms.ANDROID) {
+            window.R1ConnectJSInterface.emit(eventName, parameters ? JSON.stringify(parameters) : '');
+            return;
+        }
+
+        var iosURL = this.buildIOSUrl(eventName, parameters);
+
+        if (this.iosInProgress) {
+            this.iosURLQueue.push(iosURL);
+            return;
+        }
+
+        this.iosInProgress = true;
+        this.sendURLInFrame(iosURL);
+    },
+
+    iosURLReceived: function() {
+        setTimeout(function() {
+            window.R1Connect._iosURLReceived();
+        }, 0);
+    },
+
+    _iosURLReceived: function() {
+        if (this.iosURLQueue.length == 0) {
+            this.iosInProgress = false;
+            return;
+        }
+
+        var iosURL = this.iosURLQueue.shift();
+        this.sendURLInFrame(iosURL);    
+    },
+};
+```
+
+####iOS Setup
+
+To properly handle the events in your application, you first need to import the R1WebViewHelper header file in your ViewController .m implementation file:
+
+```objc
+#import "R1WebViewHelper.h"
+```
+
+You then should setup the UIWebView delegate from the Interface Builder or from code:
+
+```objc
+(void)viewDidLoad { [super viewDidLoad]; self.webView.delegate = self; // Your code here }
+```
+
+Finally, add the delegate method implementation:
+
+```objc
+(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType { if (![R1WebViewHelper webView:webView shouldStartLoadWithRequest:request navigationType:navigationType]) return NO; // Your code here return YES; }
+```
+
+###v. Best Practices
 ####Event Naming Convention
 One common mistake is to parametrize event names (with user data for example). Event names should be hard-coded values that you use to segement data on a specific category of event. 
 
@@ -471,7 +587,7 @@ withParameters:@{"profileFollowersBucket":@"VERY_INFLUENTIAL"}];
 
 This will enable you to create more insightful reports.
 
-###v. Debugging Tool
+###vi. Debugging Tool
 
 This tool allows you to verify that the events that you have set up are triggering correctly.  You can access the debugging area of the portal to view the JSON events sent by your application.
 
