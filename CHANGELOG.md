@@ -1,3 +1,11 @@
+##Version 2.9.0
+
+###1. Added
+
+#####1. In-App WebView Events
+
+The SDK now supports tracking events in WebViews handled by the app.
+
 ##Version 2.7.0
 
 ###1. Added
