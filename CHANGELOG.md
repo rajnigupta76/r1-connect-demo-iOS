@@ -1,3 +1,11 @@
+##Version 3.0.0
+
+###1. Added
+
+#####1. iOS 9 Support
+
+The SDK now properly supports iOS 9.
+
 ##Version 2.9.0
 
 ###1. Added
@@ -36,7 +44,7 @@ You can now see the JSON data sent when triggered by events in your application.
 
 #####1. Rich push and deep linking support
 
-    #import "R1WebCommand.h"
+The SDK now supports sending rich and deep-linking push messages.  Rich push messages open an HTML page.  Deep-linking push messages open a specific page in your application rather than your home screen.
 
 ##Version 2.3
 

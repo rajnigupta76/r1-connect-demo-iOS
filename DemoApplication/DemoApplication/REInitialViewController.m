@@ -11,6 +11,7 @@
 #import "REGeofencingViewController.h"
 #import "REEmitterViewController.h"
 #import "R1SampleInboxViewController.h"
+#import "REWebViewController.h"
 
 @interface REInitialViewController ()
 
@@ -56,7 +57,7 @@
         case 0:
             return 1;
         case 1:
-            return sdk.emitter.isStarted ? 2 : 0;
+            return sdk.emitter.isStarted ? 3 : 0;
         case 2:
             return sdk.push.isStarted ? 1 : 0;
         case 3:
@@ -88,8 +89,10 @@
         case 1:
             if (indexPath.row == 0)
                 cell.textLabel.text = @"Emitter Options";
-            else
+            else if (indexPath.row == 1)
                 cell.textLabel.text = @"Emitter Methods";
+            else if (indexPath.row == 2)
+                cell.textLabel.text = @"Emitter Web View";
             break;
         case 2:
             cell.textLabel.text = @"Push Options";
@@ -120,9 +123,12 @@
             if (indexPath.row == 0)
             {
                 viewController = [[REEmitterParametersViewController alloc] initViewController];
-            }else
+            }else if (indexPath.row == 1)
             {
                 viewController = [[REEmitterViewController alloc] initViewController];
+            }else if (indexPath.row == 2)
+            {
+                viewController = [[REWebViewController alloc] initViewController];
             }
             break;
         case 2:

@@ -44,7 +44,7 @@ The library supports the following architectures (iOS version 6.0 and higher):
   git clone git@github.com:radiumone/r1-connect-demo-iOS.git
   2.	Open your iOS project in Xcode.
   3.	Select File -> Add Files to “[YOUR XCODE PROJECT]” project
-  4.	Select all files in the "Lib" Folder from the repo you just cloned
+  4.	Select all header files in the appropriate "Lib" Folder from the repo you just cloned.  The "Bitcode Lib" is built for Xcode 7 version (with bitcode support).  The "Non-Bitcode Lib" should only be used if you are building with Xcode 6.
   5.	When the dialog box appears, check the Copy Items into destination group’s folder checkbox.
 
 
@@ -715,6 +715,8 @@ NOTE: If you enabled it in the *application:didFinishLaunchingWithOptions* metho
 ###iii. Rich Push Initialization    
 
 Rich *Push Notifications* send a URL that opens in a WebView upon user response to a system notification.  No set up is required for this feature.
+
+Please note that iOS 9 devices require use of HTTPS.  iOS 8 and previous versions still support HTTP.  Please ensure that you send HTTPS if iOS 9 devices may receive the message.
 
 
 ###iv. Deep Link Initialization    

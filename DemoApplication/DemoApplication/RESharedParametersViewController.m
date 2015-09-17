@@ -47,7 +47,7 @@
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -84,6 +84,23 @@
         return switchCell;
     }
     
+    if (indexPath.section == 2)
+    {
+        static NSString *CellIdentifier = @"СookieMappingCell";
+        RESwitchCell *cell = (RESwitchCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (cell == nil)
+        {
+            cell = [[RESwitchCell alloc] initCellWithReuseIdentifier:CellIdentifier];
+            [cell.switchView addTarget:self action:@selector(cookieMappingSwitchChanged:) forControlEvents:UIControlEventValueChanged];
+        }
+        
+        cell.textLabel.text = @"Сookie Mapping Enabled";
+        cell.switchView.on = [R1SDK sharedInstance].cookieMapping;
+        
+        return cell;
+    }
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     if (cell == nil)
     {
@@ -101,7 +118,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 2)
+    if (indexPath.section == 3)
     {
         RELocationParametersViewController *locationServiceViewController = [[RELocationParametersViewController alloc] initViewController];
         [self.navigationController pushViewController:locationServiceViewController animated:YES];
@@ -135,6 +152,11 @@
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setBool:switchView.on forKey:@"r1EmitterDemoDisableAllAdvertisingIds"];
     [ud synchronize];
+}
+
+- (void) cookieMappingSwitchChanged:(UISwitch *) switchView
+{
+    [R1SDK sharedInstance].cookieMapping = switchView.on;
 }
 
 @end
