@@ -4,7 +4,7 @@
 
 #####1. iOS 9 Support
 
-The SDK now properly supports iOS 9.
+The SDK now properly supports iOS 9 including Application Transpot Security, Bitcode, push notification updates, IPv6 and more.
 
 ##Version 2.9.0
 
