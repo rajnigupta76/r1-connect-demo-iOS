@@ -1,3 +1,11 @@
+##Version 3.0.1
+
+###1. Added
+
+#####1. Location Bug Fix
+
+Fixed a bug so that location data sends more consistently.
+
 ##Version 3.0.0
 
 ###1. Added
