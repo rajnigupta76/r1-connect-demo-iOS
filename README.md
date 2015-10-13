@@ -595,6 +595,8 @@ This tool allows you to verify that the events that you have set up are triggeri
 
 To enable the debugging tool, you should create a flat file titled "r1DebugDevices" with a list of IDFAs and add it to your project root through File -> Add Files to "Project.".  There should be one ID per line.
 
+Once you build the app and install it on the same test devices that you added in the DebugDevices file, you should see any action taken in the app appear in the debug section of the portal.
+
 ##b. Push Notification Activation
 
 ###i. Setup Apple Push Notification Services
