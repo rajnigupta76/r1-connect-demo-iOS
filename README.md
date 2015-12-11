@@ -70,30 +70,48 @@ Verify that the Background Modes switch is turned on in the Capabilities tab for
 
 Also, it is important to add an entry to the 'Other Linker Flags' setting in your application's Build Settings in Xcode. Add '-ObjC' to the 'Other Linker Flags' setting if it is not already present. This is a common required flag when integrating static libraries with your code.
 
+##Integrate with your Swift project
 
+If you are using Swift in your project and you want to use R1 Connect SDK in your swift code you should:
+* Open **Build Settings** for your project
+* Find **Swift Compiler - Code Generation** section
+* Add path to *R1SDK-Bridging-Header.h* file to **Objective-C Bridging Header**.
+
+For example if SDK located in *R1SDK* folder inside your root project directory path will be *$(PROJECT_DIR)/R1SDK/R1SDK-Bridging-Header.h*
 
 ## c. Initialize the SDK
   You will need to initialize the R1 Connect Library in your App Delegate.
-####Import the required header files
+####Import the required header files (Only for *Objective C* code)
   At the top of your application delegate include any required headers:
 
-  ```objc
+```objc
 #import "R1SDK.h"
 #import "R1Emitter.h"
-  ```
+```
 
 ####Initialize the R1Connect Instance
 
-  ```objc
-  - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:
-  (NSDictionary *)launchOptions {     
+```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {     
     R1SDK *sdk = [R1SDK sharedInstance];  
 
     // Initialize SDK
     sdk.applicationId = @"YOUR APPLICATION ID";  //Ask your RadiumOne contact for an app id
 
     return YES; 
-  }
+}
+```
+
+```swift
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    
+    let sdk = R1SDK.sharedInstance();
+    
+    // Initialize SDK
+    sdk.applicationId = "YOUR APPLICATION ID";
+
+    return true
+}
 ```
 
 ## d. Advanced Settings
@@ -109,11 +127,19 @@ Optional current user identifier.
 [R1SDK sharedInstance].applicationUserId = @"12345";
 ```
 
+```swift
+R1SDK.sharedInstance().applicationUserId = "12345";
+```
+
 ***cookieMapping***
 
 Enable or disable cookie mapping. By default is NO.  Setting this first party cookie will enable RadiumOne to be effective in targeting the user for advertising campaigns run on behalf of the Publisher. Only enable this setting if you plan to run advertising with RadiumOne.
 ```objc
 [R1SDK sharedInstance].cookieMapping = YES;
+```
+
+```swift
+R1SDK.sharedInstance().cookieMapping = true;
 ```
 
 ***location***
@@ -124,12 +150,20 @@ The current user location coordinates. Use only if your application already uses
 [R1SDK sharedInstance].location = [locations lastObject];
 ```
 
+```swift
+R1SDK.sharedInstance().location = …;
+```
+
 ***locationService***
 
 If your application did not use location information before this SDK installation, you can use locationService in this SDK to enable or disable it:
 
 ```objc
 [R1SDK sharedInstance].locationService.enabled = YES;
+```
+
+```swift
+R1SDK.sharedInstance().locationService.enabled = true;
 ```
 
 N.B. - The Connect locationService uses the Location Manager in iOS.  For deployment on iOS 8 and newer, it is required that the application's property list (plist) file include one of the two following keys:
@@ -149,12 +183,20 @@ When enabled, such as in the example above, location information will be sent au
 [R1SDK sharedInstance].locationService.autoupdateTimeout = 1200; // 20 minutes
 ```
 
+```swift
+R1SDK.sharedInstance().locationService.autoupdateTimeout = 1200; // 20 minutes
+```
+
 ***appName***
 
 The application name associated with the emitter. By default, this property is populated with the `CFBundleName` string from the application bundle. If you wish to override this property, you must do so before making any tracking calls.
 
 ```objc
 [R1Emitter sharedInstance].appName = @"Custom application name";
+```
+
+```swift
+R1Emitter.sharedInstance().appName = "Custom application name";
 ```
 
 ***appId***
@@ -167,12 +209,20 @@ The application identifier associated with this emitter.  If you wish to set thi
 [R1Emitter sharedInstance].appId = @"12345678";
 ```
 
+```swift
+R1Emitter.sharedInstance().appId = "12345678";
+```
+
 ***appVersion***
 
 The application version associated with this emitter. By default, this property is populated with the `CFBundleShortVersionString` string from the application bundle. If you wish to override this property, you must do so before making any tracking calls.
 
 ```objc
 [R1Emitter sharedInstance].appVersion = @"1.0.2";
+```
+
+```swift
+R1Emitter.sharedInstance().appVersion = "1.0.2";
 ```
 
 ***sessionTimeout***
@@ -187,17 +237,21 @@ By default, this is 30 seconds.
 [R1Emitter sharedInstance].sessionTimeout = 15;
 ```
 
+```swift
+R1Emitter.sharedInstance().sessionTimeout = 15;
+```
+
 #3. Feature Activation
 ##a. Analytics Activation
 
 ####Setup your App Delegate
 
+(Only for *Objective C* code)
 ```objc
 #import "R1SDK.h"
 #import "R1Emitter.h"
 #import "R1Push.h"
 ```
-
 
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -211,6 +265,21 @@ By default, this is 30 seconds.
   [sdk start];
 
   return YES;
+}
+```
+
+```swift
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    
+    let sdk = R1SDK.sharedInstance();
+    
+    // Initialize Anlaytics
+    sdk.applicationId = "YOUR APPLICATION ID";
+
+    // Start SDK
+    sdk.start();
+
+    return true
 }
 ```
 
@@ -252,6 +321,11 @@ userName:@"user_name"
 otherInfo:@{@"custom_key":@"value"}];
 ```
 
+```swift
+R1Emitter.sharedInstance()
+    .emitLoginWithUserID("userId", userName: "user_name", otherInfo: ["custom_key": "value"]);
+```
+
 **Registration**
 
 Records a user registration within the app
@@ -265,6 +339,11 @@ city:@"city"
 otherInfo:@{@"custom_key":@"value"}];
 ```
 
+```swift
+R1Emitter.sharedInstance()
+    .emitRegistrationWithUserID("userId", userName: "userName", country: "country", state: "state", city: "city", otherInfo: ["custom_key": "value"]);
+```
+
 **Facebook connect**
 
 Allows access to Facebook services
@@ -274,6 +353,13 @@ NSArray *permissions = @[[R1EmitterSocialPermission socialPermissionWithName:@"p
 
 [[R1Emitter sharedInstance] emitFBConnectWithPermissions:permissions
 otherInfo:@{@"custom_key":@"value"}];
+```
+
+```swift
+let permissions = [R1EmitterSocialPermission.init(name: "photos", granted: true)];
+
+R1Emitter.sharedInstance()
+    .emitFBConnectWithPermissions(permissions, otherInfo: ["custom_key": "value"]);
 ```
 
 **Twitter connect**
@@ -287,6 +373,13 @@ NSArray *permissions = @[[R1EmitterSocialPermission socialPermissionWithName:@"p
 userName:@"user_name"
 permissions:permissions
 otherInfo:@{@"custom_key":@"value"}];
+```
+
+```swift
+let permissions = [R1EmitterSocialPermission.init(name: "photos", granted: true)];
+
+R1Emitter.sharedInstance()
+    .emitTConnectWithUserID("12345", userName: "user_name", permissions: permissions, otherInfo: ["custom_key": "value"]);
 ```
 
 **User Info**
@@ -309,6 +402,12 @@ zip:@"zip"];
 otherInfo:@{@"custom_key":@"value"}];
 ```
 
+```swift
+let userInfo = R1EmitterUserInfo.init(userID: "userID", userName: "userName", email: "email", firstName: "firstName", lastName: "lastName", streetAddress: "streetAddress", phone: "phone", city: "city", state: "state", zip: "zip");
+
+R1Emitter.sharedInstance().emitUserInfo(userInfo, otherInfo: ["custom_key": "value"]);
+```
+
 **Upgrade**
 
 Tracks an application version upgrade
@@ -317,12 +416,22 @@ Tracks an application version upgrade
 [[R1Emitter sharedInstance] emitUpgradeWithOtherInfo:@{@"custom_key":@"value"}];
 ```
 
+```swift
+R1Emitter.sharedInstance()
+    .emitUpgradeWithOtherInfo(["custom_key": "value"]);
+```
+
 **Trial Upgrade**
 
 Tracks an application upgrade from a trial version to a full version
 
 ```objc
 [[R1Emitter sharedInstance] emitTrialUpgradeWithOtherInfo:@{@"custom_key":@"value"}];
+```
+
+```swift
+R1Emitter.sharedInstance()
+    .emitTrialUpgradeWithOtherInfo(["custom_key": "value"]);
 ```
 
 **Screen View**
@@ -338,6 +447,11 @@ documentPath:@"path"
 otherInfo:@{@"custom_key":@"value"}];
 ```
 
+```swift
+R1Emitter.sharedInstance()
+    .emitScreenViewWithDocumentTitle("title", contentDescription: "description", documentLocationUrl: "http://www.example.com/path", documentHostName: "example.com", documentPath: "path", otherInfo:["custom_key": "value"]);
+```
+
 **Transaction**
 
 ```objc
@@ -351,6 +465,11 @@ currency:@"USD"
 shippingCosts:10.5
 transactionTax:12.0
 otherInfo:@{@"custom_key":@"value"}];
+```
+
+```swift
+R1Emitter.sharedInstance()
+    .emitTransactionWithID("transaction_id", storeID: "store_id", storeName: "store_name", cartID: "cart_id", orderID: "order_id", totalSale: 1.5, currency: "USD", shippingCosts: 10.5, transactionTax: 12.0, otherInfo:["custom_key": "value"]);
 ```
 
 **TransactionItem**
@@ -370,6 +489,21 @@ lineItem:lineItem
 otherInfo:@{@"custom_key":@"value"}];
 ```
 
+```swift
+let lineItem = R1EmitterLineItem.init(
+    ID: "product_id",
+    name: "product_name",
+    quantity: 5,
+    unitOfMeasure: "unit",
+    msrPrice: 10,
+    pricePaid: 10,
+    currency: "USD",
+    itemCategory: "category");
+
+R1Emitter.sharedInstance()
+    .emitTransactionItemWithTransactionID("transaction_id", lineItem: lineItem, otherInfo: ["custom_key": "value"]);
+```
+
 **Create Cart**
 
 ```objc
@@ -377,11 +511,21 @@ otherInfo:@{@"custom_key":@"value"}];
 otherInfo:@{@"custom_key":@"value"}];
 ```
 
+```swift
+R1Emitter.sharedInstance()
+    .emitCartCreateWithCartID("cart_id", otherInfo: ["custom_key": "value"]);
+```
+
 **Delete Cart**
 
 ```objc
 [[R1Emitter sharedInstance] emitCartDeleteWithCartID:@"cart_id"
 otherInfo:@{@"custom_key":@"value"}];
+```
+
+```swift
+R1Emitter.sharedInstance()
+    .emitCartDeleteWithCartID("cart_id", otherInfo: ["custom_key": "value"]);
 ```
 
 **Add To Cart**
@@ -401,6 +545,21 @@ lineItem:lineItem
 otherInfo:@{@"custom_key":@"value"}];
 ```
 
+```swift
+let lineItem = R1EmitterLineItem.init(
+    ID: "product_id",
+    name: "product_name",
+    quantity: 5,
+    unitOfMeasure: "unit",
+    msrPrice: 10,
+    pricePaid: 10,
+    currency: "USD",
+    itemCategory: "category");
+
+R1Emitter.sharedInstance()
+    .emitAddToCartWithCartID("cart_id", lineItem: lineItem, otherInfo: ["custom_key": "value"]);
+```
+
 **Delete From Cart**
 
 ```objc
@@ -418,6 +577,20 @@ lineItem:lineItem
 otherInfo:@{@"custom_key":@"value"}];
 ```
 
+```swift
+let lineItem = R1EmitterLineItem.init(
+    ID: "product_id",
+    name: "product_name",
+    quantity: 5,
+    unitOfMeasure: "unit",
+    msrPrice: 10,
+    pricePaid: 10,
+    currency: "USD",
+    itemCategory: "category");
+
+R1Emitter.sharedInstance()
+    .emitDeleteFromCartWithCartID("cart_id", lineItem: lineItem, otherInfo: ["custom_key": "value"]);
+```
 
 ###iii. Custom Events
 
@@ -432,6 +605,13 @@ To include tracking of custom events for the mobile app, the following callbacks
 // Emits a custom event with parameters
 [[R1Emitter sharedInstance] emitEvent:@"Your custom event name"
 withParameters:@{@"key":@"value"}];
+```
+
+```swift
+// Emits a custom event without parameters
+R1Emitter.sharedInstance().emitEvent("Your custom event name");
+// Emits a custom event with parameters
+R1Emitter.sharedInstance().emitEvent("Your custom event name", withParameters: ["key": "value"]);
 ```
 
 ###iv. In-App Webview Events
@@ -534,6 +714,7 @@ window.R1Connect = {
 
 To properly handle the events in your application, you first need to import the R1WebViewHelper header file in your ViewController .m implementation file:
 
+(Only for *Objective C* code)
 ```objc
 #import "R1WebViewHelper.h"
 ```
@@ -541,13 +722,40 @@ To properly handle the events in your application, you first need to import the 
 You then should setup the UIWebView delegate from the Interface Builder or from code:
 
 ```objc
-(void)viewDidLoad { [super viewDidLoad]; self.webView.delegate = self; // Your code here }
+- (void) viewDidLoad {
+    [super viewDidLoad];
+    
+    self.webView.delegate = self;
+    
+    // Your code here
+}
+```
+
+```swift
+override func viewDidLoad() {
+    super.viewDidLoad();
+        
+    webView?.delegate = self;
+    
+    // Your code here
+}
 ```
 
 Finally, add the delegate method implementation:
 
 ```objc
-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType { if (![R1WebViewHelper webView:webView shouldStartLoadWithRequest:request navigationType:navigationType]) return NO; // Your code here return YES; }
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType { if (![R1WebViewHelper webView:webView shouldStartLoadWithRequest:request navigationType:navigationType]) return NO; // Your code here return YES; }
+```
+
+```swift
+func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+   if R1WebViewHelper.webView(webView, shouldStartLoadWithRequest: request, navigationType: navigationType) {
+      return false;
+   }
+        
+   // Your code here
+   return true;
+}
 ```
 
 ###v. Best Practices
@@ -566,7 +774,12 @@ Another common mistake is to add parameters to the event that have too many poss
 
 ```objc
 [[R1Emitter sharedInstance] emitEvent:@"ProfileViewing"
-withParameters:@{"profileFollowers":profileFollowers}];
+withParameters:@{@"profileFollowers":profileFollowers}];
+```
+
+```swift
+R1Emitter.sharedInstance()
+    .emitEvent("ProfileViewing", withParameters: ["profileFollowers": profileFollowers]);
 ```
 
 Again, the problem here is that each profile may have any number of followers. This will fragment your data too much to extract any valuable information.
@@ -581,9 +794,13 @@ A proper event could be
 
 ```objc
 [[R1Emitter sharedInstance] emitEvent:@"ProfileViewing"
-withParameters:@{"profileFollowersBucket":@"VERY_INFLUENTIAL"}];
+withParameters:@{@"profileFollowersBucket":@"VERY_INFLUENTIAL"}];
 ```
 
+```swift
+R1Emitter.sharedInstance()
+    .emitEvent("ProfileViewing", withParameters: ["profileFollowersBucket": "VERY_INFLUENTIAL"]);
+```
 
 This will enable you to create more insightful reports.
 
@@ -653,14 +870,13 @@ After downloading your 2 certificates (one for production, one for development),
 
 ####Setup your App Delegate
 
-
+(Only for *Objective C* code)
 ```objc
 #import "R1SDK.h"
 #import "R1Emitter.h"
 #import "R1Push.h"
 #import "R1WebCommand.h" // required for rich push
 ```
-
 
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -684,23 +900,61 @@ After downloading your 2 certificates (one for production, one for development),
 }
 ```
 
+```swift
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    
+    let sdk = R1SDK.sharedInstance();
+    
+    // Initialize Anlaytics
+    sdk.applicationId = "Application ID";  //Ask your RadiumOne contact for an app id
+    
+    // Initialize Push Notification
+    sdk.clientKey = "Your Client Key";  //Ask your RadiumOne contact for a client key
+        
+    R1Push.sharedInstance().delegate = self;
+    var remoteNotificationInfo: NSDictionary? = nil
+    if launchOptions != nil {
+        remoteNotificationInfo = (launchOptions![UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary)!;
+    }
+        
+    R1Push.sharedInstance().handleNotification(remoteNotificationInfo as? [NSObject : AnyObject], applicationState: application.applicationState);
+    R1Push.sharedInstance().registerForRemoteNotificationTypes([.Alert ,.Badge ,.Sound]);
+
+    // Start SDK
+    sdk.start();
+
+    return true
+}
+
+```
 
 ####Register for Remote Notifications
 
-
-
 ```objc
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
   [[R1Push sharedInstance] registerDeviceToken:deviceToken];
 }
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
-{
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
   [[R1Push sharedInstance] failToRegisterDeviceTokenWithError:error];
 }
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
   [[R1Push sharedInstance] handleNotification:userInfo applicationState:application.applicationState];
+}
+```
+
+```swift
+func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    R1Push.sharedInstance().registerDeviceToken(deviceToken);
+}
+
+func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    R1Push.sharedInstance().failToRegisterDeviceTokenWithError(error);
+}
+
+func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    R1Push.sharedInstance().handleNotification(userInfo, applicationState: application.applicationState);
 }
 ```
 
@@ -710,6 +964,9 @@ Push is disabled by default. You can enable it in the *application:didFinishLaun
 [[R1Push sharedInstance] setPushEnabled:YES];
 ```
 
+```swift
+R1Push.sharedInstance().pushEnabled = true;
+```
 
 NOTE: If you enabled it in the *application:didFinishLaunchingWithOptions* method, the Push Notification AlertView will be showed at first application start.
 
@@ -741,10 +998,18 @@ The maximum length of a Tag is 128 characters.
 [[R1Push sharedInstance].tags addTag:@"NEW TAG"];
 ```
 
+```swift
+R1Push.sharedInstance().tags.addTag("NEW TAG");
+```
+
 ***Add multiple Tags***
 
 ```objc
 [[R1Push sharedInstance].tags addTags:@[ @"NEW TAG 1", @"NEW TAG 2" ]];
+```
+
+```swift
+R1Push.sharedInstance().tags.addTags(["NEW TAG 1", "NEW TAG 2"]);
 ```
 
 ***Remove existing Tag***
@@ -753,10 +1018,18 @@ The maximum length of a Tag is 128 characters.
 [[R1Push sharedInstance].tags removeTag:@"EXIST TAG"];
 ```
 
+```swift
+R1Push.sharedInstance().tags.removeTag("EXIST TAG");
+```
+
 ***Remove multiple Tags***
 
 ```objc
 [[R1Push sharedInstance].tags removeTags:@[ @"EXIST TAG 1", @"EXIST TAG 2" ]];
+```
+
+```swift
+R1Push.sharedInstance().tags.removeTags([ "EXIST TAG 1", "EXIST TAG 2" ]);
 ```
 
 ***Replace all existing Tags***
@@ -769,20 +1042,28 @@ or
 [[R1Push sharedInstance].tags setTags:@[ @"NEW TAG 1", @"NEW TAG 2" ]];
 ```
 
+```swift
+R1Push.sharedInstance().tags.tags = ["NEW TAG 1", "NEW TAG 2"];
+```
+
 ***Get all Tags***
 
 ```objc
 NSArray *currentTags = [R1Push sharedInstance].tags.tags;
 ```
 
+```swift
+let currentTags = R1Push.sharedInstance().tags.tags;
+```
+
 ###vi. Inbox Integration
-If you want to enable inbox functionality, you need to use R1Inbox class and import *R1Inbox.h* header at the top of your class file:
+If you want to enable inbox functionality, you need to use R1Inbox class and import *R1Inbox.h* header at the top of your class file (Only for *Objective C* code):
 
 ```objc
 #import "R1Inbox.h"
 ```
 
-If you want to add some label or button with count of unread or total Inbox messages, you should implement `-(void) inboxMessageUnreadCountChanged` or `-(void) inboxMessagesDidChanged` methods from `R1InboxMessagesDelegate` protocol in your class. After that, add your class as delegate to `[R1Inbox sharedInstance].messages`
+If you want to add some label or button with count of unread or total Inbox messages, you should implement `-(void) inboxMessageUnreadCountChanged` or `-(void) inboxMessagesDidChanged` (`func inboxMessageUnreadCountChanged()` or `func inboxMessagesDidChanged()` for *swift*) methods from `R1InboxMessagesDelegate` protocol in your class. After that, add your class as delegate to `[R1Inbox sharedInstance].messages` (`R1Inbox.sharedInstance().messages` for *swift*).
 
 ```objc
 - (void) addInboxMessagesDelegate
@@ -796,7 +1077,17 @@ If you want to add some label or button with count of unread or total Inbox mess
 	
 	[self.inboxButton setTitle:btnTitle forState:UIControlStateNormal];
 }
+```
 
+```swift
+func addInboxMessagesDelegate() {
+  R1Inbox.sharedInstance().messages.addDelegate(self);
+}
+
+func inboxMessageUnreadCountChanged() {
+  let btnTitle = String.init(format: "Inbox unread cound: %d", R1Inbox.sharedInstance().messages.unreadMessagesCount);
+  inboxButton?.setTitle(btnTitle, forState: .Normal);
+}
 ```
 
 Do not forget to remove your class from delegates when your class gets deallocated:
@@ -805,13 +1096,20 @@ Do not forget to remove your class from delegates when your class gets deallocat
 - (void) dealloc
 {
     [[R1Inbox sharedInstance].messages removeDelegate:self];
-    ...
+    //...
+}
+```
+
+```swift
+deinit {
+    R1Inbox.sharedInstance().messages.removeDelegate(self);
+    //...
 }
 ```
 
 To display the list of Inbox messages, you should create your own ViewController to provide required customization. In this case, this screen would not look foreign to your application.
 
-You can see the sample of Inbox implementation in DemoApplication project in files *R1SampleInboxTableViewCell.h*, *R1SampleInboxTableViewCell.m*, *R1SampleInboxViewController.h*, *R1SampleInboxViewController.m*.
+You can see the sample of Inbox implementation in DemoApplication project in files *R1SampleInboxTableViewCell.h*, *R1SampleInboxTableViewCell.m*, *R1SampleInboxViewController.h*, *R1SampleInboxViewController.m* (for *Objective C*) and in DemoApplicationSwift project in files *R1SampleInboxTableViewCell.swift*, *R1SampleInboxViewController.swift* (for *swift*)
 
 *R1SampleInboxTableViewCell.h*
 
@@ -1156,7 +1454,172 @@ You can see the sample of Inbox implementation in DemoApplication project in fil
 @end
 ```
 
-In this example, initialize the R1SampleInboxViewController with the following method:
+*R1SampleInboxViewController.swift*
+
+```swift
+import UIKit
+
+protocol R1SampleInboxViewControllerDelegate {
+    func sampleInboxViewControllerDidFinished(sampleInboxViewController: R1SampleInboxViewController);
+}
+
+class R1SampleInboxViewController: UITableViewController, R1InboxMessagesDelegate {
+    
+    var inboxMessages: R1InboxMessages?
+    var inboxDelegate: R1SampleInboxViewControllerDelegate?;
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        inboxMessages = R1Inbox.sharedInstance().messages;
+        
+        updateTitle();
+    }
+    
+    func updateTitle() {
+        if (inboxMessages?.unreadMessagesCount == 0) {
+            navigationItem.title = "Inbox";
+        } else {
+            navigationItem.title = String.init(format: "Inbox (%lu unread)", (inboxMessages?.unreadMessagesCount)!);
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        updateTitle();
+        inboxMessages?.addDelegate(self);
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        inboxMessages?.removeDelegate(self);
+    }
+    
+    @IBAction func closeButtonPressed(sender: UIBarButtonItem) {
+        inboxDelegate?.sampleInboxViewControllerDidFinished(self);
+    }
+
+    // MARK: - Table view data source
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Int((inboxMessages?.messagesCount)!);
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let message : R1InboxMessage = (inboxMessages?.messages[indexPath.row])! as! R1InboxMessage;
+        
+        return R1SampleInboxTableViewCell.heightForCell(message, cellWidth: tableView.frame.size.width)
+    }
+
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! R1SampleInboxTableViewCell;
+        
+        let message : R1InboxMessage = (inboxMessages?.messages[indexPath.row])! as! R1InboxMessage;
+        
+        cell.setInboxMessage(message);
+
+        return cell
+    }
+
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let message : R1InboxMessage = (inboxMessages?.messages[indexPath.row])! as! R1InboxMessage;
+            
+            inboxMessages?.deleteMessage(message);
+        }
+    }
+    
+    // MARK: - Table view delegate
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let message : R1InboxMessage = (inboxMessages?.messages[indexPath.row])! as! R1InboxMessage;
+        
+        R1Inbox.sharedInstance().showMessage(message) { () -> Void in
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+    }
+    
+    // MARK: - R1InboxMessagesDelegate
+    
+    func inboxMessagesWillChanged() {
+        tableView.beginUpdates()
+    }
+    
+    func inboxMessagesDidChangeMessage(inboxMessage: R1InboxMessage!, atIndex index: UInt, forChangeType changeType: UInt, newIndex: UInt) {
+        if (changeType == UInt(R1InboxMessagesChangeInsert)) {
+            tableView.insertRowsAtIndexPaths([ NSIndexPath.init(forRow: Int(index), inSection: 0)], withRowAnimation: .Automatic);
+        } else if (changeType == UInt(R1InboxMessagesChangeDelete)) {
+            tableView.deleteRowsAtIndexPaths([ NSIndexPath.init(forRow: Int(index), inSection: 0)], withRowAnimation: .Automatic);
+        } else if (changeType == UInt(R1InboxMessagesChangeUpdate)) {
+            let cell = tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: Int(index), inSection: 0)) as! R1SampleInboxTableViewCell;
+            let message : R1InboxMessage = (inboxMessages?.messages[Int(index)])! as! R1InboxMessage;
+            
+            cell.setInboxMessage(message);
+        }
+    }
+    
+    func inboxMessagesDidChanged() {
+        tableView.endUpdates()
+    }
+    
+    func inboxMessageUnreadCountChanged() {
+        updateTitle()
+    }
+}
+```
+
+*R1SampleInboxTableViewCell.swift*
+
+```swift
+import UIKit
+
+class R1SampleInboxTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var unreadMarkerView: UIView?
+    @IBOutlet weak var alertLabel: UILabel?
+    @IBOutlet weak var messageLabel: UILabel?
+    @IBOutlet weak var dateLabel: UILabel?
+    
+    var dateFormatter: NSDateFormatter?
+    
+    func setInboxMessage(inboxMessage: R1InboxMessage) {
+        unreadMarkerView?.hidden = !inboxMessage.unread;
+        
+        self.messageLabel?.text = inboxMessage.title;
+        self.alertLabel?.text = inboxMessage.alert;
+        self.dateLabel?.text = dateFormatter?.stringFromDate(inboxMessage.createdDate);
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        dateFormatter = NSDateFormatter?.init();
+        dateFormatter?.dateStyle = .ShortStyle;
+        dateFormatter?.timeStyle = .MediumStyle;
+    }
+    
+    static func heightForCell(inboxMessage: R1InboxMessage, cellWidth: CGFloat) -> CGFloat {
+        var height: CGFloat = 16+40;
+        
+        if (inboxMessage.alert != nil) {
+            let paragraph : NSMutableParagraphStyle = NSMutableParagraphStyle.init();
+            paragraph.lineBreakMode = .ByWordWrapping;
+            
+            height += inboxMessage.alert!._bridgeToObjectiveC().boundingRectWithSize(CGSize.init(width: cellWidth-16-15, height: 100), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName : UIFont.systemFontOfSize(14), NSParagraphStyleAttributeName: paragraph], context: nil).size.height;
+        }
+        
+        return height;
+    }
+}
+```
+
+In *Objective C* example, initialize the R1SampleInboxViewController with the following method:
 
  ```objc
  [[R1SampleInboxViewController alloc] initInboxViewController]
@@ -1179,13 +1642,20 @@ Once your Account Manager has set up tracking, you will start receiving attribut
 
 ##d. Geofencing Activation
 
-````
+(Only for *Objective C* code)
+```objc
 #import "R1GeofencingSDK.h"
-````
+```
 
 Geofencing is disabled by default.  You can enable it in the `application:didFinishLaunchingWithOptions:` method or later.
 
+```objc
 sdk.geofencingEnabled = YES;
+```
+
+```swift
+sdk.geofencingEnabled = false;
+```
 
 To disable geofencing, either remove the above call or set its value to NO
 
@@ -1199,31 +1669,50 @@ kR1LocationRegionObjectKey
 kR1LocationRegionNameKey
 ````
 You can register region enter/exit notifications as needed as shown below:
-````
+
+```objc
 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendLocalEnterNotification:) name:kR1GeofenceDidEnterNotification object:nil];
 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendLocalExitNotification:) name:kR1GeofenceDidExitNotification object:nil];
-````
+```
+
+```swift
+NSNotificationCenter.defaultCenter().addObserver(self, selector: "sendLocalEnterNotification:", name: kR1GeofenceDidEnterNotification, object: nil);
+NSNotificationCenter.defaultCenter().addObserver(self, selector: "sendLocalExitNotification:", name: kR1GeofenceDidExitNotification, object: nil);
+```
+
 In your `sendLocalEnterNotification:` and `sendLocalExitNotification:` methods,
-   you can relay your event messages to `application:didReceiveLocalNotification:`
-   by overriding it on your application delegate to display these local notifications using your own keys. For example:
+you can relay your event messages to `application:didReceiveLocalNotification:`
+by overriding it on your application delegate to display these local notifications using your own keys. For example:
 
 
-   ```objc
-   - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+```objc
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
-  if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
-    // you may want to show an alert
-
-    NSString *alertString = [notification.userInfo objectForKey:<Your_Own_NotificationAlertBodyKey>];
-    application.applicationIconBadgeNumber = 0; // reset the badge to zero
-
-    NSString *alertTitle = [notification.userInfo objectForKey:<Your__Own_NotificationAlertTypeKey>];
-
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alert show];
-  }
+	if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+		// you may want to show an alert
+		
+		NSString *alertString = [notification.userInfo objectForKey:<Your_Own_NotificationAlertBodyKey>];
+		application.applicationIconBadgeNumber = 0; // reset the badge to zero
+		
+		NSString *alertTitle = [notification.userInfo objectForKey:<Your__Own_NotificationAlertTypeKey>];
+		
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+		[alert show];
+	}
 }
+```
 
+```swift
+func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+	if application.applicationState == .Active {
+	    let alertString : String = notification.userInfo![""] as! String;
+	    let alertTitle : String = notification.userInfo![""] as! String;
+	    
+	    application.applicationIconBadgeNumber = 0;
+	    
+	    UIAlertView.init(title: alertTitle, message: alertString, delegate: self, cancelButtonTitle: "OK").show();
+	}
+}
 ```
 
 N.B. - The Connect locationService uses the Location Manager in iOS.  For

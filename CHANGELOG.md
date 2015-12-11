@@ -1,3 +1,11 @@
+##Version 3.1.0
+
+###1. Added
+
+#####1. Swift Support
+
+The SDK is now Swift-compatible!
+
 ##Version 3.0.1
 
 ###1. Added
