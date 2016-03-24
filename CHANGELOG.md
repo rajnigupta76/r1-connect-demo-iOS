@@ -1,3 +1,15 @@
+##Version 3.3.0
+
+###1. Added
+
+#####1. Default Push Tags
+
+You can now easily reach users that have not been active in your application for different intervals of time.
+
+#####2. Deferred Deeplinking Flag
+
+You can now easily enable deferred deeplinking within your application.
+
 ##Version 3.1.0
 
 ###1. Added

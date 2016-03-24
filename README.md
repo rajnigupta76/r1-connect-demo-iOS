@@ -142,6 +142,17 @@ Enable or disable cookie mapping. By default is NO.  Setting this first party co
 R1SDK.sharedInstance().cookieMapping = true;
 ```
 
+***deferredDeeplinkScheme***
+
+Enable deferred deeplinking. Value is the app registered URL scheme.
+```objc
+[R1SDK sharedInstance].deferredDeeplinkScheme = @"your app scheme";
+```
+
+```swift
+R1SDK.sharedInstance().deferredDeeplinkScheme = "your app scheme";
+```
+
 ***location***
 
 The current user location coordinates. Use only if your application already uses location services.
@@ -848,6 +859,8 @@ You will need to click Edit to continue. If the Edit button is not visible it is
 ######Creating an SSL Certificate
 To enable the Development or Production Push SSL Certificate please click Edit. (It is important to note that each certificate is limited to a single app, identified by its bundle ID and limited to one of two environments, either Development or Production. Read more info [here](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ProvisioningDevelopment.html#//apple_ref/doc/uid/TP40008194-CH104-SW1).)
 
+Note:  Apple has updated their Push certificate system.  They now offer Universal cerfticates which will work with both Development and Production Provisioning Profiles.  We still support the older, environment-specific certificates as well.
+
 ![Files in Xcode project](http://mcpdemo.herokuapp.com/static/img/help/ios_integration/image005.jpg)
 
 
@@ -911,7 +924,6 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
     // Initialize Push Notification
     sdk.clientKey = "Your Client Key";  //Ask your RadiumOne contact for a client key
         
-    R1Push.sharedInstance().delegate = self;
     var remoteNotificationInfo: NSDictionary? = nil
     if launchOptions != nil {
         remoteNotificationInfo = (launchOptions![UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary)!;

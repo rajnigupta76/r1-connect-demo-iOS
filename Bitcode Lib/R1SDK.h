@@ -16,6 +16,8 @@
 
 @property(nonatomic, assign) BOOL cookieMapping;
 
+@property(nonatomic, copy) NSString *deferredDeeplinkScheme;
+
 /*!
  The current user location.
  Use this variable only if your application already used location services.
