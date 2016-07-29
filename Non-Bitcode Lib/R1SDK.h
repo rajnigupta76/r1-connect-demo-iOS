@@ -35,6 +35,8 @@
 
 - (void) start; // Start emitter and push
 
+- (BOOL) openURL:(NSURL *)url;
+
 + (NSString *) sha1:(NSString *) inputString;
 + (NSString *) md5:(NSString *) inputString;
 

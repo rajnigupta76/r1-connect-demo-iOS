@@ -995,6 +995,24 @@ Please note that iOS 9 devices require use of HTTPS.  iOS 8 and previous version
 Deep linking *Push Notifications* open up a designated view in an application upon user response to a system notification.  To properly handle deep link push receipts, please read Apple's documentation:  https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/Inter-AppCommunication/Inter-AppCommunication.html#//apple_ref/doc/uid/TP40007072-CH6-SW10
 http://wiki.akosma.com/IPhone_URL_Schemes
 
+####Add Smartlink Handler
+
+```objc
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options {
+    R1SDK *sdk = [R1SDK sharedInstance];
+    [sdk openURL:url];
+
+    return YES; 
+}
+```
+
+```swift
+func application(application: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+    R1SDK.sharedInstance().openURL(url);
+    
+    return true;
+}
+```
 
 ###v. Segment your Audience    
 

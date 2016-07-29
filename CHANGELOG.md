@@ -1,3 +1,11 @@
+##Version 3.4.0
+
+###1. Added
+
+####1.  SmartLink Support
+
+The SDK now supports Po.st SmartLinks.
+
 ##Version 3.3.0
 
 ###1. Added
