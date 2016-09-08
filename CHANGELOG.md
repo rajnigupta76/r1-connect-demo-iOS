@@ -1,3 +1,11 @@
+##Version 3.4.1
+
+###1. Added
+
+####1.  iOS 10 Support
+
+The SDK now handles the iOS 10 'Limit Ad Tracking' option.
+
 ##Version 3.4.0
 
 ###1. Added
